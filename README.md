@@ -1,4 +1,4 @@
-<h1 align="center">🚙<a href="#" alt="cookin">Car Rentals</a> 🚙</h1>
+<h1 align="center">🚙 <a href="#" alt="cookin">Car Rentals</a> 🚙</h1>
 
 <h2>Contents</h2>
 
@@ -72,6 +72,7 @@ This API contains X routes and XX endpoints. For more detailed information about
 - <a name="expressjs" href="https://expressjs.com/" target="_blank">ExpressJS</a>
 - <a name="typeorm" href="https://typeorm.io/" target="_blank">TypeORM</a>
 - <a name="postgreSQL" href="https://www.postgresql.org/docs/" target="_blank">PostgreSQL</a>
+- <a name="jestL" href="https://jestjs.io/" target="_blank">Jest</a>
 
 <a name="requisites"></a>
 
