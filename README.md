@@ -42,6 +42,7 @@ This API contains X routes and XX endpoints. For more detailed information about
   - [x] update their e-mail, name or password;
   - [x] register new administrators;
   - [x] change customer's or company's status (available/unavailable for rent);
+  - [x] get customers' and companies' list;
 
 - [x] Once registered in Car Rentals app and signed in, companies can:
 
