@@ -63,7 +63,7 @@ This API contains X routes and XX endpoints. For more detailed information about
   - [x] return a rented car;
   - [x] get car rental history;
 
-        <a name="technologies"></a>
+<a name="technologies"></a>
 
 ## 4. Technologies 🧰
 
