@@ -24,7 +24,7 @@ This API was developed in order to storage administrators, customers and compani
 
 All routes require Bearer token authentication (except register and login for customers and companies). Access token can be obtained in login successful response.
 
-This API contains X routes and XX endpoints. For more detailed information about the API and its endpoints, please consult API Documentation in Application links section.
+This API contains 3 routes and 19 endpoints. For more detailed information about the API and its endpoints, please consult API Documentation in Application links section.
 
 🎓 Project developed as first Capstone of Q4 back end module of the Fullstack Developer Course of [Kenzie Academy Brasil](https://kenzie.com.br/v2/).
 
