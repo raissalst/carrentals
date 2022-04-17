@@ -1,3 +1,5 @@
 import jwtConfig from './jwtconfig';
+import USERS from './user';
+import config from './config';
 
-export { jwtconfig };
+export { jwtConfig, USERS, config };
