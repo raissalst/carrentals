@@ -1,7 +1,7 @@
 {
   "name": "Capstone-CarRental",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server.js",
   "repository": "git@github.com:raissalst/carrentals.git",
   "author": "Raissa Toledo <raissalst@gmail.com>",
   "license": "MIT",
