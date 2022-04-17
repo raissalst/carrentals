@@ -4,8 +4,11 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Address } from './Address';
+import { Car } from './Car';
+import { Rental } from './Rental';
 
 export type UserTypeOptions = 'admin' | 'cliente' | 'empresa';
 
@@ -41,4 +44,10 @@ export class User {
   @OneToOne((type) => Address)
   @JoinColumn()
   address: Address;
+
+  @OneToMany(() => Car, (cars) => cars.user)
+  cars: Car[];
+
+  @OneToMany(() => Rental, (rentals) => rentals.user)
+  rentals: Rental[];
 }
