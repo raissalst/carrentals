@@ -26,10 +26,10 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ unique: true, length: 14 })
+  @Column({ unique: true, length: 14, nullable: true })
   cpf: string;
 
-  @Column({ unique: true, length: 18 })
+  @Column({ unique: true, length: 18, nullable: true })
   cnpj: string;
 
   @Column()
