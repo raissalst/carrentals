@@ -13,26 +13,26 @@ export class Rental {
   @Column()
   rentalReturnDate: Date;
 
-  @Column()
+  @Column({ nullable: true })
   returnedCarDate: Date;
 
   @Column({ default: false })
   returnedCar: boolean;
 
-  @Column({ type: 'float', scale: 2 })
+  @Column({ type: 'float' })
   rentalPricePerDay: number;
 
-  @Column({ type: 'float', scale: 2 })
+  @Column({ type: 'float' })
   rentalPricePreview: number;
 
-  @Column({ type: 'float', scale: 2, default: 0.0 })
+  @Column({ type: 'float', default: 0.0 })
   rentalPriceTotal: number;
 
-  @Column({ type: 'float', scale: 2, default: 0.0 })
+  @Column({ type: 'float', default: 0.0 })
   mileageRan: number;
 
-  @ManyToOne(() => User, (user) => user.rentals)
-  user: User;
+  @ManyToOne(() => User, (customer) => customer.rentals)
+  customer: User;
 
   @ManyToOne(() => Car, (car) => car.rentals)
   car: Car;

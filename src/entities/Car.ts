@@ -58,10 +58,10 @@ export class Car {
   @Column()
   chassis: string;
 
-  @Column({ type: 'float', scale: 2 })
+  @Column({ type: 'float' })
   currentMileage: number;
 
-  @Column({ type: 'float', scale: 2 })
+  @Column({ type: 'float' })
   rentalPricePerDay: number;
 
   @Column({ default: true })
@@ -73,6 +73,6 @@ export class Car {
   @OneToMany(() => Rental, (rentals) => rentals.car)
   rentals: Rental[];
 
-  @ManyToOne(() => User, (user) => user.cars)
-  user: User;
+  @ManyToOne(() => User, (company) => company.cars)
+  company: User;
 }

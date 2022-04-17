@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { string } from 'yup';
 
 @Entity('addresses')
 export class Address {

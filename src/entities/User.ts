@@ -45,9 +45,9 @@ export class User {
   @JoinColumn()
   address: Address;
 
-  @OneToMany(() => Car, (cars) => cars.user)
+  @OneToMany(() => Car, (cars) => cars.company)
   cars: Car[];
 
-  @OneToMany(() => Rental, (rentals) => rentals.user)
+  @OneToMany(() => Rental, (rentals) => rentals.customer)
   rentals: Rental[];
 }
