@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { jwtConfig } from '../configs';
 import { ErrorHandler } from '../utils';
 
-const validateToken = (req: Request, res: Response, next: NextFunction) => {
+const validateAuth = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token: string = req.headers.authorization?.split(' ')[1];
     if (!token) {
@@ -22,4 +22,4 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default validateToken;
+export default validateAuth;

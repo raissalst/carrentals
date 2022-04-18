@@ -1,7 +1,7 @@
 import validateShape from './validateShape.middleware';
-import validateToken from './validateToken.middleware';
+import validateAuth from './validateAuth.middleware';
 
 export {
   validateShape,
-  validateToken,
-}
+  validateAuth,
+};
