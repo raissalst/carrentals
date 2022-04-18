@@ -1,5 +1,4 @@
 import { describe, expect, it } from '@jest/globals';
-import { number } from 'yup';
 import { createCarShape } from '../../../shapes';
 
 describe('verify user update shape', () => {

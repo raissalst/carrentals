@@ -15,7 +15,7 @@ const createCarShape = yup.object().shape({
         chassis: yup.string().required(),
         currentMileage: yup.number().required(),		
         rentalPricePerday: yup.number().required(),
-        availableToRent: yup.bool().default(() => true).optional(),
+        availableToRent: yup.boolean().default(() => true).optional(),
         isActive: yup.boolean().default(() => true).optional()
 
     }))
