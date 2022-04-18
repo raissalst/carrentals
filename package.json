@@ -1,12 +1,12 @@
 {
   "name": "Capstone-CarRental",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server.js",
   "repository": "git@github.com:raissalst/carrentals.git",
   "author": "Raissa Toledo <raissalst@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@faker-js/faker": "^6.1.2",
+    "@jest/globals": "^27.5.1",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
@@ -18,7 +18,6 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@jest/globals": "^27.5.1",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
