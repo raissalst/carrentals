@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { loginUserShape } from '../../shapes';
+import { loginUserShape } from '../../../shapes';
 
 describe('verify user login shape', () => {
   const correctSchema = {
