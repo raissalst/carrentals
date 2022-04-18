@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from '@jest/globals';
 import request from 'supertest';
 import app from '../app';
-import UserRepository from '../repositories/user';
 import { connection } from './index';
+import v4 from 'uuid';
 
 // cria a conexão com o db de testes antes de todos os testes desse arquivo
 beforeAll(async () => {
@@ -22,12 +22,58 @@ beforeEach(async () => {});
 // executada depois de cada teste
 afterEach(async () => {});
 
-describe('tested de modelo', () => {
-  it('pegar todos os usuarios', async () => {
-    // console.log(resp.body);
+// função de exemplo para mokar um token válido
+const admLogin = async () => {
+  const UserMock = {
+    username: 'admin',
+    password: '1234',
+  };
+
+  const loginResponse = await request(app).post('/users/login').send(UserMock);
+  return loginResponse.body.accessToken;
+};
+
+describe('testes de modelo', () => {
+  /*
+
+  it('teste de rota simples', async () => {
+    const requestBody = {
+      email: 'user@mail.com',
+      password: '1234',
+    };
+
+    const response = await request(app)
+      .post('/api/users/login')
+      .send(requestBody);
+    const responseBody = response.body;
+    expect(response.statusCode).toBe(200);
+    expect(typeof responseBody).toBe('object');
+    expect(responseBody.token).toBeTruthy();
   });
 
-  // TODO: criar um teste de exemplo de rota
-  // TODO: criar um teste de exemplo de Repository
-  // TODO: criar um teste de exemplo de rota com autenticação
+  it('teste de rota com header', async () => {
+    const token = await admLogin();
+
+    const response = await request(app)
+      .get('/api/users')
+      .set('Authorization', `Bearer ${token}`);
+    const responseBody = response.body;
+
+    expect(response.statusCode).toBe(200);
+    expect(typeof responseBody).toBe('object');
+  });  
+  
+  it('teste de um Repository', async () => {
+    const requestBody = {
+      uuid: v4,
+      email: 'user@mail.com',
+      password: '1234',
+      isAdm: false,
+    };
+    const newUser = await new UserRepository().createUser(requestBody)
+    
+    expect(newUser).toBeTruthy()
+  })
+
+  */
 });
