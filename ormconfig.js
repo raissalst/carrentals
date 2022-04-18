@@ -1,3 +1,3 @@
-// const dbConfig = require('./dist/database/ormconfig.js');
+const dbConfig = require('./dist/database/ormconfig.js');
 
-// module.exports = dbConfig;
+module.exports = dbConfig;
