@@ -5,6 +5,7 @@ declare global {
     interface Request {
       validated: any; // importar os tipos e colocar aqui exemplo: User | Car etc..
       token: string;
+      userAuth: any;
     }
   }
 }
