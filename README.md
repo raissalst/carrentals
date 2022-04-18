@@ -33,7 +33,7 @@ This API contains 3 routes and 19 endpoints. For more detailed information about
 ## 2. Application's links 🔗
 
 - <a name="API documentation" href="https://www.postman.com/" target="_blank">API Documentation</a>
-- <a name="API deploy in Heroku" href="https://www.heroku.com/" target="_blank">API Deploy in Heroku</a>
+- <a name="API deploy in Heroku" href="https://carrental-capstone.herokuapp.com/" target="_blank">API Deploy in Heroku</a>
 
 ## 3. General Functionalities ⚙️
 
