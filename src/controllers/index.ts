@@ -1,5 +1,3 @@
 import createUserController from './users/createUser.controller';
-
-export {
-  createUserController,
-};
+import loginUser from './users/loginUser.controller';
+export { createUserController, loginUser };
