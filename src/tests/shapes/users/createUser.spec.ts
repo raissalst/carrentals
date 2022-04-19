@@ -9,7 +9,10 @@ describe('verify create user shape', () => {
       phone: '55976885423',
       cpf: '123.456.789-10',
       userType: 'cliente',
-      isAdmin: false,
+      address: 'Rua Pereira da Silva 1000 apto 301',
+	    city: 'Rio de Janeiro',
+	    state: 'Rio de Janeiro',
+	    country: 'Brasil'
     };
   
     const schemaWrong = {
