@@ -33,8 +33,8 @@ const admLogin = async () => {
   return loginResponse.body.accessToken;
 };
 
-describe('testes de modelo', () => {
-  /*
+// describe('testes de modelo', () => {
+/*
 
   it('teste de rota simples', async () => {
     const requestBody = {
@@ -76,4 +76,4 @@ describe('testes de modelo', () => {
   })
 
   */
-});
+// });
