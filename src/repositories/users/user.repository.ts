@@ -5,8 +5,7 @@ interface IUserRepo {
   saveUser: (user: User) => Promise<User>;
   findByEmail: (email: string) => Promise<User>;
   findUsers: () => Promise<User[]>;
-  updateUser: (userData: any, id: string) => Promise<Object>;
-  deleteUser: (id: string) => Promise<DeleteResult>;
+  updateUser: (userData: any, id: string) => Promise<Object>;  
 }
 
 class UserRepository implements IUserRepo {
@@ -31,13 +30,7 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .returning('*')
       .execute();
-
-  deleteUser = async (id: string) =>
-    await this.ormRepository
-      .createQueryBuilder()
-      .delete()
-      .where({ id: id })
-      .execute();
+  
 }
 
 export { UserRepository, IUserRepo };
