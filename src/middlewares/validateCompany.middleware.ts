@@ -8,7 +8,7 @@ const validateCompany = async (req: Request, res: Response, next: NextFunction) 
     const user = await new UserRepository().findByEmail(
       (req.userAuth as User).email
     )
-    if (user.userType === 'cliente') {
+    if (user.userType === 'empresa') {
       return next();
     } else {
       throw new ErrorHandler(401, 'Unauthorized')
