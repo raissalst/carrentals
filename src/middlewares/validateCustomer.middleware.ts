@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { User } from '../entities/User';
+import { UserRepository } from '../repositories'
 
 const validateCustomer = async (req: Request, res: Response, next: NextFunction) => {
   try {
