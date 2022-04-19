@@ -4,28 +4,30 @@ import { UserRepository } from '../../repositories';
 import { User } from '../../entities/User';
 
 import { jwtConfig } from '../../configs';
-import JWT from 'jsonwebtoken';
+
+import jsonwebtoken from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { ErrorHandler } from '../../utils';
+
+import { ErrorHandler, handleError } from '../../utils';
 
 const loginUser = async (req: Request, res: Response): Promise<any> => {
   try {
     const { email, password } = req.validated;
     const user: User = await new UserRepository().findByEmail(email);
     if (!user) {
-      throw new ErrorHandler(400, 'Usuario não encontrado');
+      throw new ErrorHandler(404, 'User not found');
     }
     const match: Boolean = await bcrypt.compare(password, user.password);
 
     if (!match) {
       throw new ErrorHandler(401, 'Wrong email or password');
     }
-    const token: string = JWT.sign({ email }, jwtConfig.secretKey, {
+    const token: string = jsonwebtoken.sign({ user }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,
     });
-    return res.status(200).json({ acessToken: token });
+    return res.status(200).json({ token: token });
   } catch (err) {
-    throw new ErrorHandler(400, 'Unauthorized');
+    return handleError(err, res);
   }
 };
 export default loginUser;
