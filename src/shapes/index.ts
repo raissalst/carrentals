@@ -5,5 +5,3 @@ import createUserShape from "./users/createUser.shape";
 import createCarRentShape from './cars/createCarRent.shape';
 
 export { updateUserShape, loginUserShape, createCarRentShape, createCarShape, createUserShape };
-
-//trying to send modifications
