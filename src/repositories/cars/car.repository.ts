@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, UpdateResult } from 'typeorm';
 import { Car } from '../../entities/Car';
 
 interface ICarRepo {
@@ -6,7 +6,9 @@ interface ICarRepo {
   saveMultipleCars: (cars: Car[]) => Promise<any>;
   getCarById: (id: string) => Promise<Car>;
   getCars: (params?: object[]) => Promise<Car[]>;
-  getNotAvailableAndNotActiveCars: (params) => Promise<Car[]>
+  getNotAvailableAndNotActiveCars: (params) => Promise<Car[]>;
+  updateCar: (params?: object[]) => Promise<Car[]>;
+  updateStatusCar: (car: object, status: string) => Promise<UpdateResult>;
 }
 
 class CarRepository implements ICarRepo {
@@ -17,9 +19,7 @@ class CarRepository implements ICarRepo {
   }
 
   // [POST] → registra carro (como array de objetos) (autorização para empresa)🔒
-
   saveCar = async (Car: Car) => await this.ormRepository.save(Car);
-
   saveMultipleCars = async (cars: Car[]) =>
     await this.ormRepository
       .createQueryBuilder()
@@ -38,17 +38,13 @@ class CarRepository implements ICarRepo {
   getCars = async (params?) => await this.ormRepository.find({where: params});
 
   // - ***?available=false ou ?active=false*** ***ou ?available=false&&active=false*** [GET] → *filtrar por query params dados públicos de todos os carros que não estão disponíveis para alugar (autorização apenas para admins)🔒*
-  getNotAvailableAndNotActiveCars = async (params) => await this.ormRepository.find({where: params})
+  getNotAvailableAndNotActiveCars = async (params) => await this.ormRepository.find({where: {available: false, active: false}})
 
-  updateCar = async (params?) => await this.ormRepository.find({where: params});
+  // - [PATCH] → *atualizar dados de um carro (autorização apenas para empresas)🔒*
+  updateCar = async (params?: object[]) => await this.ormRepository.find({where: params});
   
+  // - **/<:id>** [PATCH] → *desativar um carro (autorização apenas para empresas)  🔒*
+  updateStatusCar = async (car, status) => await this.ormRepository.update(car, status);
 }
 
 export { CarRepository, ICarRepo };
-
-
-// - **/<:id>** [PATCH] → *atualizar dados de um carro (autorização apenas para empresas)🔒*
-
-// - **/<:id>** [POST] → *alugar um carro (autorização apenas para clientes) 🔒*
-
-// - **/<:id>** [DELETE] → *desativar um carro (autorização apenas para empresas)  🔒*
