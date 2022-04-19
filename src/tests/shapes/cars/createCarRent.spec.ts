@@ -1,14 +1,14 @@
 import { describe, it } from '@jest/globals';
 import { createCarRentShape } from '../../../shapes';
 
-describe('', () => {
+describe('verify create car rent shape', () => {
   const correctSchema = {
-    rentalStartDate: '10/05/2023',
-    rentalReturnDate: '15/05/2023',
+    rentalStartDate: '20/05/2023',
+    rentalReturnDate: '23/05/2023',
   };
   const wrongSchema = {
-    rentalStartData: '10/05/2023',
-    rentalReturnData: '15/05/2023',
+    rentalStartDate: '20-05-2024',
+    rentalReturnDate: '23-05-2024',
   };
 
   it('should be a valid schema', async () => {
@@ -16,7 +16,7 @@ describe('', () => {
     expect(result).toEqual(true);
   });
 
-  it('should not be a  valid schema, field name is incorrect', async () => {
+  it('should not be a  valid schema, with dates being sent in wrong format', async () => {
     const result = await createCarRentShape.isValid(wrongSchema);
     expect(result).toEqual(false);
   });

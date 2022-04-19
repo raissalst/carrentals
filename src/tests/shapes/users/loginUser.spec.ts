@@ -18,7 +18,7 @@ describe('verify user login shape', () => {
     const result = await loginUserShape.isValid(correctSchema);
     expect(result).toEqual(true);
   });
-  it('should not be a valid schema, with field email dont type email', async () => {
+  it('should not be a valid schema, with field email not type email', async () => {
     const result = await loginUserShape.isValid(wrongSchema);
     expect(result).toEqual(false);
   });
