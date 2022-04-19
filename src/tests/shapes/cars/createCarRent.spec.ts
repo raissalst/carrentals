@@ -3,12 +3,12 @@ import { createCarRentShape } from '../../../shapes';
 
 describe('', () => {
   const correctSchema = {
-    rentalStartDate: '10/05/2023',
-    rentalReturnDate: '15/05/2023',
+    rentalStartDate: '20/05/2023',
+    rentalReturnDate: '23/05/2023',
   };
   const wrongSchema = {
-    rentalStartData: '10/05/2023',
-    rentalReturnData: '15/05/2023',
+    rentalStartDate: '20-05-2024',
+    rentalReturnDate: '23-05-2024',
   };
 
   it('should be a valid schema', async () => {
