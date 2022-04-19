@@ -41,7 +41,7 @@
     "dev": "ts-node-dev --rs --files src/server.ts --clear ",
     "build": "tsc",
     "test": "jest",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js -f src/database/ormconfig.ts"
   }
 }

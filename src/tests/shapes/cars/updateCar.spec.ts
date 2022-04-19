@@ -3,8 +3,18 @@ import updateCarShape from '../../../shapes/cars/updateCar.shape';
 
 describe('verify car update shape', () => {
   const schemaRight = {
+    name: 'Gol',
+    model: 'bolinha',
+    brand: 'Volkswagen',
+    year: '1995',
+    color: 'vermelho',
+    doors: 2,
+    fuelType: 'alcool',
+    plate: 'ABC1234',
+    gear: 'manual',
+    chassis: '3D8XW68F95A285324',
     currentMileage: 1000,
-    rentalPricePerDay: 89,
+    rentalPricePerDay: 89.0,
     availableToRent: true,
     isActive: true
   };
