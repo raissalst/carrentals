@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-// app.use("/api", router);
+// app.use('/api', router);
 app.use((err: any, _: Request, res: Response, __: NextFunction) => {
   return handleError(err, res);
 });
