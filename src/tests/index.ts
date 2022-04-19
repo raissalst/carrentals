@@ -22,7 +22,7 @@ const testConfig = {
 const connection = {
   create: async () => {
     await createConnection(testConfig)
-      .then(() => console.log('database conected'))
+      .then(/*() =>  console.log('database conected') */)
       .catch((err) => console.log(err));
   },
 
