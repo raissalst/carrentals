@@ -23,7 +23,7 @@ const createUserShape = yup.object().shape({
   cnpj: yup
     .string()
     .matches(
-      /[0-9]{2}\.[0-9]{3}\.[0-9]{3}\[0-9]{4}\-[0-9]{2}/,
+      /[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}/,
       'Invalid CNPJ. CNPJ must be sent as XX.XXX.XXX/XXXX-XX.'
     )
     .optional(),
