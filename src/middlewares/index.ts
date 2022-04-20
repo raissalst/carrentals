@@ -3,6 +3,7 @@ import validateAuth from './validateAuth.middleware';
 import validateCustomer from './validateCustomer.middleware';
 import validateCompany from './validateCompany.middleware';
 import validateAdmin from './validateAdmin.middleware';
+import verifyUserType from './verifyUserType.middleware';
 
 export {
   validateShape,
@@ -10,4 +11,5 @@ export {
   validateCustomer,
   validateCompany,
   validateAdmin,
+  verifyUserType,
 };
