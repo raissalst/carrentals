@@ -1,6 +1,6 @@
 import { expect, describe, it, beforeAll, afterAll } from '@jest/globals';
-import { connection } from '..';
-import app from '../../app';
+import { connection } from '../..';
+import app from '../../../app';
 import request from 'supertest';
 
 beforeAll(async () => {
