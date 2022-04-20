@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { UserRepository } from '../../repositories';
 
-const updateIsActiveUser = async (req: Request, res: Response) => {
+const updateIsActiveUserController = async (req: Request, res: Response) => {
   const userToChange = req.userFromQuery;
   const updateResponse = await new UserRepository().updateUser(
     { isActive: !userToChange.isActive },
@@ -11,4 +11,4 @@ const updateIsActiveUser = async (req: Request, res: Response) => {
   res.status(204).json();
 };
 
-export default updateIsActiveUser;
+export default updateIsActiveUserController;
