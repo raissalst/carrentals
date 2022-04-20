@@ -60,8 +60,6 @@ describe('update isActive users', () => {
       .patch(`/api/users/${userMock.id}`)
       .set('Authorization', `Bearer ${adminToken}`);
 
-    console.log(response.body);
-
     expect(response.statusCode).toBe(204);
     expect(response.body).toStrictEqual({});
 
@@ -82,8 +80,6 @@ describe('update isActive users', () => {
     const response = await request(app)
       .patch(`/api/users/${v4()}`)
       .set('Authorization', `Bearer ${adminToken}`);
-
-    console.log(response.body);
 
     expect(response.statusCode).toBe(404);
   });
