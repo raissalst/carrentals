@@ -16,8 +16,8 @@ const validateShape =
       req.validated = validated;
       return next();
       
-    } catch (e: any) {
-      return res.status(400).json({ error: e.errors });
+    } catch (err: any) {
+      return res.status(400).json({ error: err.errors });
     }
   };
 
