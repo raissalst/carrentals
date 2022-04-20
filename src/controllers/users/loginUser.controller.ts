@@ -10,10 +10,14 @@ import bcrypt from 'bcrypt';
 
 import { ErrorHandler, handleError } from '../../utils';
 
-const loginUser = async (req: Request, res: Response): Promise<any> => {
+const loginUserController = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   try {
     const { email, password } = req.validated;
     const user: User = await new UserRepository().findByEmail(email);
+
     if (!user) {
       throw new ErrorHandler(404, 'User not found');
     }
@@ -30,4 +34,4 @@ const loginUser = async (req: Request, res: Response): Promise<any> => {
     return handleError(err, res);
   }
 };
-export default loginUser;
+export default loginUserController;

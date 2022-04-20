@@ -1,7 +1,10 @@
 import { Router } from 'express';
-import { createUserController } from "../../controllers";
-import { createUserShape } from "../../shapes";
-import updateIsActiveUser from '../../controllers/users/updateIsActiveUser.controller';
+import {
+  loginUserController,
+  updateIsActiveUserController,
+  createUserController,
+} from '../../controllers';
+
 import {
   validateShape,
   getUserFromQueryId,
@@ -10,21 +13,25 @@ import {
   verifyUserType,
 } from '../../middlewares';
 
+import { createUserShape, loginUserShape } from '../../shapes';
+
 const userRoute = Router();
 
+userRoute.post('/login', validateShape(loginUserShape), loginUserController);
 userRoute.post(
   '/',
   validateShape(createUserShape),
   verifyUserType,
   createUserController
-)
+);
 
 userRoute.patch(
   '/:id',
   validateAuth,
   validateAdmin,
   getUserFromQueryId,
-  updateIsActiveUser
+  updateIsActiveUserController
 );
 
 export default userRoute;
+
