@@ -12,7 +12,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  //   await connection.clearTables();
   await connection.dropTables();
   await connection.close();
 });
@@ -41,7 +40,6 @@ describe('test loginUser controller', () => {
       .post('/api/users/login')
       .send(requestWrongBody);
     const responseBody = response.body;
-    console.log({ consoleTESTE: responseBody });
     expect(response.statusCode).toBe(401);
     expect(typeof responseBody).toBe('object');
   });
