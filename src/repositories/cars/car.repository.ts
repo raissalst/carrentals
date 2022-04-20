@@ -1,13 +1,30 @@
 import { Repository, getRepository, UpdateResult } from 'typeorm';
 import { Car } from '../../entities/Car';
 
+interface IUpdateCarData {
+  name?: string;
+  model?: string;
+  brand?: string;
+  year?: string;
+  color?: string;
+  doors?: number;
+  fuelType?: string; //enum
+  plate?: string;
+  gear?: string; //enum
+  chassis?: string;
+  currentMileage?: number;
+  availableToRent?: boolean;
+  isActive?: boolean;
+  rentalPricePerDay?: number;
+}
+
 interface ICarRepo {
   saveCar: (Car: Car) => Promise<Car>;
   saveMultipleCars: (cars: Car[]) => Promise<any>;
   getCarById: (id: string) => Promise<Car>;
   getCars: (params?: object[]) => Promise<Car[]>;
   getNotAvailableAndNotActiveCars: (params) => Promise<Car[]>;
-  updateCar: (params?: object[]) => Promise<Car[]>;
+  updateCar: (params?: IUpdateCarData) => Promise<Car[]>;
   updateStatusCar: (car: object, status: string) => Promise<UpdateResult>;
 }
 
@@ -41,7 +58,7 @@ class CarRepository implements ICarRepo {
   getNotAvailableAndNotActiveCars = async (params) => await this.ormRepository.find({where: {available: false, active: false}})
 
   // - [PATCH] → *atualizar dados de um carro (autorização apenas para empresas)🔒*
-  updateCar = async (params?: object[]) => await this.ormRepository.find({where: params});
+  updateCar = async (params?: IUpdateCarData) => await this.ormRepository.find({where: params});
   
   // - **/<:id>** [PATCH] → *desativar um carro (autorização apenas para empresas)  🔒*
   updateStatusCar = async (car, status) => await this.ormRepository.update(car, status);
