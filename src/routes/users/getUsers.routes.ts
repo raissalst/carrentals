@@ -1,11 +1,12 @@
 import { Router } from 'express'
 import { getUserController } from '../../controllers';
-import { validateAdmin } from '../../middlewares';
+import { validateAdmin, verifyUserType } from '../../middlewares';
 
 const getUserRouter = Router();
 
 getUserRouter.get(
-    '/api/users',
+    '/users',
+    verifyUserType,
     validateAdmin,
     getUserController,
 )
