@@ -10,10 +10,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-beforeAll(async () => {
-  await connection.create();
-});
-
 afterAll(async () => {
   await connection.dropTables();
   await connection.close();
@@ -35,6 +31,8 @@ describe('update isActive users', () => {
   let adminToken: string;
   let userToken: string;
   beforeAll(async () => {
+    await connection.create();
+
     const user = await new UserRepository().saveUser(userMock as any);
     const admin = await new UserRepository().findByEmail(
       process.env.ADMIN_EMAIL
