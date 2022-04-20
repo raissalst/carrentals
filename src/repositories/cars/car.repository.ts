@@ -24,7 +24,6 @@ interface ICarRepo {
   getCarById: (id: string) => Promise<Car>;
   getCars: (params?: ICarData) => Promise<Car[]>;
   updateCar: (car: object, data) => Promise<UpdateResult>;
-  updateStatusCar: (car: object, status: boolean) => Promise<UpdateResult>;
 }
 
 class CarRepository implements ICarRepo {
