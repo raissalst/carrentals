@@ -1,3 +1,8 @@
-import getUserRouter from "./users/getUsers.routes";
+import { Router } from 'express';
+import userRoute from './users';
 
-export { getUserRouter }
+const route = Router();
+
+route.use('/users', userRoute);
+
+export default route;

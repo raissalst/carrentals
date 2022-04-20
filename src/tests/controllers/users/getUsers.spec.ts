@@ -19,25 +19,33 @@ afterAll(async () => {
 // // executada depois de cada teste
 // afterEach(async () => {});
 
-const admLogin = async () => {
-  const UserMock = {
-    username: 'admin',
-    password: '1234',
-  };
+// const admLogin = async () => {
+//   const UserMock = {
+//     username: 'admin',
+//     password: '1234',
+//   };
 
-  const loginResponse = await request(app).post('/users/login').send(UserMock);
-  return loginResponse.body.accessToken;
-};
+//   const loginResponse = await request(app).post('/users/login').send(UserMock);
+//   return loginResponse.body.accessToken;
+// };
 
-describe('Testing the /get/Users route', () => {
+// describe('Testing the /get/Users route', () => {
 
-  it('should return status code 200', async () => {
-    const token = await admLogin();
-    const response = await request(app)
-      .get('/api/users')
-      .set('Authorization', `Bearer ${token}`);
-    const responseBody = response.body;
-    expect(response.statusCode).toBe(200);
-    expect(typeof responseBody).toBe('object');
-  });
+//   it('should return status code 200', async () => {
+//     // const token = await admLogin();
+//     const response = await request(app)
+//       .get('/api/users')
+//       // .set('Authorization', `Bearer ${token}`);
+//     const responseBody = response.body;
+//     expect(response.statusCode).toBe(401);
+//     // expect(typeof responseBody).toBe('object');
+//   });
+
+it('should not get users without admin token', async () => {
+
+  const response = await request(app).get('/api/users')
+
+  const responseBody = response.body;
+  expect(response.statusCode).toBe(401);
 });
+// });

@@ -10,7 +10,7 @@ const validateAdmin = async (
 ) => {
   try {
     const user = await new UserRepository().findByEmail(
-      (req.userAuth as User).email
+      req.userAuth.user.email
     );
 
     if (user.userType === 'admin') {
