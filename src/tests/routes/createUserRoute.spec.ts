@@ -1,8 +1,5 @@
-import { AddressRepository, UserRepository } from '../../repositories';
 import { expect, describe, it, beforeAll, afterAll } from '@jest/globals';
 import { connection } from '..';
-import { createUserController } from '../../controllers';
-import { User } from '../../entities/User';
 import app from '../../app';
 import request from 'supertest';
 
@@ -40,7 +37,7 @@ describe('Create User test', () => {
     expect(typeof responseBody).toBe('object');
   });
 
-  it('does not create a new user', async () => {
+  it('should not create a new user without email key', async () => {
     const { email, ...newMock } = userMock;
     const requestBody = newMock;
 
@@ -48,7 +45,18 @@ describe('Create User test', () => {
 
     const responseBody = response.body;
     expect(response.statusCode).toBe(400);
-    expect(responseBody.error).toContain("email is a required field")
+    expect(responseBody.error).toContain('email is a required field');
   });
-  
+
+  it('should not create an admin user without admin token', async () => {
+    const { userType, ...newMock } = userMock;
+    newMock['userType'] = 'admin';
+    const requestBody = newMock;
+
+    const response = await request(app).post('/api/users').send(requestBody);
+
+    const responseBody = response.body;
+    expect(response.statusCode).toBe(401);
+    expect(responseBody.error).toContain('missing authorization token');
+  });
 });
