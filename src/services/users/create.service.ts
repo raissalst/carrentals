@@ -3,8 +3,13 @@ import { UserRepository } from '../../repositories';
 
 const createUserService = async (user: User) => {
   try {
-    const { password, ...newUser } = await new UserRepository().saveUser(user);
-    return newUser;
+    if (user.cpf) {
+      const { password, isActive, cnpj, ...newUser } = await new UserRepository().saveUser(user);
+      return newUser;
+    } else {
+      const { password, isActive, cpf, ...newUser } = await new UserRepository().saveUser(user);
+      return newUser;
+    }
   } catch (err: any) {
     return err;
   }

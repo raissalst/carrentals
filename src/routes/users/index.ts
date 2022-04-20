@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { createUserController } from "../../controllers";
-import { validateShape, validateAuth } from "../../middlewares";
+import { validateShape, validateAuth, verifyUserType } from "../../middlewares";
 import { createUserShape } from "../../shapes";
 
 const userRouter = Router();
@@ -8,6 +8,7 @@ const userRouter = Router();
 userRouter.post(
   '/',
   validateShape(createUserShape),
+  verifyUserType,
   createUserController
 )
 

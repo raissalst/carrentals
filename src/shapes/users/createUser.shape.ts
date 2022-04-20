@@ -7,7 +7,7 @@ const createUserShape = yup.object().shape({
   email: yup.string().email().lowercase().required(),
   password: yup.string().transform((pwd) => bcrypt.hashSync(pwd, 10)).required(),
   cpf: yup.string().matches(/[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}/).optional(),
-  cnpj: yup.string().matches(/[0-9]{2}\.[0-9]{3}\.[0-9]{3}\[0-9]{4}\-[0-9]{2}/).optional(),
+  cnpj: yup.string().matches(/[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}/).optional(),
   phone: yup.string().required(),
   userType: yup.mixed().oneOf(['cliente', 'empresa', 'admin']).required(),
   isActive: yup.boolean().default(() => true),
