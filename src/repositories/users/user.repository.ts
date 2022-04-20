@@ -4,8 +4,9 @@ import { User } from '../../entities/User';
 interface IUserRepo {
   saveUser: (user: User) => Promise<User>;
   findByEmail: (email: string) => Promise<User>;
+  findById: (id: string) => Promise<User>;
   findUsers: () => Promise<User[]>;
-  updateUser: (userData: any, id: string) => Promise<Object>;  
+  updateUser: (userData: any, id: string) => Promise<Object>;
 }
 
 class UserRepository implements IUserRepo {
@@ -20,6 +21,8 @@ class UserRepository implements IUserRepo {
   findByEmail = async (email: string) =>
     await this.ormRepository.findOne({ email: email });
 
+  findById = async (id: string) => await this.ormRepository.findOne({ id });
+
   findUsers = async () => await this.ormRepository.find();
 
   updateUser = async (userData: any, id: string) =>
@@ -30,7 +33,6 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .returning('*')
       .execute();
-  
 }
 
 export { UserRepository, IUserRepo };
