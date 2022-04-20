@@ -8,9 +8,8 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  // await connection.clearTables();
-  // await connection.dropTables();
-  // await connection.close();
+  await connection.dropTables();
+  await connection.close();
 });
 
 describe('Car repository tests', () => {
@@ -66,12 +65,12 @@ describe('Car repository tests', () => {
   //   },
   // ];
 
-  // it('create car', async () => {
-  //   const car = await new CarRepository().saveCar(carMock as any);
+  it('create car', async () => {
+    const car = await new CarRepository().saveCar(carMock as any);
 
-  //   expect(car).toBeTruthy();
-  //   expect(car).toStrictEqual(carMock);
-  // });
+    expect(car).toBeTruthy();
+    expect(car).toStrictEqual(carMock);
+  });
 
   // it('create multiple cars', async () => {
   //   const cars = await new CarRepository().saveMultipleCars(carMock as any);
