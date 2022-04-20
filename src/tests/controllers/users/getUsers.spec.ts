@@ -29,7 +29,7 @@ afterAll(async () => {
 //   return loginResponse.body.accessToken;
 // };
 
-// describe('Testing the /get/Users route', () => {
+describe('Testing the /get/Users route', () => {
 
 //   it('should return status code 200', async () => {
 //     // const token = await admLogin();
@@ -41,11 +41,11 @@ afterAll(async () => {
 //     // expect(typeof responseBody).toBe('object');
 //   });
 
-it('should not get users without admin token', async () => {
+  it('should not get users without admin token', async () => {
 
-  const response = await request(app).get('/api/users')
+    const response = await request(app).get('/api/users')
 
-  const responseBody = response.body;
-  expect(response.statusCode).toBe(401);
+    // const responseBody = response.body;
+    expect(response.statusCode).toBe(401);
+  });
 });
-// });
