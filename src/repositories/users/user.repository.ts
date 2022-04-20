@@ -4,7 +4,7 @@ import { User } from '../../entities/User';
 interface IUserRepo {
   saveUser: (user: User) => Promise<User>;
   findByEmail: (email: string) => Promise<User>;
-  findUsers: () => Promise<User[]>;
+  findUsers: (data) => Promise<User[]>;
   updateUser: (userData: any, id: string) => Promise<Object>;  
 }
 
@@ -20,7 +20,9 @@ class UserRepository implements IUserRepo {
   findByEmail = async (email: string) =>
     await this.ormRepository.findOne({ email: email });
 
-  findUsers = async () => await this.ormRepository.find();
+  findUsers = async (data) => await this.ormRepository.find({where: [
+    {cpf: data.cpf}, {cnpj: data.cnpj}, {email: data.email}
+  ]});
 
   updateUser = async (userData: any, id: string) =>
     await this.ormRepository
