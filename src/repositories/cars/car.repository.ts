@@ -23,7 +23,7 @@ interface ICarRepo {
   saveMultipleCars: (cars: Car[]) => Promise<any>;
   getCarById: (id: string) => Promise<Car>;
   getCars: (params?: ICarData) => Promise<Car[]>;
-  getNotAvailableAndNotActiveCars: (params: boolean) => Promise<Car[]>;
+  getNotAvailableAndNotActiveCars: (params: object) => Promise<Car[]>;
   updateCar: (car: object, data) => Promise<UpdateResult>;
   updateStatusCar: (car: object, status: boolean) => Promise<UpdateResult>;
 }
@@ -34,7 +34,6 @@ class CarRepository implements ICarRepo {
   constructor() {
     this.ormRepository = getRepository(Car);
   }
-  
 
   // [POST] → registra carro (como array de objetos) (autorização para empresa)🔒
   saveCar = async (Car: Car) => await this.ormRepository.save(Car);
@@ -56,7 +55,7 @@ class CarRepository implements ICarRepo {
   getCars = async (params?: ICarData) => await this.ormRepository.find({where: params});
 
   // - ***?available=false ou ?active=false*** ***ou ?available=false&&active=false*** [GET] → *filtrar por query params dados públicos de todos os carros que não estão disponíveis para alugar (autorização apenas para admins)🔒*
-  getNotAvailableAndNotActiveCars = async (params: boolean) => await this.ormRepository.find({where: {available: false, active: false}})
+  getNotAvailableAndNotActiveCars = async (params: object) => await this.ormRepository.find({where: {params}})
 
   // - [PATCH] → *atualizar dados de um carro (autorização apenas para empresas)🔒*
   updateCar = async (car: object, data) => await this.ormRepository.update(car, data);
