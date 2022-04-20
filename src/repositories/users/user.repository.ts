@@ -1,11 +1,12 @@
-import { Repository, getRepository, DeleteResult } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { User } from '../../entities/User';
 
 interface IUserRepo {
   saveUser: (user: User) => Promise<User>;
   findByEmail: (email: string) => Promise<User>;
-  findUsers: (data) => Promise<User[]>;
-  updateUser: (userData: any, id: string) => Promise<Object>;  
+  findUsers: (data) => Promise<User[]>; 
+  findById: (id: string) => Promise<User>;
+  updateUser: (userData: any, id: string) => Promise<Object>;
 }
 
 class UserRepository implements IUserRepo {
@@ -23,6 +24,7 @@ class UserRepository implements IUserRepo {
   findUsers = async (data) => await this.ormRepository.find({where: [
     {cpf: data.cpf}, {cnpj: data.cnpj}, {email: data.email}
   ]});
+  findById = async (id: string) => await this.ormRepository.findOne({ id });
 
   updateUser = async (userData: any, id: string) =>
     await this.ormRepository
@@ -32,7 +34,6 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .returning('*')
       .execute();
-  
 }
 
 export { UserRepository, IUserRepo };

@@ -1,15 +1,30 @@
-import { Router } from "express";
+import { Router } from 'express';
 import { createUserController } from "../../controllers";
-import { validateShape, validateAuth, verifyUserType } from "../../middlewares";
 import { createUserShape } from "../../shapes";
+import updateIsActiveUser from '../../controllers/users/updateIsActiveUser.controller';
+import {
+  validateShape,
+  getUserFromQueryId,
+  validateAdmin,
+  validateAuth,
+  verifyUserType,
+} from '../../middlewares';
 
-const userRouter = Router();
+const userRoute = Router();
 
-userRouter.post(
+userRoute.post(
   '/',
   validateShape(createUserShape),
   verifyUserType,
   createUserController
 )
 
-export default userRouter;
+userRoute.patch(
+  '/:id',
+  validateAuth,
+  validateAdmin,
+  getUserFromQueryId,
+  updateIsActiveUser
+);
+
+export default userRoute;

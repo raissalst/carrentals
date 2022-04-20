@@ -9,6 +9,7 @@ const validateAuth = (req: Request, res: Response, next: NextFunction) => {
     if (!token) {
       throw new ErrorHandler(401, 'Missing authorization token');
     }
+
     jwt.verify(token, jwtConfig.secretKey, (err, decoded) => {
       req.userAuth = decoded as string;
       if (err) {
