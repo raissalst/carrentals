@@ -8,7 +8,7 @@ const updateIsActiveUser = async (req: Request, res: Response) => {
     userToChange.id
   );
 
-  res.send(402).json();
+  res.status(204).json();
 };
 
 export default updateIsActiveUser;
