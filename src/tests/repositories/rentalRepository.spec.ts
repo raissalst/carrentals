@@ -3,15 +3,15 @@ import { connection } from '..';
 import { RentalRepository } from '../../repositories';
 import { v4 } from 'uuid';
 
-describe('rental reposiotory tests', () => {
-  beforeAll(async () => {
-    await connection.create();
-  });
+beforeAll(async () => {
+  await connection.create();
+});
 
-  afterAll(async () => {
-    await connection.dropTables();
-    await connection.close();
-  });
+afterAll(async () => {
+  await connection.dropTables();
+  await connection.close();
+});
+describe('rental reposiotory tests', () => {
   const rentalMock = {
     id: v4(),
     rentalStartDate: new Date(),
