@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction } from 'express';
 import { UserRepository } from '../repositories';
-import { ErrorHandler } from '../utils';
+import { ErrorHandler, handleError } from '../utils';
 
 const validateCustomerOrCompany = async (
   req: Request,
@@ -15,7 +15,7 @@ const validateCustomerOrCompany = async (
       return next();
     }
   } catch (err: any) {
-    res.status(400).json({ error: err });
+    return handleError(err, res);
   }
   throw new ErrorHandler(401, 'Unauthorized');
 };
