@@ -1,3 +1,5 @@
+import { User } from '../entities/User';
+
 //importar interfaces ou entities
 export {};
 declare global {
@@ -6,6 +8,7 @@ declare global {
       validated: any; // importar os tipos e colocar aqui exemplo: User | Car etc..
       token: string;
       userAuth: any;
+      userFromQuery: User;
     }
   }
 }
