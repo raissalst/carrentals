@@ -4,6 +4,10 @@
  */
 
 export default {
+ 
+    // "verbose": true,
+    // "testTimeout": 5000,   APAGAR TALVEZ
+ 
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 

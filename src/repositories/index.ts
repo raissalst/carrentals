@@ -1,5 +1,5 @@
 import { UserRepository, IUserRepo } from './users/user.repository';
-import { CarRepository, ICarRepo } from './cars/car.repository';
+import { CarRepository, ICarRepo, ICarData } from './cars/car.repository';
 import {
   AddressRepository,
   IAddressRepo,
@@ -11,8 +11,8 @@ export {
   IUserRepo,
   CarRepository,
   ICarRepo,
+  ICarData,
   AddressRepository, 
   IAddressRepo, 
   IUpdateAddressData 
 };
-
