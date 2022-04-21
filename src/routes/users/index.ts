@@ -3,6 +3,7 @@ import {
   loginUserController,
   updateIsActiveUserController,
   createUserController,
+  getUserProfileController,
 } from '../../controllers';
 
 import {
@@ -33,5 +34,10 @@ userRoute.patch(
   updateIsActiveUserController
 );
 
-export default userRoute;
+userRoute.get(
+  '/profile',
+  validateAuth,
+  getUserProfileController
+)
 
+export default userRoute;
