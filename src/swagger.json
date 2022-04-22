@@ -1,0 +1,237 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cars Rentals API",
+    "description": "Documentation for the Car Rentals API. ",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Car Rentals API local host"
+    },
+    {
+      "url": "https://carrental-capstone.herokuapp.com/api",
+      "description": "Car Rentals API"
+    }    
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "description": "Creates a new user (cliente, empresa ou admin)",
+        "parameters": [],
+        "responses": {}
+      },
+      "get": {
+        "description": "Get private information of all registered users (clientes, empresas e admins)",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users/login": {
+      "post": {
+        "description": "User login",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users?userType=cliente": {      
+      "get": {
+        "description": "Visualize private users information by user type. Only admin authorization.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userType",
+            "schema":{
+              "type": "string",
+              "default": "cliente"
+            },
+            "required": false,
+            "description": "User type to be listed (cliente, empresa ou admin"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/users?userType=empresa": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users?userType=admin": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+           {
+            "in": "path",
+            "name": "id",
+            "example": "5af8434f-a107-4560-ae75-9ab02f67492b",
+            "required": true,
+            "schema":{
+              "type":"string"
+            },
+            "description": "The user ID"
+          }
+        ],
+        "responses": {}
+      },
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users/profile": {
+      "patch": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/users/profile/cars": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/users/profile/cars?available=true": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/users/profile/cars?available=false": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/users/profile/rentals": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/users/profile/rentals?returnedCar=true": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/users/profile/rentals?returnedCard=false": {      
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/cars": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/cars?available=true&&active=true": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }     
+    },
+    "/cars/:id": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "patch": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/rentals": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/rentals?returnedCar=true": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/rentals?returnedCar=false": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    },
+    "/rentals/:id": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }      
+    }
+  }
+}
