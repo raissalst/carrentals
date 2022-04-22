@@ -13,17 +13,55 @@
     {
       "url": "https://carrental-capstone.herokuapp.com/api",
       "description": "Car Rentals API"
-    }    
+    }
   ],
   "paths": {
     "/users": {
       "post": {
         "description": "Creates a new user (cliente, empresa ou admin)",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema":{
+                "$ref": "#/components/schemas/CustomerRegister"
+              },
+              "examples": {
+                "Customer Register":{
+                  "$ref": "#/components/examples/CustomerRegister"
+                },
+                "Company Register":{
+                  "$ref": "#/components/examples/CompanyRegister"
+                },
+                "Admin Register":{
+                  "$ref": "#/components/examples/AdminRegister"
+                }
+              }
+            }
+          }
+        },
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
       },
       "get": {
         "description": "Get private information of all registered users (clientes, empresas e admins)",
+        "tags": ["users"],
         "security": [
           {
             "bearerAuth": []
@@ -36,13 +74,15 @@
     "/users/login": {
       "post": {
         "description": "User login",
+        "tags": ["users"],
         "parameters": [],
         "responses": {}
       }
     },
-    "/users?userType=cliente": {      
+    "/users?userType=cliente": {
       "get": {
         "description": "Visualize private users information by user type. Only admin authorization.",
+        "tags": ["users"],
         "security": [
           {
             "bearerAuth": []
@@ -52,7 +92,7 @@
           {
             "in": "query",
             "name": "userType",
-            "schema":{
+            "schema": {
               "type": "string",
               "default": "cliente"
             },
@@ -63,175 +103,455 @@
         "responses": {}
       }
     },
-    "/users?userType=empresa": {      
+    "/users?userType=empresa": {
       "get": {
         "description": "",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       }
     },
-    "/users?userType=admin": {      
+    "/users?userType=admin": {
       "get": {
         "description": "",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       }
     },
     "/users/{id}": {
+      "get": {
+        "description": "Visualize specific public profile data. Companies can retrieve customer or company profiles, customer can retrieve companies profile, and an admin can retrieve public and private companies data.",
+         "tags": ["users"],
+         "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {}
+      },
       "put": {
-        "description": "",
+        "description": "Activate or deactivate a company or a customer profile.",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
-           {
+          {
             "in": "path",
             "name": "id",
             "example": "5af8434f-a107-4560-ae75-9ab02f67492b",
             "required": true,
-            "schema":{
-              "type":"string"
+            "schema": {
+              "type": "string"
             },
             "description": "The user ID"
           }
         ],
         "responses": {}
-      },
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
       }
     },
     "/users/profile": {
       "patch": {
-        "description": "",
+        "description": "Update logged in user data.",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       },
       "get": {
-        "description": "",
+        "description": "Visualize private information of a logged in user profile.",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       },
       "delete": {
-        "description": "",
+        "description": "Deactivate logged in user profile.",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       }
     },
-    "/users/profile/cars": {      
+    "/users/profile/cars": {
       "get": {
-        "description": "",
+        "description": "Visualize all cars information of a logged in company.",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
-    "/users/profile/cars?available=true": {      
+    "/users/profile/cars?available=true": {
       "get": {
-        "description": "",
+        "description": "Visualize all available/unavailable cars of a logged in company.",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
-    "/users/profile/cars?available=false": {      
+    "/users/profile/cars?available=false": {
       "get": {
         "description": "",
+        "tags": ["users"],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
-    "/users/profile/rentals": {      
+    "/users/profile/rentals": {
       "get": {
-        "description": "",
+        "description": "Visualize rental history of a logged in user (company or customer).",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
-    "/users/profile/rentals?returnedCar=true": {      
+    "/users/profile/rentals?returnedCar=true": {
       "get": {
-        "description": "",
+        "description": "Visualize history of active/inative rentals of a logged in user. (company or customer)",
+        "tags": ["users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
-    "/users/profile/rentals?returnedCard=false": {      
+    "/users/profile/rentals?returnedCard=false": {
       "get": {
         "description": "",
+        "tags": ["users"],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
     "/cars": {
       "get": {
-        "description": "",
+        "description": "Visualize public information of all registered available cars.",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "description": "",
+        "description": "Register cars to rent",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       }
     },
-    "/cars?available=true&&active=true": {
+    "/cars?available=false&&active=false": {
       "get": {
-        "description": "",
+        "description": "Visualize all public data of unavaillable/inactive registered cars.",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }     
+      }
     },
     "/cars/:id": {
       "get": {
-        "description": "",
+        "description": "Visualize all public data of a specific car.",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "description": "",
+        "description": "Rent a car.",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       },
       "patch": {
-        "description": "",
+        "description": "Update car information.",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       },
       "delete": {
-        "description": "",
+        "description": "Deactivates a car.",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       }
     },
     "/rentals": {
       "get": {
-        "description": "",
+        "description": "Visualize rentals history of all customers.",
+        "tags": ["rentals"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
     "/rentals?returnedCar=true": {
       "get": {
-        "description": "",
+        "description": "Visualize active/inactive rentals history of all customers.",
+        "tags": ["rentals"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
     "/rentals?returnedCar=false": {
       "get": {
         "description": "",
+        "tags": ["rentals"],
         "parameters": [],
         "responses": {}
-      }      
+      }
     },
     "/rentals/:id": {
       "get": {
-        "description": "",
+        "description": "Visualize all details of a specific rent.",
+        "tags": ["rentals"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "description": "",
+        "description": "Close a specific rent.",
+        "tags": ["rentals"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [],
         "responses": {}
-      }      
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id":{
+            "type": "string"
+          },
+          "name":{
+            "type": "string"
+          },
+          "email":{
+            "type": "string"
+          },
+          "cpf":{
+            "type": "string"
+          },
+          "cnpj":{
+            "type": "string"
+          },
+          "phone":{
+            "type": "string"
+          },
+          "userType":{
+            "type": "string"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "CustomerRegister":{
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password",
+          "phone",
+          "cpf",
+          "userType",
+          "address",
+          "city",
+          "state",
+          "ountry"
+        ]
+      }
+    },
+    "examples": {
+      "CustomerRegister":{
+        "value": {
+          "name": "Roberto",
+	        "email": "roberto235@gmail.com",
+	        "password": "123456",
+	        "phone": "21997771234",
+	        "userType": "cliente",
+	        "cpf": "902.950.180-46",
+	        "address": "Rua vinte e dois de outubro",
+	        "city": "São Gonçalo",
+	        "state": "RJ",
+	        "country": "Brasil"
+        }
+      },
+      "CompanyRegister":{
+        "value": {
+          "name": "Rode Bem S/A",
+          "email": "rode_bem@gmail.com",
+	        "password": "123456",
+	        "phone": "21998271255",
+	        "userType": "empresa",
+	        "cnpj": "51.363.333/0001-31",
+	        "address": "Rua das Calotas, 199 - Galpão",
+	        "city": "Magé",
+	        "state": "RJ",
+	        "country": "Brasil"
+        }
+      },
+      "AdminRegister": {
+        "value": {
+          "name": "Ricardo",
+	        "email": "ricardo@gmail.com",
+	        "password": "123456",
+	        "phone": "21997873434",
+	        "userType": "admin",
+	        "cpf": "945.458.750-17",
+	        "address": "Rua São Clemente, 98/201",
+	        "city": "Botafogo",
+	        "state": "RJ",
+	        "country": "Brasil"
+        }
+      },
+      "Customer":{
+        "value": {
+          "id": "122171a3-20d1-4079-b7c5-f3eff02680c1",
+          "name": "Roberto",
+          "email": "roberto235@gmail.com",
+          "phone": "21997771234",
+          "cnpj": "51.363.333/0001-31",
+          "userType": "cliente",
+          "address": {
+            "id": "e6471557-49ac-4f1d-a9e4-60b759c17ca8",
+            "address": "Rua vinte e dois de outubro",
+            "city": "São GOnçalo",
+            "state": "RJ",
+            "country": "Brasil"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized Error": {
+        "description": "UNAUTHORIZED",
+        "content": {
+          "application/json": {
+            "example": {
+              "error": "Missing authorization token"
+            }
+          }
+        }
+      }
     }
   }
 }
