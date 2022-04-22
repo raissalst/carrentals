@@ -75,8 +75,29 @@
       "post": {
         "description": "User login",
         "tags": ["users"],
+        "requestBody":{
+          "description": "Use email and password of created users examples",
+          "content": {
+            "application/json":{
+              "schema":{
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          }
+        },
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users?userType=cliente": {
@@ -461,6 +482,25 @@
                 "type": "string"
               }
             }
+          }
+        }
+      },
+      "UserLogin":{
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password":{
+            "type": "string"
+          }
+        }
+      },
+      "Token":{
+        "type": "object",
+        "properties": {
+          "token":{
+            "type": "string"
           }
         }
       },
