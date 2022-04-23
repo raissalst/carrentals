@@ -7,7 +7,7 @@ interface IUserRepo {
   findUsers: (data) => Promise<User[]>;
   findById: (id: string) => Promise<User>;
   updateUser: (userData: any, id: string) => Promise<Object>;
-  findUserProfile: (id) => Promise<User[]>;
+  findUserProfile: (id: string) => Promise<User[]>;
 }
 
 class UserRepository implements IUserRepo {
@@ -38,7 +38,7 @@ class UserRepository implements IUserRepo {
       .returning('*')
       .execute();
 
-  findUserProfile = async (id) =>
+  findUserProfile = async (id: string) =>
     await this.ormRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.address', 'address')
