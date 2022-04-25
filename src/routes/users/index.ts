@@ -15,6 +15,7 @@ import {
   validateAdmin,
   validateAuth,
   verifyUserType,
+  validateCompany,
 } from '../../middlewares';
 
 import { createUserShape, loginUserShape, updateUserShape } from '../../shapes';
@@ -51,6 +52,7 @@ userRoute.get('/:id', validateAuth, getUserByIdController);
 userRoute.get(
   '/profile/cars',
   validateAuth,
+  validateCompany,
   getUserProfileCarsController
 )
 
