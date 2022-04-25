@@ -26,8 +26,7 @@ class UserRepository implements IUserRepo {
     await this.ormRepository.find({
       where: [{ cpf: data.cpf }, { cnpj: data.cnpj }, { email: data.email }],
     });
-  findById = async (id: string) =>
-    await await this.ormRepository.findOne({ id });
+  findById = async (id: string) => await this.ormRepository.findOne({ id });
 
   updateUser = async (userData: any, id: string) =>
     await this.ormRepository

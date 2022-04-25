@@ -16,7 +16,7 @@ describe('verify create car shape', () => {
         gear: 'automatico',
         chassis: '3C8FY68B82T297664',
         currentMileage: 856,
-        rentalPricePerday: 95.0,
+        rentalPricePerDay: 95.0,
       },
     ],
   };
