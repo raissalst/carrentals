@@ -10,7 +10,6 @@ afterAll(async () => {
   await connection.dropTables();
   await connection.close();
 });
-
 describe('Address repository tests', () => {
   const addressMock = {
     id: '563fb10f-084e-4abd-a6f5-09293cd24cbf',

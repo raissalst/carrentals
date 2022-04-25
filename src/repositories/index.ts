@@ -5,6 +5,12 @@ import {
   IAddressRepo,
   IUpdateAddressData,
 } from './address/address.repository';
+import {
+  RentalRepository,
+  IRentalRepo,
+  IRentalFilters,
+  IRentalUpdateData,
+} from './rentals/rental.repository';
 
 export {
   UserRepository,
@@ -14,5 +20,9 @@ export {
   ICarData,
   AddressRepository, 
   IAddressRepo, 
-  IUpdateAddressData 
+  IUpdateAddressData,
+  RentalRepository,
+  IRentalRepo,
+  IRentalFilters,
+  IRentalUpdateData
 };

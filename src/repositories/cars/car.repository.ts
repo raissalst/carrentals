@@ -7,10 +7,10 @@ interface ICarData {
   brand?: string;
   year?: string;
   color?: string;
-  doors?: number;
-  fuelType?: string; //enum
+  doors?: 2 | 3 | 4;
+  fuelType?: 'flex' | 'hibrido' | 'eletrico' | 'gasolina' | 'diesel' | 'alcool'
   plate?: string;
-  gear?: string; //enum
+  gear?: 'automatico' | 'manual'
   chassis?: string;
   currentMileage?: number;
   availableToRent?: boolean;
@@ -23,7 +23,7 @@ interface ICarRepo {
   saveMultipleCars: (cars: Car[]) => Promise<any>;
   getCarById: (id: string) => Promise<Car>;
   getCars: (params?: ICarData) => Promise<Car[]>;
-  updateCar: (car: object, data) => Promise<UpdateResult>;
+  updateCar: (id: string, updatedData: ICarData) => Promise<UpdateResult>;
 }
 
 class CarRepository implements ICarRepo {
@@ -33,7 +33,6 @@ class CarRepository implements ICarRepo {
     this.ormRepository = getRepository(Car);
   }
 
-  // [POST] → registra carro (como array de objetos) (autorização para empresa)🔒
   saveCar = async (Car: Car) => await this.ormRepository.save(Car);
   
   saveMultipleCars = async (cars: Car[]) =>
@@ -45,16 +44,11 @@ class CarRepository implements ICarRepo {
       .execute()     
       .then((cars) => cars.generatedMaps);    
     
-  // - **/<:id>** [GET] → *visualizar os dados públicos de um carro (tudo menos placa, chassis, km e isActive) (autorização apenas para empresa, cliente ou admin) 🔒*
   getCarById = async (id: string) => await this.ormRepository.findOne(id);
 
-   // - ***filtro=...*** [GET] → *filtrar por query params (name, model, brand, year, color, doors, fuelType, gear, rentalPricePerDay) todos os carros disponíveis e ativos (autorização apenas para clientes)🔒*
-  // - [GET] → *visualizar dados públicos (tudo menos placa, chassis, km e isActive) de todos os carros disponíveis (available=true e active=true) cadastrados na plataforma (autorização para admin, empresa e cliente)🔒*
   getCars = async (params: ICarData = {}) => await this.ormRepository.find({where: params});
 
-  // - [PATCH] → *atualizar dados de um carro (autorização apenas para empresas)🔒*
-  // - **/<:id>** [PATCH] → *desativar um carro (autorização apenas para empresas)  🔒*
-  updateCar = async (car: object, data) => await this.ormRepository.update(car, data);
+  updateCar = async (id: string, updatedData: ICarData) => await this.ormRepository.update({ id }, updatedData);
   }
 
 export { CarRepository, ICarRepo, ICarData };

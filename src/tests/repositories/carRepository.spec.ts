@@ -1,7 +1,8 @@
 import { CarRepository } from '../../repositories';
 import { expect, describe, it, beforeAll, afterAll } from '@jest/globals';
+import { v4 } from "uuid";
 import { connection } from '..';
-jest.setTimeout(30000);
+
 
 beforeAll(async () => {
   await connection.create();
@@ -14,56 +15,62 @@ afterAll(async () => {
 
 describe('Car repository tests', () => {
   const carMock = {
-    id: '563fb10f-084e-4abd-a6f5-09293cd24cbf',
+    id: v4(),
     name: 'voyage',
     model: 'GTS',
     brand: 'VW',
     year: '1991',
     color: 'branco',
     doors: 3,
-    fuelType: 'álcool',
+    fuelType: 'alcool',
     plate: 'LPY78UY',
     gear: 'manual',
     chassis: '3C8FY68B82T297664',
     currentMileage: 856,
-    rentalPricePerday: 95.0,
+    rentalPricePerDay: 95.0,
     availableToRent: true,
     isActive: true,
-    company: "563fb10f-084e-4abd-a0f5-09293cd24cbf"
+    companyId: "563fb10f-084e-4abd-a0f5-09293cd24cbf"
   };
 
-  // const carMultipleCarsMock = [
-  //   {
-  //     id: '563fb10f-084e-4abd-a6f5-09293cd24cbf',
-  //     name: 'voyage',
-  //     model: 'GTS',
-  //     brand: 'VW',
-  //     year: '1991',
-  //     color: 'branco',
-  //     doors: 3,
-  //     fuelType: 'álcool',
-  //     plate: 'LPY78UY',
-  //     gear: 'manual',
-  //     chassis: '3C8FY68B82T297664',
-  //     currentMileage: 234,
-  //     rentalPricePerday: 95.0,
-  //   },
-  //   {
-  //     id: '563fb10f-084e-4abd-a6f5-09293cd24cbf',
-  //     name: 'voyage',
-  //     model: 'GTS',
-  //     brand: 'VW',
-  //     year: '1991',
-  //     color: 'branco',
-  //     doors: 3,
-  //     fuelType: 'álcool',
-  //     plate: 'LPY78UY',
-  //     gear: 'manual',
-  //     chassis: '3C8FY68B82T297664',
-  //     currentMileage: 856,
-  //     rentalPricePerday: 95.0,
-  //   },
-  // ];
+  const carMultipleCarsMock = [
+    {
+      id: v4(),
+    name: 'voyage',
+    model: 'GTS',
+    brand: 'VW',
+    year: '1991',
+    color: 'branco',
+    doors: 3,
+    fuelType: 'alcool',
+    plate: 'LPY78UY',
+    gear: 'manual',
+    chassis: '3C8FY68B82T297664',
+    currentMileage: 856,
+    rentalPricePerDay: 95.0,
+    availableToRent: true,
+    isActive: true,
+    companyId: "563fb10f-084e-4abd-a0f5-09293cd24cbf"
+    },
+    {
+      id: v4(),
+    name: 'voyage',
+    model: 'GTS',
+    brand: 'VW',
+    year: '1991',
+    color: 'branco',
+    doors: 3,
+    fuelType: 'alcool',
+    plate: 'LPY78UY',
+    gear: 'manual',
+    chassis: '3C8FY68B81T297664',
+    currentMileage: 856,
+    rentalPricePerDay: 95.0,
+    availableToRent: true,
+    isActive: true,
+    companyId: "563fb15f-084e-4abd-a0f5-09293cd24cbf"
+    },
+  ];
 
   it('create car', async () => {
     const car = await new CarRepository().saveCar(carMock as any);
@@ -72,34 +79,38 @@ describe('Car repository tests', () => {
     expect(car).toStrictEqual(carMock);
   });
 
-  // it('create multiple cars', async () => {
-  //   const cars = await new CarRepository().saveMultipleCars(carMock as any);
+  it('create multiple cars', async () => {
+    const cars = await new CarRepository().saveMultipleCars(carMultipleCarsMock as any);
 
-  //   expect(cars).toBeTruthy();
-  //   expect(cars).toStrictEqual(carMock);
-  // });
+    expect(cars).toBeTruthy();
+    expect(cars).toHaveLength(2);
+  });
 
   it('get all cars', async () => {
     const cars = await new CarRepository().getCars();
 
-    expect(cars.length).toBe(0);
+    expect(cars.length).toBe(3);
   });
 
-  // it('get car by id', async () => {
-  //   const car = await new CarRepository().getCarById(carMock.id);
+  it('get car by id', async () => {
+    const car = await new CarRepository().getCarById(carMock.id);
+    const { companyId, ...carWithoutCompanyId } = carMock
+    const carKeys = Object.keys(car)
+    const carKeysMock = Object.keys(carWithoutCompanyId )
 
-  //   expect(Object.keys(car)).toStrictEqual(Object.keys(carMock));
-  // });
+    expect(car.id).toBe(carMock.id);
+    expect(carKeys.sort()).toStrictEqual(carKeysMock.sort());
+  });
 
-  // it('update car', async () => {
-  //   const response = await new CarRepository().updateCar(carMock.id as any, {
-  //     color: 'vermelho',
-  //   });
+  it('update car', async () => {
+    const response = await new CarRepository().updateCar(carMock.id as any, {
+      color: 'vermelho',
+    });
 
-  //   expect(response.affected).toBe(1);
+    expect(response.affected).toBe(1);
 
-  //   const car = await new CarRepository().getCarById(carMock.id);
+    const car = await new CarRepository().getCarById(carMock.id);
 
-  //   expect(car.color).toStrictEqual('vermelho');
-  // });
+    expect(car.color).toStrictEqual('vermelho');
+  });
 });
