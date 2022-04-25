@@ -67,9 +67,8 @@ describe('update User profile tests', () => {
       .patch('/api/users/profile')
       .set('Authorization', `Bearer ${responseBody.token}`)
       .send({ address: 'Rua Caravelas, 2022' });
-
     expect(res.statusCode).toBe(200);
-    expect(res.body.address[0].address).toStrictEqual('Rua Caravelas, 2022');
+    expect(res.body.address.address).toStrictEqual('Rua Caravelas, 2022');
   });
 
   it('should not update without bearer token', async () => {
