@@ -1,4 +1,5 @@
 import { UserRepository } from '../../repositories';
+import { ErrorHandler } from '../../utils';
 
 interface IAvailable {
   availableToRent?: string;
@@ -15,6 +16,8 @@ const getProfileCarsService = async (id: string, availableData: IAvailable) => {
       responseCars = responseCars.filter((car) => car.availableToRent);
     } else if  (searchQuery.toLowerCase().trim() === 'false'){
       responseCars = responseCars.filter((car) => !car.availableToRent);
+    } else {
+      throw new ErrorHandler(400, 'The availableToRent param, when used, must be true or false')
     }
   }
 
