@@ -6,6 +6,7 @@ import {
   getUserController,
   updateUserProfileController,
   getUserProfileController,
+  getUserByIdController,
 } from '../../controllers';
 
 import {
@@ -32,7 +33,7 @@ userRoute.patch(
   '/profile',
   validateAuth,
   validateShape(updateUserShape),
-  updateUserProfileController,
+  updateUserProfileController
 );
 
 
@@ -57,5 +58,9 @@ userRoute.get(
   // validateAdmin,
   getUserController,
 );
+
+userRoute.get('/profile', validateAuth, getUserProfileController);
+
+userRoute.get('/:id', validateAuth, getUserByIdController);
 
 export default userRoute;

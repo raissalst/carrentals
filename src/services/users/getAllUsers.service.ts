@@ -5,8 +5,6 @@ const getAllUsersService = async (query: IUserFilters) => {
   const users = await new UserRepository().findAll({ userType });
   const userFilter = []
 
-  console.log({userType})
-
   for (let i=0; i<users.length; i++) {
     if (users.filter((obj) => obj.cpf !== null)) {
       const { password, cars, cnpj, ...userProfile } = users[i];

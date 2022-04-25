@@ -20,7 +20,7 @@ const createCarShape = yup.object().shape({
       gear: yup.mixed().oneOf(['manual', 'automatico']).required(),
       chassis: yup.string().required(),
       currentMileage: yup.number().required(),
-      rentalPricePerday: yup.number().required(),
+      rentalPricePerDay: yup.number().required(),
       availableToRent: yup
         .boolean()
         .default(() => true)
