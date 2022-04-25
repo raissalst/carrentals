@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Address } from '../../entities/Address';
 import { User } from '../../entities/User';
-import { UserRepository } from '../../repositories';
+import { AddressRepository, UserRepository } from '../../repositories';
 import {
   updateAddressProfileService,
   updateProfileService,
@@ -12,6 +12,7 @@ const updateUserProfileController = async (req: Request, res: Response) => {
   try {
     let userAddressProfile: Array<Address>;
     let userProfileData: Array<User>;
+
     const {
       name,
       email,
@@ -20,7 +21,6 @@ const updateUserProfileController = async (req: Request, res: Response) => {
       userType,
       cpf,
       cnpj,
-      isActive,
       ...addressData
     } = req.validated;
 
@@ -46,7 +46,16 @@ const updateUserProfileController = async (req: Request, res: Response) => {
       );
       userProfile['address'] = [userAddressProfile];
     }
-    const { addressId, ...updatedUserProfile } = userProfile;
+    
+    let { addressId, isActive, ...updatedUserProfile } = userProfile;
+    updatedUserProfile['address'] =
+      await new AddressRepository().getAddressById(userProfile.addressId);
+
+    if (updatedUserProfile.userType === 'cliente') {
+      delete updatedUserProfile.cnpj;
+    } else {
+      delete updatedUserProfile.cpf;
+    }
 
     return res.status(200).json(updatedUserProfile);
   } catch (err: any) {
