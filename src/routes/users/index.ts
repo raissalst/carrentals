@@ -4,6 +4,7 @@ import {
   updateIsActiveUserController,
   createUserController,
   updateUserProfileController,
+  getUserProfileController,
 } from '../../controllers';
 
 import {
@@ -51,5 +52,11 @@ userRoute.patch(
   getUserFromQueryId,
   updateIsActiveUserController
 );
+
+userRoute.get(
+  '/profile',
+  validateAuth,
+  getUserProfileController
+)
 
 export default userRoute;

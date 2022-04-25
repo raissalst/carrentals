@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, QueryBuilder } from 'typeorm';
 import { User } from '../../entities/User';
 
 interface IUserRepo {
@@ -7,6 +7,7 @@ interface IUserRepo {
   findUsers: (data) => Promise<User[]>;
   findById: (id: string) => Promise<User>;
   updateUser: (userData: any, id: string) => Promise<Object>;
+  findUserProfile: (id: string) => Promise<User[]>;
 }
 
 class UserRepository implements IUserRepo {
@@ -35,6 +36,13 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .returning('*')
       .execute();
+
+  findUserProfile = async (id: string) =>
+    await this.ormRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.address', 'address')
+      .where({ id: id })
+      .getMany();
 }
 
 export { UserRepository, IUserRepo };
