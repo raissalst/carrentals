@@ -46,7 +46,7 @@ const getUserByIdController = async (
 
     return res.status(200).json(publicProfileReturn);
   } catch (err) {
-    return res.status(404).json({ error: 'User not found.' });
+    return handleError(err, res);
   }
 };
 
