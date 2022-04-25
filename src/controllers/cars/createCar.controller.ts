@@ -4,6 +4,7 @@ import { CarRepository } from '../../repositories';
 const createCarController = async (req: Request, res: Response) => {
   const { userAuth, validated } = req;
 
+  console.log(userAuth.user.id);
   const data = validated.cars.map((car) => {
     return { ...car, companyId: userAuth.user.id };
   });
