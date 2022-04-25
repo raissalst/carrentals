@@ -42,8 +42,6 @@ class UserRepository implements IUserRepo {
     await this.ormRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.address', 'address')
-      .leftJoinAndSelect('user.cars', 'cars')
-      .leftJoinAndSelect('user.rentals', 'rentals')
       .where({ id: id })
       .getMany();
 }
