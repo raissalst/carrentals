@@ -14,13 +14,13 @@ afterAll(async () => {
 
 describe('get user information by id', () => {
   const companyMock = {
-    name: 'Company SA',
-    email: 'companysa@gmail.com',
+    name: 'Company One',
+    email: 'companyone@gmail.com',
     password: '1234',
     phone: '21997771234',
     userType: 'empresa',
-    cnpj: '29.594.702/0001-22',
-    address: 'Rua company, 100',
+    cnpj: '29.788.702/0001-22',
+    address: 'Rua da passagem, 20',
     city: 'Petrópolis',
     state: 'RJ',
     country: 'Brasil',
@@ -41,7 +41,7 @@ describe('get user information by id', () => {
 
   const customerMockTwo = {
     name: 'Helena',
-    email: 'henela@gmail.com',
+    email: 'helena@gmail.com',
     password: '1234',
     phone: '21995634234',
     userType: 'cliente',
