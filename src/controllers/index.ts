@@ -6,6 +6,8 @@ import updateUserProfileController from './users/updateUserProfile.controller';
 import getUserProfileController from './users/getUserProfile.controller';
 import createCarController from './cars/createCar.controller';
 
+import getAllRentals from './rentals/getAllRentals.controller';
+
 export {
   createUserController,
   loginUserController,
@@ -13,4 +15,5 @@ export {
   updateUserProfileController,
   getUserProfileController,
   createCarController,
+  getAllRentals,
 };
