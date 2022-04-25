@@ -4,7 +4,7 @@ import { handleError } from '../../utils';
 
 const getAllRentals = async (req: Request, res: Response) => {
   try {
-    const rentals = await getAllRentalsService();
+    const rentals = await getAllRentalsService(req.query);
     return res.status(200).json(rentals);
   } catch (err: any) {
     return handleError(err, res);

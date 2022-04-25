@@ -1,7 +1,8 @@
-import { RentalRepository } from '../../repositories';
+import { IRentalFilters, RentalRepository } from '../../repositories';
 
-const getAllRentalsService = async () => {
-  const rentals = await new RentalRepository().getAllRental();
+const getAllRentalsService = async (query: IRentalFilters) => {
+  const { returnedCar } = query;
+  const rentals = await new RentalRepository().getAllRental({ returnedCar });
   return rentals;
 };
 

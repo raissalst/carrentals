@@ -60,4 +60,10 @@ describe('Controller getAllRentals test', () => {
     const response = await request(app).get('/api/rentals');
     expect(response.statusCode).toBe(401);
   });
+  it('200, get rentals with query', async () => {
+    const response = await request(app)
+      .get('/api/rentals?returnedCar=true')
+      .set('Authorization', `Bearer ${adminToken}`);
+    expect(response.statusCode).toBe(200);
+  });
 });
