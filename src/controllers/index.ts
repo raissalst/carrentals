@@ -4,6 +4,7 @@ import updateIsActiveUserController from './users/updateIsActiveUser.controller'
 
 import updateUserProfileController from './users/updateUserProfile.controller';
 import getUserProfileController from './users/getUserProfile.controller';
+import getUserByIdController from './users/getUserById.controller';
 import createCarController from './cars/createCar.controller';
 
 export {
@@ -12,5 +13,6 @@ export {
   updateIsActiveUserController,
   updateUserProfileController,
   getUserProfileController,
+  getUserByIdController,
   createCarController,
 };
