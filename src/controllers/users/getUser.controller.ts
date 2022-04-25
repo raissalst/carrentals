@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { UserRepository } from "../../repositories/users/user.repository";
+import { getAllUsersService } from "../../services";
 import { handleError } from '../../utils';
 
-const getUserController = async (_: Request, res: Response) => {
+const getUserController = async (req: Request, res: Response) => {
   try {
-  const allUsers = await new UserRepository().findAll();
+  const allUsers = await getAllUsersService(req.query);
 
   return res.status(200).json(allUsers);
   

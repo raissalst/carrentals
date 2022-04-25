@@ -31,8 +31,18 @@ class AddressRepository implements IAddressRepo {
 
   getAddressById = async (id: string) => await this.ormRepo.findOne(id);
 
-  updateAddress = async (id: string, updateData: IUpdateAddressData) =>
-    await this.ormRepo.update({ id }, updateData);
+  // updateAddress = async (id: string, updateData: IUpdateAddressData) =>
+  //   await this.ormRepo.update({ id }, updateData);
+
+    updateAddress = async (id: string, updateData: IUpdateAddressData) =>
+    await this.ormRepo
+      .createQueryBuilder()
+      .update(Address)
+      .set(updateData)
+      .where({ id: id })
+      .returning('*')
+      .execute();
 }
+
 
 export { AddressRepository, IAddressRepo, IUpdateAddressData };
