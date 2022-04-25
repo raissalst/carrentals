@@ -3,6 +3,7 @@ import {
   loginUserController,
   updateIsActiveUserController,
   createUserController,
+  deleteUserProfile
 } from '../../controllers';
 
 import {
@@ -31,6 +32,14 @@ userRoute.patch(
   validateAdmin,
   getUserFromQueryId,
   updateIsActiveUserController
+);
+
+userRoute.delete(
+  '/profile',
+  // '/:id',
+  validateAuth,
+  getUserFromQueryId,
+  deleteUserProfile
 );
 
 export default userRoute;
