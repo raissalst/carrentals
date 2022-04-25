@@ -83,17 +83,23 @@ describe('get user cars', () => {
   });
 
   it('should not retrieve the cars list if not requested by a company', async () => {
-    const mockTpken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNzAxNzNjOTEtYzMyNC00MDNiLWI0ZTctOGM1MDIxYWQ3NjM1IiwibmFtZSI6IlJvYmVydG8iLCJlbWFpbCI6InJvYmVydG8yNTBAbm1haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkOHBFVjE2UWdEaDVUMFNiWFluSmFpT3lMOC94alRMY3hITnNvNVgwTkJxZWVRbU80Mm9ySnUiLCJjcGYiOiI1MDEuNDY1LjQxMC0wNiIsImNucGoiOm51bGwsInBob25lIjoiNTUyMTk4NDU1NzQ4NSIsInVzZXJUeXBlIjoiY2xpZW50ZSIsImlzQWN0aXZlIjp0cnVlfSwiaWF0IjoxNjUwOTA5NzMxLCJleHAiOjE2NTA5OTYxMzF9.1Tsz-Ac0s8xbpFIzCjq0hZ3AdgpiqovVQJkDHQOe_kM';
+    const requestBody = {
+      email: process.env.ADMIN_EMAIL,
+      password: process.env.ADMIN_PASSWORD,
+    };
+
+    const response = await request(app)
+      .post('/api/users/login')
+      .send(requestBody);
+    const responseBody = response.body;
+
+    const mockToken = responseBody.token;
 
     const userCars = await request(app)
       .get('/api/users/profile/cars')
-      .set('Authorization', `Bearer ${mockTpken}`);
-
-    expect(userCars.statusCode).toBe(403);
-    expect(userCars.body).toMatchObject({
-      error: 'Forbidden',
-    });
+      .set('Authorization', `Bearer ${mockToken}`);
+    expect(userCars.statusCode).toBe(401);
+    expect(userCars.body).toMatchObject({ error: 'Unauthorized' });
   });
 
   it('should filter cars in the list by true availability', async () => {
@@ -113,6 +119,6 @@ describe('get user cars', () => {
       .query('availableToRent=true');
 
     expect(userCars.statusCode).toBe(200);
-    expect(userCars.body[0].availableToRent).toStrictEqual(true)
+    expect(userCars.body[0].availableToRent).toStrictEqual(true);
   });
 });
