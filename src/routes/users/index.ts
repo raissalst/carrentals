@@ -6,6 +6,7 @@ import {
   updateUserProfileController,
   getUserProfileController,
   getUserProfileCarsController,
+  getUserByIdController,
 } from '../../controllers';
 
 import {
@@ -32,19 +33,8 @@ userRoute.patch(
   '/profile',
   validateAuth,
   validateShape(updateUserShape),
-  updateUserProfileController,
+  updateUserProfileController
 );
-
-
-
-
-
-
-
-
-
-
-
 
 userRoute.patch(
   '/:id',
@@ -54,11 +44,9 @@ userRoute.patch(
   updateIsActiveUserController
 );
 
-userRoute.get(
-  '/profile',
-  validateAuth,
-  getUserProfileController
-)
+userRoute.get('/profile', validateAuth, getUserProfileController);
+
+userRoute.get('/:id', validateAuth, getUserByIdController);
 
 userRoute.get(
   '/profile/cars',
