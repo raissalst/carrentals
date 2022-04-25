@@ -4,6 +4,7 @@ import {
   updateIsActiveUserController,
   createUserController,
   getUserProfileController,
+  getUserProfileCarsController,
 } from '../../controllers';
 
 import {
@@ -38,6 +39,12 @@ userRoute.get(
   '/profile',
   validateAuth,
   getUserProfileController
+)
+
+userRoute.get(
+  '/profile/cars',
+  validateAuth,
+  getUserProfileCarsController
 )
 
 export default userRoute;
