@@ -1,7 +1,7 @@
 import { UserRepository } from '../../repositories';
 
 interface IAvailable {
-  availableToRent: string;
+  availableToRent?: string;
 }
 
 const getProfileCarsService = async (id: string, availableData: IAvailable) => {
