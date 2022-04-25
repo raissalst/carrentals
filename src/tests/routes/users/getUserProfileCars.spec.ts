@@ -95,4 +95,24 @@ describe('get user cars', () => {
       error: 'Forbidden',
     });
   });
+
+  it('should filter cars in the list by true availability', async () => {
+    const loginRequestBody = {
+      email: companyMock.email,
+      password: companyMock.password,
+    };
+
+    const response = await request(app)
+      .post('/api/users/login')
+      .send(loginRequestBody);
+    const responseBody = response.body;
+
+    const userCars = await request(app)
+      .get('/api/users/profile/cars')
+      .set('Authorization', `Bearer ${responseBody.token}`)
+      .query('availableToRent=true');
+
+    expect(userCars.statusCode).toBe(200);
+    expect(userCars.body[0].availableToRent).toStrictEqual(true)
+  });
 });
