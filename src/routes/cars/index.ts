@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   createCarController,
   rentACarController,
+  getCarByIdController,
   updateIsActiveCarController,
 } from '../../controllers';
 import {
@@ -36,5 +37,6 @@ carRoute.post(
   validateCustomer,
   rentACarController
 );
+carRoute.get('/:id', validateAuth, getCarByIdController);
 
 export default carRoute;
