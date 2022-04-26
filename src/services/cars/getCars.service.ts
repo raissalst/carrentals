@@ -1,8 +1,6 @@
 import { CarRepository } from "../../repositories";
 
 const getCarsService = async () => {
-
-    try {
         
         const cars = await new CarRepository().getCars();
         const onlyAvailableandActiveCars = []
@@ -16,14 +14,12 @@ const getCarsService = async () => {
         const retrieveCars = []
         
         onlyAvailableandActiveCars.forEach(element => {
-            const { plate, chassis, currentMileage, isActive, ...car } = element;;    
+            const { plate, chassis, currentMileage, isActive, ...car } = element;    
             retrieveCars.push(car)
         });
         
         return retrieveCars
-    } catch (error) {
-        return error
-    }
+
 }
 
 export default getCarsService

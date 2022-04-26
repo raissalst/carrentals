@@ -4,7 +4,7 @@ import {
   getCarsController,
   updateIsActiveCarController,
 } from '../../controllers';
-import getCars from '../../controllers/cars/getCars.controller';
+
 import {
   validateAdmin,
   validateAuth,
@@ -33,7 +33,7 @@ carRoute.delete(
 
 carRoute.get(
   '/',
-  validateAuth,
+  // validateAuth,
   // validateCustomerOrCompany,
   getCarsController
 );

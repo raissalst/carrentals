@@ -14,4 +14,3 @@ const getCarsController = async (_: Request, res: Response) => {
 export default getCarsController;
 
 
-// - [GET] → *visualizar dados públicos (tudo menos placa, chassis, km e isActive) de todos os carros disponíveis (available=true e active=true) cadastrados na plataforma (autorização para admin, empresa e cliente)🔒*

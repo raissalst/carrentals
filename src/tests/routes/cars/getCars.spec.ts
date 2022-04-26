@@ -14,23 +14,29 @@ afterAll(async () => {
   await connection.close();
 });
 
+
 describe('should retrieve all active and available cars', () => {
+
+  it('200, get no cars when there are not cars availables or actives', async () => {
+    const response = await request(app).get(
+      '/api/cars');
+      
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toStrictEqual([]);
+  });
+
+
   it('200, get all cars', async () => {
     const car = await createCar();
+    const { chassis, currentMileage, isActive, plate, ...outputCar } = car[0]
 
     const response = await request(app).get('/api/cars');
 
     expect(response.statusCode).toBe(200);
-    expect(response.body).toStrictEqual(car.body);
+    expect(response.body).toStrictEqual([outputCar]);
   });
   
-  it('get no cars when there are not cars availables or actives', async () => {
-    const response = await request(app).get(
-      '/api/cars');
-      
-      expect(response.badRequest).toBe(400);
-      expect(response.body).toHaveLength(0);
-  });
+ 
 });
 
 const createCar = async () => {
@@ -52,9 +58,9 @@ const createCar = async () => {
     },
   ];
 
-  const resp = await new CarRepository().saveCar(carMock as any);
+  const resp = await new CarRepository().saveMultipleCars(carMock as any);
 
-  return resp[0];
+  return resp;
 };
 
 
