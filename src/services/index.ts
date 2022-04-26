@@ -13,6 +13,6 @@ export {
   updateProfileService,
   updateAddressProfileService,
   getUserProfileService,
-  getAllUsersService
+  getAllUsersService,
   getProfileCarsService,
 }
