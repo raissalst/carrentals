@@ -4,9 +4,11 @@ import updateIsActiveUserController from './users/updateIsActiveUser.controller'
 import getUserController from './users/getUser.controller';
 import updateUserProfileController from './users/updateUserProfile.controller';
 import getUserProfileController from './users/getUserProfile.controller';
+import getUserProfileCarsController from './users/getUserProfileCars.controller';
 import getUserByIdController from './users/getUserById.controller';
 import createCarController from './cars/createCar.controller';
 import updateIsActiveCarController from './cars/updateIsActiveCar.controller';
+import getCarByIdController from './cars/getCarById.controller';
 
 export {
   createUserController,
@@ -15,7 +17,9 @@ export {
   getUserController,
   updateUserProfileController,
   getUserProfileController,
+  getUserProfileCarsController,
   getUserByIdController,
   createCarController,
   updateIsActiveCarController,
+  getCarByIdController,
 };

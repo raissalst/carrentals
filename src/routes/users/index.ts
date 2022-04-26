@@ -6,6 +6,7 @@ import {
   getUserController,
   updateUserProfileController,
   getUserProfileController,
+  getUserProfileCarsController,
   getUserByIdController,
 } from '../../controllers';
 
@@ -15,6 +16,7 @@ import {
   validateAdmin,
   validateAuth,
   verifyUserType,
+  validateCompany,
 } from '../../middlewares';
 
 import { createUserShape, loginUserShape, updateUserShape } from '../../shapes';
@@ -62,5 +64,12 @@ userRoute.get(
 userRoute.get('/profile', validateAuth, getUserProfileController);
 
 userRoute.get('/:id', validateAuth, getUserByIdController);
+
+userRoute.get(
+  '/profile/cars',
+  validateAuth,
+  validateCompany,
+  getUserProfileCarsController
+)
 
 export default userRoute;
