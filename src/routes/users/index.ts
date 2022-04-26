@@ -3,6 +3,9 @@ import {
   loginUserController,
   updateIsActiveUserController,
   createUserController,
+  updateUserProfileController,
+  getUserProfileController,
+  getUserByIdController,
 } from '../../controllers';
 
 import {
@@ -13,7 +16,7 @@ import {
   verifyUserType,
 } from '../../middlewares';
 
-import { createUserShape, loginUserShape } from '../../shapes';
+import { createUserShape, loginUserShape, updateUserShape } from '../../shapes';
 
 const userRoute = Router();
 
@@ -26,6 +29,13 @@ userRoute.post(
 );
 
 userRoute.patch(
+  '/profile',
+  validateAuth,
+  validateShape(updateUserShape),
+  updateUserProfileController
+);
+
+userRoute.patch(
   '/:id',
   validateAuth,
   validateAdmin,
@@ -33,5 +43,8 @@ userRoute.patch(
   updateIsActiveUserController
 );
 
-export default userRoute;
+userRoute.get('/profile', validateAuth, getUserProfileController);
 
+userRoute.get('/:id', validateAuth, getUserByIdController);
+
+export default userRoute;
