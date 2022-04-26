@@ -1,9 +1,15 @@
 import { Repository, getRepository, QueryBuilder } from 'typeorm';
 import { User } from '../../entities/User';
 
+interface IUserFilters {
+  userType?: string;
+}
+
 interface IUserRepo {
   saveUser: (user: User) => Promise<User>;
   findByEmail: (email: string) => Promise<User>;
+  findUsersByData: (data: User) => Promise<User[]>;
+  findAll: (query: Array<IUserFilters> | IUserFilters) => Promise<User[]>;
   findUsers: (data) => Promise<User[]>;
   findById: (id: string) => Promise<User>;
   updateUser: (userData: any, id: string) => Promise<Object>;
@@ -22,6 +28,20 @@ class UserRepository implements IUserRepo {
 
   findByEmail = async (email: string) =>
     await this.ormRepository.findOne({ email: email });
+
+  findUsersByData = async (data: User) => await this.ormRepository.find({where: [
+    {cpf: data.cpf}, {cnpj: data.cnpj}, {email: data.email}
+  ]});
+
+  findAll = async(query: IUserFilters) => {
+    const basicQuery = await this.ormRepository.createQueryBuilder('user').leftJoinAndSelect('user.address', 'address')
+
+      if (query.userType) {
+        return basicQuery.where("user.userType = :userType", query).getMany();
+      } else {
+        return basicQuery.getMany();
+      }
+  }
 
   findUsers = async (data) =>
     await this.ormRepository.find({
@@ -53,4 +73,4 @@ class UserRepository implements IUserRepo {
       .getMany();
 }
 
-export { UserRepository, IUserRepo };
+export { UserRepository, IUserRepo, IUserFilters };

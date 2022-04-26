@@ -1,4 +1,4 @@
-import { UserRepository, IUserRepo } from './users/user.repository';
+import { UserRepository, IUserRepo, IUserFilters } from './users/user.repository';
 import { CarRepository, ICarRepo, ICarData } from './cars/car.repository';
 import {
   AddressRepository,
@@ -15,6 +15,7 @@ import {
 export {
   UserRepository,
   IUserRepo,
+  IUserFilters,
   CarRepository,
   ICarRepo,
   ICarData,
