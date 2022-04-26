@@ -8,6 +8,7 @@ interface IUserRepo {
   findById: (id: string) => Promise<User>;
   updateUser: (userData: any, id: string) => Promise<Object>;
   findUserProfile: (id: string) => Promise<User[]>;
+  findRentalsInUsers: (query?: boolean) => Promise<User[]>;
 }
 
 class UserRepository implements IUserRepo {
@@ -42,6 +43,16 @@ class UserRepository implements IUserRepo {
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.address', 'address')
       .where({ id: id })
+      .getMany();
+
+  findRentalsInUsers = async (query: boolean) =>
+    await this.ormRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.adress', 'adress')
+      .leftJoinAndSelect('user.rentals', 'rentals')
+      .where(query !== undefined ? 'rentals.returnedCar =:returnedCar' : '', {
+        returnedCar: query,
+      })
       .getMany();
 }
 
