@@ -1,11 +1,15 @@
 import { Router } from 'express';
 import {
   createCarController,
+  getCarsController,
   updateIsActiveCarController,
 } from '../../controllers';
+import getCars from '../../controllers/cars/getCars.controller';
 import {
+  validateAdmin,
   validateAuth,
   validateCompany,
+  validateCustomerOrCompany,
   validateShape,
 } from '../../middlewares';
 import { createCarShape } from '../../shapes';
@@ -26,4 +30,12 @@ carRoute.delete(
   validateCompany,
   updateIsActiveCarController
 );
+
+carRoute.get(
+  '/',
+  validateAuth,
+  // validateCustomerOrCompany,
+  getCarsController
+);
+
 export default carRoute;
