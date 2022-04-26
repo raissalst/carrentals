@@ -28,6 +28,6 @@ carRoute.delete(
   updateIsActiveCarController
 );
 
-carRoute.get('/:id', getCarByIdController);
+carRoute.get('/:id', validateAuth, getCarByIdController);
 
 export default carRoute;
