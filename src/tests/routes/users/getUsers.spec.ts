@@ -3,9 +3,6 @@ import { connection } from '../..';
 import app from '../../../app';
 import request from 'supertest';
 import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken';
-import { jwtConfig } from '../../../configs';
-import { UserRepository } from '../../../repositories';
 
 dotenv.config();
 
@@ -31,14 +28,6 @@ describe('Testing the /get/Users route', () => {
       .post('/api/users/login')
       .send(requestLoginBody);
     const responseLoginBody = response.body;
-
-    // const admin = await new UserRepository().findByEmail(
-    //   process.env.ADMIN_EMAIL
-    // );
-
-    // const adminToken = jwt.sign({ user: admin }, jwtConfig.secretKey, {
-    //   expiresIn: jwtConfig.expiresIn,
-    // });
     
     const res = await request(app)
     .get(`/api/users`)
