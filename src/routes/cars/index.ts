@@ -7,9 +7,10 @@ import {
 import {
   validateAuth,
   validateCompany,
+  validateCustomer,
   validateShape,
 } from '../../middlewares';
-import { createCarShape } from '../../shapes';
+import { createCarRentShape, createCarShape } from '../../shapes';
 
 const carRoute = Router();
 
@@ -28,6 +29,12 @@ carRoute.delete(
   updateIsActiveCarController
 );
 
-carRoute.post('/:id', rentACarController);
+carRoute.post(
+  '/:id',
+  validateShape(createCarRentShape),
+  validateAuth,
+  validateCustomer,
+  rentACarController
+);
 
 export default carRoute;
