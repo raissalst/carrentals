@@ -33,8 +33,7 @@ carRoute.delete(
 
 carRoute.get(
   '/',
-  // validateAuth,
-  // validateCustomerOrCompany,
+  validateAuth,
   getCarsController
 );
 
