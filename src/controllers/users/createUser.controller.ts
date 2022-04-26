@@ -7,7 +7,7 @@ import { ErrorHandler, handleError } from '../../utils';
 
 const createUserController = async (req: Request, res: Response) => {
   try {
-    const checkUser = await new UserRepository().findUsers(
+    const checkUser = await new UserRepository().findUsersByData(
       req.validated as User
     );
 

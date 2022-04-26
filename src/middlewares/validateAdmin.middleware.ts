@@ -12,6 +12,9 @@ const validateAdmin = async (
     const user = await new UserRepository().findByEmail(
       req.userAuth.user.email
     );
+    if (!user) {
+      throw new ErrorHandler(404, 'Admin not found');
+    }
 
     if (user.userType === 'admin') {
       return next();

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createCarController,
+  getCarByIdController,
   updateIsActiveCarController,
 } from '../../controllers';
 import {
@@ -26,4 +27,7 @@ carRoute.delete(
   validateCompany,
   updateIsActiveCarController
 );
+
+carRoute.get('/:id', validateAuth, getCarByIdController);
+
 export default carRoute;

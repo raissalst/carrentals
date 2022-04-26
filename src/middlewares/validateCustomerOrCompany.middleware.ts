@@ -11,6 +11,10 @@ const validateCustomerOrCompany = async (
   try {
     const user = await new UserRepository().findByEmail(userAuth.email);
 
+    if (!user) {
+      throw new ErrorHandler(404, 'User not found');
+    }
+
     if (user.userType === 'empresa' || 'cliente') {
       return next();
     }
