@@ -37,7 +37,12 @@ class CarRepository implements ICarRepo {
 
   saveMultipleCars = async (cars: Car[]) => await this.ormRepository.save(cars);
 
-  getCarById = async (id: string) => await this.ormRepository.findOne(id);
+  getCarById = async (id: string) =>
+    await this.ormRepository
+      .createQueryBuilder('car')
+      .leftJoinAndSelect('car.company', 'company')
+      .where({ id: id })
+      .getOne();
 
   getCars = async (params: ICarData = {}) =>
     await this.ormRepository.find({ where: params });
