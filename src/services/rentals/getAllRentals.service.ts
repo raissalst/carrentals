@@ -1,14 +1,21 @@
 import { IRentalFilters, UserRepository } from '../../repositories';
 
 const getAllRentalsService = async (query: IRentalFilters | any) => {
-  const { returnedCar } = query;
-  const rentals = await new UserRepository().findRentalsInUsers(returnedCar);
-  if (rentals[0].cpf) {
-    const { password, cnpj, ...newRentals } = rentals[0];
-    return newRentals;
-  } else {
-    const { password, cpf, ...newRentals } = rentals[0];
-    return newRentals;
+  try {
+    const { returnedCar } = query;
+    const rentals = await new UserRepository().findRentalsInUsers(returnedCar);
+    rentals.forEach((element) => {
+      delete element.password;
+      if (element.cpf) {
+        delete element.cnpj;
+      } else {
+        delete element.cpf;
+      }
+    });
+    const rentalsFiltered = rentals.filter((item) => item.rentals.length > 0);
+    return rentalsFiltered;
+  } catch (err: any) {
+    return err;
   }
 };
 

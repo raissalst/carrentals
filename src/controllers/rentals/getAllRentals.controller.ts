@@ -5,7 +5,7 @@ import { handleError } from '../../utils';
 const getAllRentalsController = async (req: Request, res: Response) => {
   try {
     const rentals = await getAllRentalsService(req.query);
-    return res.status(200).json(rentals);
+    return res.status(200).json({ clientes: rentals });
   } catch (err: any) {
     return handleError(err, res);
   }

@@ -1,10 +1,10 @@
 import { expect, describe, it, beforeAll, afterAll } from '@jest/globals';
-import { connection } from '../..';
-import app from '../../../app';
-import request from 'supertest';
-import { UserRepository } from '../../../repositories';
-import jwt from 'jsonwebtoken';
+import { RentalRepository, UserRepository } from '../../../repositories';
 import { jwtConfig } from '../../../configs';
+import { connection } from '../..';
+import request from 'supertest';
+import jwt from 'jsonwebtoken';
+import app from '../../../app';
 import dotenv from 'dotenv';
 import { v4 } from 'uuid';
 
@@ -27,11 +27,25 @@ describe('Controller getAllRentals test', () => {
     isActive: true,
     addressId: v4(),
   };
+  const rentalMock = {
+    id: '63ed70b9-691e-4f4b-bb15-e4a8d87632ae',
+    rentalStartDate: '2023-05-20T03:00:00.000Z',
+    rentalReturnDate: '2023-05-25T03:00:00.000Z',
+    returnedCarDate: null,
+    returnedCar: false,
+    rentalPricePerDay: 60,
+    rentalPricePreview: 180,
+    rentalPriceTotal: 180,
+    mileageRan: 40,
+    customer: userMock.id,
+  };
+
   let adminToken: string;
   let userToken: string;
   beforeAll(async () => {
     await connection.create();
     const user = await new UserRepository().saveUser(userMock as any);
+    const rental = await new RentalRepository().saveRental(rentalMock as any);
     const admin = await new UserRepository().findByEmail(
       process.env.ADMIN_EMAIL
     );

@@ -45,10 +45,10 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .getMany();
 
-  findRentalsInUsers = async (query: boolean) =>
+  findRentalsInUsers = async (query?: boolean) =>
     await this.ormRepository
       .createQueryBuilder('user')
-      .leftJoinAndSelect('user.adress', 'adress')
+      .leftJoinAndSelect('user.address', 'address')
       .leftJoinAndSelect('user.rentals', 'rentals')
       .where(query !== undefined ? 'rentals.returnedCar =:returnedCar' : '', {
         returnedCar: query,
