@@ -6,6 +6,7 @@ import getUserProfileController from './users/getUserProfile.controller';
 import getUserByIdController from './users/getUserById.controller';
 import createCarController from './cars/createCar.controller';
 import updateIsActiveCarController from './cars/updateIsActiveCar.controller';
+import rentACarController from './rentals/rentACar.controller';
 
 export {
   createUserController,
@@ -16,4 +17,5 @@ export {
   getUserByIdController,
   createCarController,
   updateIsActiveCarController,
+  rentACarController,
 };
