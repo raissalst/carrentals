@@ -22,6 +22,7 @@ interface IRentalRepo {
     id: string,
     updateData: IRentalUpdateData
   ) => Promise<UpdateResult>;
+  findRentals: (id: string) => Promise<Rental[]>;
 }
 
 class RentalRepository implements IRentalRepo {
@@ -41,6 +42,13 @@ class RentalRepository implements IRentalRepo {
 
   updateRental = async (id: string, updateData: IRentalUpdateData) =>
     await this.ormRepo.update({ id }, updateData);
+
+  findRentals = async (id: string) =>
+    await this.ormRepo
+      .createQueryBuilder('rentals')
+      .leftJoinAndSelect('rentals.car', 'car')
+      .where({ customer: id })
+      .getMany();
 }
 
 export { RentalRepository, IRentalRepo, IRentalFilters, IRentalUpdateData };

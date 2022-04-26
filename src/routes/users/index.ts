@@ -7,6 +7,7 @@ import {
   getUserProfileController,
   getUserProfileCarsController,
   getUserByIdController,
+  getUserProfileRentalsController,
 } from '../../controllers';
 
 import {
@@ -16,6 +17,7 @@ import {
   validateAuth,
   verifyUserType,
   validateCompany,
+  validateCustomerOrCompany,
 } from '../../middlewares';
 
 import { createUserShape, loginUserShape, updateUserShape } from '../../shapes';
@@ -54,6 +56,13 @@ userRoute.get(
   validateAuth,
   validateCompany,
   getUserProfileCarsController
-)
+);
+
+userRoute.get(
+  '/profile/rentals',
+  validateAuth,
+  validateCustomerOrCompany,
+  getUserProfileRentalsController,
+);
 
 export default userRoute;

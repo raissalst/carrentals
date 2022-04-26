@@ -9,8 +9,8 @@ const validateCustomerOrCompany = async (
 ) => {
   const { userAuth } = req;
   try {
-    const user = await new UserRepository().findByEmail(userAuth.email);
-
+    const user = await new UserRepository().findByEmail(userAuth.user.email);
+    
     if (!user) {
       throw new ErrorHandler(404, 'User not found');
     }

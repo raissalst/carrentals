@@ -5,6 +5,7 @@ import getProfileCarsService from "./users/getProfileCars.service";
 
 import updateProfileService from "./users/updateProfile.service";
 import updateAddressProfileService from "./address/updateProfile.service";
+import getProfileRentalsService from "./users/getProfileRentals.service";
 
 export {
   createUserService,
@@ -13,4 +14,5 @@ export {
   updateAddressProfileService,
   getUserProfileService,
   getProfileCarsService,
+  getProfileRentalsService,
 }
