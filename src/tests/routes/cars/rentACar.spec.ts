@@ -19,15 +19,75 @@ afterAll(async () => {
 describe('rent a car tests', () => {
   let car;
   let user;
+  let adminToken;
 
   beforeAll(async () => {
     car = await createCarMock();
     user = await createUserMock();
+    const admin = await new UserRepository().findByEmail(
+      process.env.ADMIN_EMAIL
+    );
+
+    adminToken = jwt.sign({ user: admin }, jwtConfig.secretKey, {
+      expiresIn: jwtConfig.expiresIn,
+    });
   });
+
+  it('400, try rent a car with wrong keys on body', async () => {
+    const response = await request(app).post(`/api/cars/${car.id}`).send({});
+
+    expect(response.statusCode).toBe(400);
+  });
+
+  it('401, try rent a car with no token', async () => {
+    const response = await request(app).post(`/api/cars/${car.id}`).send({
+      rentalStartDate: '10/05/2023',
+      rentalReturnDate: '15/05/2023',
+    });
+
+    expect(response.statusCode).toBe(401);
+    expect(response.body).toStrictEqual({
+      error: 'Missing authorization token',
+    });
+  });
+
+  it('401, try rent a car with not customer token', async () => {
+    const response = await request(app)
+      .post(`/api/cars/${car.id}`)
+      .send({
+        rentalStartDate: '10/05/2023',
+        rentalReturnDate: '15/05/2023',
+      })
+      .set('Authorization', `Bearer ${adminToken}`);
+
+    expect(response.statusCode).toBe(401);
+    expect(response.body).toStrictEqual({ error: 'Unauthorized' });
+  });
+
   it('200, rent success', async () => {
-    const response = await request(app).post(`/api/cars/${car.id}`);
+    const response = await request(app)
+      .post(`/api/cars/${car.id}`)
+      .send({
+        rentalStartDate: '10/05/2023',
+        rentalReturnDate: '15/05/2023',
+      })
+      .set('Authorization', `Bearer ${user.userToken}`);
+
+    const responseKeys = Object.keys(response.body);
+    const mockKeys = [
+      'id',
+      'rentalStartDate',
+      'rentalReturnDate',
+      'returnedCarDate',
+      'returnedCar',
+      'rentalPricePerDay',
+      'rentalPricePreview',
+      'rentalPriceTotal',
+      'mileageRan',
+    ];
 
     expect(response.statusCode).toBe(200);
+    expect(responseKeys.sort()).toStrictEqual(mockKeys.sort());
   });
 });
 
