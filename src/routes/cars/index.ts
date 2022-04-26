@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createCarController,
+  rentACarController,
   updateIsActiveCarController,
 } from '../../controllers';
 import {
@@ -26,4 +27,7 @@ carRoute.delete(
   validateCompany,
   updateIsActiveCarController
 );
+
+carRoute.post('/:id', rentACarController);
+
 export default carRoute;
