@@ -7,7 +7,7 @@ import {
   getUserProfileController,
   getUserProfileCarsController,
   getUserByIdController,
-  getUserProfileRentalsController,
+  getUserRentalsController,
 } from '../../controllers';
 
 import {
@@ -62,7 +62,7 @@ userRoute.get(
   '/profile/rentals',
   validateAuth,
   validateCustomerOrCompany,
-  getUserProfileRentalsController,
+  getUserRentalsController,
 );
 
 export default userRoute;

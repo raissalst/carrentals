@@ -22,7 +22,7 @@ interface IRentalRepo {
     id: string,
     updateData: IRentalUpdateData
   ) => Promise<UpdateResult>;
-  findRentals: (id: string, query) => Promise<Rental[]>;
+  findRentals: (id: string, query: boolean) => Promise<Rental[]>;
 }
 
 class RentalRepository implements IRentalRepo {
