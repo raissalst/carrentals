@@ -6,7 +6,7 @@ const getAllUsersService = async (query: IUserFilters) => {
   const userFilter = []
 
   for (let i=0; i<users.length; i++) {
-    if (users.filter((obj) => obj.cpf !== null)) {
+    if (users[i].cpf) {
       const { password, cars, cnpj, ...userProfile } = users[i];
       userFilter.push(userProfile);
     } else {
