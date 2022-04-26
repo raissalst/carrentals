@@ -15,8 +15,14 @@ const getCarByIdController = async (req: Request, res: Response) => {
     if (!response) {
       throw new ErrorHandler(404, 'Car not found.');
     }
-    const { plate, chassis, isActive, currentMileage, ...responseToSend } =
-      response;
+    const {
+      plate,
+      chassis,
+      isActive,
+      currentMileage,
+      company,
+      ...responseToSend
+    } = response;
     res.status(200).json(responseToSend);
   } catch (error) {
     return handleError(error, res);
