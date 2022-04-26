@@ -8,6 +8,7 @@ import getUserByIdController from './users/getUserById.controller';
 import createCarController from './cars/createCar.controller';
 import updateIsActiveCarController from './cars/updateIsActiveCar.controller';
 import getUserProfileRentalsController from './users/getUserProfileRentals.controller';
+import getCarByIdController from './cars/getCarById.controller';
 
 export {
   createUserController,
@@ -20,4 +21,5 @@ export {
   createCarController,
   updateIsActiveCarController,
   getUserProfileRentalsController,
+  getCarByIdController,
 };
