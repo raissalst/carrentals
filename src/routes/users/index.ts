@@ -50,9 +50,7 @@ userRoute.patch(
 
 userRoute.delete(
   '/profile',
-  // '/:id',
   validateAuth,
-  getUserFromQueryId,
   deleteUserProfile
 );
 

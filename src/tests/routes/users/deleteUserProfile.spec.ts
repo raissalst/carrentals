@@ -22,20 +22,12 @@ const userMock = {
   addressId: v4(),
 };
 
-let adminToken: string;
 let userToken: string;
 
 beforeAll(async () => {
   await connection.create();
 
   const user = await new UserRepository().saveUser(userMock as any);
-  const admin = await new UserRepository().findByEmail(
-    process.env.ADMIN_EMAIL
-  );
-
-  adminToken = jwt.sign({ user: admin }, jwtConfig.secretKey, {
-    expiresIn: jwtConfig.expiresIn,
-  });
 
   userToken = jwt.sign({ user }, jwtConfig.secretKey, {
     expiresIn: jwtConfig.expiresIn,
@@ -51,10 +43,10 @@ afterAll(async () => {
 
 describe('Testing the /delete/UserProfile route', () => {
 
-  it('204, try update with admin token', async () => {
+  it('should set isActive false', async () => {
     const response = await request(app)
-      .patch(`/api/users/${userMock.id}`)
-      .set('Authorization', `Bearer ${adminToken}`);
+      .delete(`/api/users/profile`)
+      .set('Authorization', `Bearer ${userToken}`);
 
     expect(response.statusCode).toBe(204);
     expect(response.body).toStrictEqual({});
@@ -64,7 +56,7 @@ describe('Testing the /delete/UserProfile route', () => {
     expect(user.isActive).toBe(false);
   });
 
-    it('should not delete users without admin token', async () => {
+    it('should not delete users without token', async () => {
   
       const response = await request(app).delete('/api/users/profile')
   

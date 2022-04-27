@@ -1,4 +1,4 @@
-import { Repository, getRepository, QueryBuilder, DeleteResult } from 'typeorm';
+import { Repository, getRepository, DeleteResult } from 'typeorm';
 import { User } from '../../entities/User';
 
 interface IUserFilters {
@@ -10,10 +10,10 @@ interface IUserRepo {
   findByEmail: (email: string) => Promise<User>;
   findUsersByData: (data: User) => Promise<User[]>;
   findAll: (query: Array<IUserFilters> | IUserFilters) => Promise<User[]>;
-  findUsers: (data) => Promise<User[]>;
   findById: (id: string) => Promise<User>;
   updateUser: (userData: any, id: string) => Promise<Object>;
   findUserProfile: (id: string) => Promise<User[]>;
+  findRentalsInUsers: (query?: boolean) => Promise<User[]>;
   findUserCars: (id: string) => Promise<User[]>;
   deleteUser: (id: string) => Promise<DeleteResult>;
 }
@@ -30,24 +30,22 @@ class UserRepository implements IUserRepo {
   findByEmail = async (email: string) =>
     await this.ormRepository.findOne({ email: email });
 
-  findUsersByData = async (data: User) => await this.ormRepository.find({where: [
-    {cpf: data.cpf}, {cnpj: data.cnpj}, {email: data.email}
-  ]});
-
-  findAll = async(query: IUserFilters) => {
-    const basicQuery = await this.ormRepository.createQueryBuilder('user').leftJoinAndSelect('user.address', 'address')
-
-      if (query.userType) {
-        return basicQuery.where("user.userType = :userType", query).getMany();
-      } else {
-        return basicQuery.getMany();
-      }
-  }
-
-  findUsers = async (data) =>
+  findUsersByData = async (data: User) =>
     await this.ormRepository.find({
       where: [{ cpf: data.cpf }, { cnpj: data.cnpj }, { email: data.email }],
     });
+
+  findAll = async (query: IUserFilters) => {
+    const basicQuery = await this.ormRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.address', 'address');
+
+    if (query.userType) {
+      return basicQuery.where('user.userType = :userType', query).getMany();
+    } else {
+      return basicQuery.getMany();
+    }
+  };
 
   findById = async (id: string) => await this.ormRepository.findOne({ id });
 
@@ -67,6 +65,16 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .getMany();
 
+  findRentalsInUsers = async (query?: boolean) =>
+    await this.ormRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.address', 'address')
+      .leftJoinAndSelect('user.rentals', 'rentals')
+      .where(query !== undefined ? 'rentals.returnedCar =:returnedCar' : '', {
+        returnedCar: query,
+      })
+      .getMany();
+
   findUserCars = async (id: string) =>
     await this.ormRepository
       .createQueryBuilder('user')
@@ -74,7 +82,7 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .getMany();
 
-    deleteUser = async (id: string) =>
+  deleteUser = async (id: string) =>
     await this.ormRepository.delete({ id });
 }
 
