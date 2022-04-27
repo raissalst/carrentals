@@ -21,6 +21,11 @@ const loginUserController = async (
     if (!user) {
       throw new ErrorHandler(404, 'User not found');
     }
+
+    if (user.userType === 'cliente' && !user.isActive) {
+      throw new ErrorHandler(401, 'Your profile as deactivated.');
+    }
+
     const match: Boolean = await bcrypt.compare(password, user.password);
 
     if (!match) {
