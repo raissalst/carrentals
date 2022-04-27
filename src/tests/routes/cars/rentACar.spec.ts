@@ -89,6 +89,35 @@ describe('rent a car tests', () => {
     expect(response.statusCode).toBe(200);
     expect(responseKeys.sort()).toStrictEqual(mockKeys.sort());
   });
+  it('400, try rent unavailable car', async () => {
+    const response = await request(app)
+      .post(`/api/cars/${car.id}`)
+      .send({
+        rentalStartDate: '10/05/2023',
+        rentalReturnDate: '15/05/2023',
+      })
+      .set('Authorization', `Bearer ${user.userToken}`);
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toStrictEqual({
+      error: 'This car is not available to rent.',
+    });
+  });
+
+  it('400, try rent car with invalid id', async () => {
+    const response = await request(app)
+      .post(`/api/cars/${v4()}`)
+      .send({
+        rentalStartDate: '10/05/2023',
+        rentalReturnDate: '15/05/2023',
+      })
+      .set('Authorization', `Bearer ${user.userToken}`);
+
+    expect(response.statusCode).toBe(404);
+    expect(response.body).toStrictEqual({
+      error: 'Car not found',
+    });
+  });
 });
 
 const createUserMock = async () => {
