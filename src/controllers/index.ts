@@ -10,6 +10,7 @@ import createCarController from './cars/createCar.controller';
 import updateIsActiveCarController from './cars/updateIsActiveCar.controller';
 import getCarsController from './cars/getCars.controller'
 import getCarByIdController from './cars/getCarById.controller';
+import getRentalByIdController from './rentals/getRentalById';
 
 import getAllRentalsController from './rentals/getAllRentals.controller';
 
@@ -27,4 +28,5 @@ export {
   updateIsActiveCarController,
   getCarsController,
   getCarByIdController,
+  getRentalByIdController,
 };
