@@ -3,16 +3,24 @@ import {
   createCarController,
   getCarByIdController,
   updateIsActiveCarController,
+  updateCarController,
 } from '../../controllers';
 import {
   validateAuth,
   validateCompany,
   validateShape,
 } from '../../middlewares';
-import { createCarShape } from '../../shapes';
+import { createCarShape, updateCarShape } from '../../shapes';
 
 const carRoute = Router();
 
+carRoute.patch(
+  '/:id',
+  validateShape(updateCarShape),
+  validateAuth,
+  validateCompany,
+  updateCarController
+);
 carRoute.post(
   '/',
   validateShape(createCarShape),
