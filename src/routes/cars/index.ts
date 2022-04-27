@@ -1,15 +1,17 @@
 import { Router } from 'express';
 import {
   createCarController,
+  rentACarController,
   getCarByIdController,
   updateIsActiveCarController,
 } from '../../controllers';
 import {
   validateAuth,
   validateCompany,
+  validateCustomer,
   validateShape,
 } from '../../middlewares';
-import { createCarShape } from '../../shapes';
+import { createCarRentShape, createCarShape } from '../../shapes';
 
 const carRoute = Router();
 
@@ -28,6 +30,13 @@ carRoute.delete(
   updateIsActiveCarController
 );
 
+carRoute.post(
+  '/:id',
+  validateShape(createCarRentShape),
+  validateAuth,
+  validateCustomer,
+  rentACarController
+);
 carRoute.get('/:id', validateAuth, getCarByIdController);
 
 export default carRoute;
