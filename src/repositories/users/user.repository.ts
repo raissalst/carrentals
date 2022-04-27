@@ -1,13 +1,20 @@
-import { Repository, getRepository, QueryBuilder } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { User } from '../../entities/User';
+
+interface IUserFilters {
+  userType?: string;
+}
 
 interface IUserRepo {
   saveUser: (user: User) => Promise<User>;
   findByEmail: (email: string) => Promise<User>;
-  findUsers: (data) => Promise<User[]>;
+  findUsersByData: (data: User) => Promise<User[]>;
+  findAll: (query: Array<IUserFilters> | IUserFilters) => Promise<User[]>;
   findById: (id: string) => Promise<User>;
   updateUser: (userData: any, id: string) => Promise<Object>;
   findUserProfile: (id: string) => Promise<User[]>;
+  findRentalsInUsers: (query?: boolean) => Promise<User[]>;
+  findUserCars: (id: string) => Promise<User[]>;
 }
 
 class UserRepository implements IUserRepo {
@@ -22,10 +29,23 @@ class UserRepository implements IUserRepo {
   findByEmail = async (email: string) =>
     await this.ormRepository.findOne({ email: email });
 
-  findUsers = async (data) =>
+  findUsersByData = async (data: User) =>
     await this.ormRepository.find({
       where: [{ cpf: data.cpf }, { cnpj: data.cnpj }, { email: data.email }],
     });
+
+  findAll = async (query: IUserFilters) => {
+    const basicQuery = await this.ormRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.address', 'address');
+
+    if (query.userType) {
+      return basicQuery.where('user.userType = :userType', query).getMany();
+    } else {
+      return basicQuery.getMany();
+    }
+  };
+
   findById = async (id: string) => await this.ormRepository.findOne({ id });
 
   updateUser = async (userData: any, id: string) =>
@@ -43,6 +63,23 @@ class UserRepository implements IUserRepo {
       .leftJoinAndSelect('user.address', 'address')
       .where({ id: id })
       .getMany();
+
+  findRentalsInUsers = async (query?: boolean) =>
+    await this.ormRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.address', 'address')
+      .leftJoinAndSelect('user.rentals', 'rentals')
+      .where(query !== undefined ? 'rentals.returnedCar =:returnedCar' : '', {
+        returnedCar: query,
+      })
+      .getMany();
+
+  findUserCars = async (id: string) =>
+    await this.ormRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.cars', 'cars')
+      .where({ id: id })
+      .getMany();
 }
 
-export { UserRepository, IUserRepo };
+export { UserRepository, IUserRepo, IUserFilters };
