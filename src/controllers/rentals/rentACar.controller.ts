@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { createRentalService } from '../../services';
-import { handleError } from '../../utils';
+import { ErrorHandler, handleError } from '../../utils';
 
 const rentACarController = async (req: Request, res: Response) => {
   const requestBody = req.validated;
@@ -10,11 +10,13 @@ const rentACarController = async (req: Request, res: Response) => {
   try {
     const resp = await createRentalService(requestBody, carId, user);
 
-    resp.rentalStartDate = resp.rentalStartDate.toLocaleString().split(',')[0];
+    if (!resp.rentalStartDate) {
+      throw new ErrorHandler(resp.status, resp.message);
+    }
 
-    resp.rentalReturnDate = resp.rentalReturnDate
-      .toLocaleString()
-      .split(',')[0];
+    resp.rentalStartDate = resp.rentalStartDate.toLocaleDateString('pt-BR');
+
+    resp.rentalReturnDate = resp.rentalReturnDate.toLocaleDateString('pt-BR');
 
     const { car, customer, ...output } = resp;
 

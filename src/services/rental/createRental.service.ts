@@ -41,6 +41,10 @@ const createRentalService = async (
       throw new ErrorHandler(404, 'Car not found');
     }
 
+    if (!car.availableToRent || !car.isActive) {
+      throw new ErrorHandler(400, 'This car is not available to rent.');
+    }
+
     const newRent = {
       id: v4(),
       rentalStartDate: convertDate(rentalStartDate),
@@ -59,6 +63,7 @@ const createRentalService = async (
       customer: customer,
     };
     const rent = await new RentalRepository().saveRental(newRent);
+    await new CarRepository().updateCar(car.id, { availableToRent: false });
 
     return rent;
   } catch (error) {
