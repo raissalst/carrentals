@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, DeleteResult } from 'typeorm';
 import { User } from '../../entities/User';
 
 interface IUserFilters {
@@ -80,6 +80,7 @@ class UserRepository implements IUserRepo {
       .leftJoinAndSelect('user.cars', 'cars')
       .where({ id: id })
       .getMany();
+
 }
 
 export { UserRepository, IUserRepo, IUserFilters };
