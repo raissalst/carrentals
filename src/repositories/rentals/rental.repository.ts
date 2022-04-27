@@ -9,7 +9,7 @@ interface IRentalUpdateData {
   returnedCarDate: Date;
   returnedCar: boolean;
   rentalPriceTotal: number;
-  mileageRan: number;
+  mileageRun: number;
 }
 
 interface IRentalRepo {
