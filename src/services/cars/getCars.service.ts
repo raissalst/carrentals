@@ -4,18 +4,31 @@ import { ErrorHandler } from "../../utils";
 const getCarsService = async (req: any) => {
         
         const cars = await new CarRepository().getCars();
-
-        // const { availableToRent, isActive }: any = req.params;       poderia hasParams
         const hasParams: any = req.params;
         const userLoggedType = req.userAuth.user.userType;
         const paramsKeys = Object.keys(hasParams)
         const output = []
-        const onlyAvailableandActiveCars = []
+        const onlyAvailableAndActiveCars = []
+        
+        //deixar eles em cima p ja tratar como deve sair sem plate, chassis, .. mas gasta mais memoria, processamento
 
+        cars.map((car)=>{
+            if(car.isActive && car.availableToRent) {
+                onlyAvailableAndActiveCars.push(car)
+            }
+        })
+
+        const retrieveCars = []
+        
+        onlyAvailableAndActiveCars.forEach(element => {
+            const { plate, chassis, currentMileage, isActive, ...car } = element;    
+            retrieveCars.push(car)
+        });
 
         if (hasParams !== undefined) {
 
-            if((hasParams.availableToRent || hasParams.isActive) && (userLoggedType === "admin")){ 
+            // tem que ser igual false 
+            if((!hasParams.availableToRent || !hasParams.isActive) && (userLoggedType === "admin")){ 
                 
                 for (const car in cars){
                     for (const key in paramsKeys){
@@ -40,33 +53,28 @@ const getCarsService = async (req: any) => {
             }
         }
 
+        const paramsSent = Object.entries(req.params)
+
         if((auxArrayCustomer.length !== 0) && (userLoggedType === "cliente")){ 
-            // const 
-            for (const car in cars){
-                
-            }      
-            return output   
             
+            // for (const car in retrieveCars){
+            //     for (const keyParam in auxArrayCustomer){
+            //         for (const valueParam in ){
+
+            //             if(car[keyParam] === valueParam ){
+
+            //             }
+            //         }
+            //      //includes
+            //     }
+            // }      
+
+            return output   
         }
-    }
-
-
-        cars.map((car)=>{
-            if(car.isActive && car.availableToRent) {
-                onlyAvailableandActiveCars.push(car)
-            }
-        })
-        
-        const retrieveCars = []
-        
-        onlyAvailableandActiveCars.forEach(element => {
-            const { plate, chassis, currentMileage, isActive, ...car } = element;    
-            retrieveCars.push(car)
-        });
+    }        
         
         return retrieveCars
 
 }
 
 export default getCarsService
-
