@@ -4,6 +4,7 @@ import request from 'supertest';
 import dotenv from 'dotenv';
 import { connection } from '../../index';
 import app from '../../../app';
+import { v4 } from 'uuid';
 
 dotenv.config();
 
@@ -43,4 +44,38 @@ describe('test loginUser controller', () => {
     expect(response.statusCode).toBe(401);
     expect(typeof responseBody).toBe('object');
   });
+
+  it('401, try login with desactivated user', async () => {
+    const user = await createUserMock();
+    const requestWrongBody = {
+      email: user.email,
+      password: user.password,
+    };
+    const response = await request(app)
+      .post('/api/users/login')
+      .send(requestWrongBody);
+    const responseBody = response.body;
+    expect(response.statusCode).toBe(401);
+    expect(responseBody).toStrictEqual({
+      error: 'Your profile as deactivated.',
+    });
+  });
 });
+
+const createUserMock = async () => {
+  const userMock = {
+    id: v4(),
+    name: 'Jhon Doe',
+    email: 'jhon@mail.com',
+    password: '1234',
+    cpf: '123.123.123-12',
+    phone: '1191234-1234',
+    userType: 'cliente',
+    isActive: false,
+    addressId: v4(),
+  };
+
+  const user = await new UserRepository().saveUser(userMock as any);
+
+  return user;
+};
