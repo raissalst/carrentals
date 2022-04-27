@@ -8,6 +8,7 @@ import updateAddressProfileService from './address/updateProfile.service';
 import getAllUsersService from './users/getAllUsers.service';
 
 import getAllRentalsService from './rentals/getAllRentals.service';
+import updateCompanyIsActive from './users/updateCompanyIsActive.service';
 
 export {
   createUserService,
@@ -18,4 +19,5 @@ export {
   getAllUsersService,
   getProfileCarsService,
   getAllRentalsService,
+  updateCompanyIsActive,
 };
