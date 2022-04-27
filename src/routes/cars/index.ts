@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createCarController,
+  rentACarController,
   getCarByIdController,
   updateIsActiveCarController,
   getCarsController,
@@ -11,9 +12,10 @@ import {
   validateAuth,
   validateCompany,
   validateCustomerOrCompany,
+  validateCustomer,
   validateShape,
 } from '../../middlewares';
-import { createCarShape } from '../../shapes';
+import { createCarRentShape, createCarShape } from '../../shapes';
 
 const carRoute = Router();
 
@@ -36,6 +38,14 @@ carRoute.get(
   '/',
   validateAuth,
   getCarsController
+)
+
+carRoute.post(
+  '/:id',
+  validateShape(createCarRentShape),
+  validateAuth,
+  validateCustomer,
+  rentACarController
 );
 carRoute.get('/:id', validateAuth, getCarByIdController);
 

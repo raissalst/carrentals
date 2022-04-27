@@ -32,37 +32,40 @@ This API contains 3 routes and 19 endpoints. For more detailed information about
 
 ## 2. Application's links 🔗
 
-- <a name="API documentation" href="https://www.postman.com/" target="_blank">API Documentation</a>
+- <a name="API documentation" href="https://swagger.io/" target="_blank">API Documentation (Swagger)</a>
 - <a name="API deploy in Heroku" href="https://carrental-capstone.herokuapp.com/" target="_blank">API Deploy in Heroku</a>
 
 ## 3. General Functionalities ⚙️
 
 - [x] Once registered in Car Rentals app and signed in, administrators can:
 
-  - [x] update their e-mail, name or password;
+  - [x] update their e-mail, name, password, phone number, CPF or address data;
   - [x] register new administrators;
   - [x] change customer's or company's status (available/unavailable for rent);
-  - [x] get customers' and companies' list;
+  - [x] get administrators', customers' and companies' private profile information;
+  - [x] get a list of unavailable cars, deactivated by companies or that are already rented;
+  - [x] get rentals' history information or get a specific rental information;
 
 - [x] Once registered in Car Rentals app and signed in, companies can:
 
-  - [x] update their e-mail, name, password, cnpj, address or phone number;
+  - [x] update their e-mail, name, password, CNPJ, address data or phone number;
   - [x] register cars for rental;
   - [x] get a list of owned cars;
   - [x] update car's data, such as name, model, brand, year, color, doors, fuel type, plate, gear, chassis, current mileage, price per day of rental or rental availability.
-  - [x] delete a car;
-  - [x] filter its own cars for rental by name, model, brand, year, color, doors, fuel type, plate, gear, chassis, current mileage, price per day of rental or rental availability;
-  - [x] get car rental history;
-  - [x] get a customer profile information;
+  - [x] make a car unavailable to rent;
+  - [x] filter its own cars for rental by rental availability;
+  - [x] get rentals' history;
+  - [x] get a customer or company public profile information;
+  - [x] close rental of a car;
 
 - [x] Once registered in Car Rentals app and signed in, customers can:
 
-  - [x] update their e-mail, name, password, registerNumber, address or phone number;
+  - [x] update their e-mail, name, password, CPF or CNPJ, address data or phone number;
   - [x] retrieve a list of available cars for rental;
-  - [x] filter available cars for rental by price, model, name or a specific car rental company;
+  - [x] filter available cars for rental by name, model, brand, year, color, doors, fuel type, gear or rental price per day;
   - [x] rent a car;
-  - [x] return a rented car;
   - [x] get car rental history;
+  - [x] get a company public profile information;
 
 <a name="technologies"></a>
 
@@ -74,6 +77,7 @@ This API contains 3 routes and 19 endpoints. For more detailed information about
 - <a name="typeorm" href="https://typeorm.io/" target="_blank">TypeORM</a>
 - <a name="postgreSQL" href="https://www.postgresql.org/docs/" target="_blank">PostgreSQL</a>
 - <a name="jestL" href="https://jestjs.io/" target="_blank">Jest</a>
+- <a name="swagger" href="https://swagger.io/" target="_blank">Swagger API Specification</a>
 
 <a name="requisites"></a>
 
