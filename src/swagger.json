@@ -216,10 +216,56 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema":{
+              "type": "string",
+              "default": "c40423ac-9871-4e71-a75a-c2f42233ce25"
+            },
+            
+            "description": "Use an id from a created user"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Bad Request",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 400,
+                  "message": "query"
+                }
+              }
+            }
+          }
+        }
       },
-      "put": {
+      "patch": {
         "description": "Activate or deactivate a company or a customer profile.",
         "tags": ["users"],
         "security": [
@@ -231,15 +277,43 @@
           {
             "in": "path",
             "name": "id",
-            "example": "5af8434f-a107-4560-ae75-9ab02f67492b",
+            "example": "2c97c2b8-e215-457b-95de-9cdf884fc40c",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "The user ID"
+            "description": "Use an id from a created user"
           }
         ],
-        "responses": {}
+        "responses": {
+          "204":{
+            "description": "No Content"            
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Bad Request",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 400,
+                  "message": "query"
+                }
+              }
+            }
+          }          
+        }
       }
     },
     "/users/profile": {
@@ -251,8 +325,40 @@
             "bearerAuth": []
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema":{
+                "$ref": "#/components/schemas/CustomerRegister"
+              },
+              "examples": {
+                "Customer Name Update": {
+                  "value": {
+                    "name": "Novo nome"
+                  }
+                },
+                "Company phone update": {
+                  "value": {
+                    "phone": "0122999221234"
+                  }
+                }
+              }
+            }
+          }
+        },
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
       },
       "get": {
         "description": "Visualize private information of a logged in user profile.",
@@ -263,7 +369,41 @@
           }
         ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 400                  
+                }
+              }
+            }
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       },
       "delete": {
         "description": "Deactivate logged in user profile.",
@@ -287,10 +427,40 @@
           }
         ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "Unauthroized User error":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "Unauthorized"
+                }
+              },
+              "Unauthorized Missing token error":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/users/profile/cars?available=true": {
+    "/users/profile/cars?availableToRent=param": {
       "get": {
         "description": "Visualize all available/unavailable cars of a logged in company.",
         "tags": ["users"],
@@ -299,16 +469,42 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/users/profile/cars?available=false": {
-      "get": {
-        "description": "",
-        "tags": ["users"],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "query",
+            "name": "availableToRent",
+            "schema":{
+              "type": "boolean",
+              "default": true
+            },
+            "required": false,
+            "description": "Availability can be true or false"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/profile/rentals": {
@@ -324,7 +520,7 @@
         "responses": {}
       }
     },
-    "/users/profile/rentals?returnedCar=true": {
+    "/users/profile/rentals?returnedCar=param": {
       "get": {
         "description": "Visualize history of active/inative rentals of a logged in user. (company or customer)",
         "tags": ["users"],
@@ -333,14 +529,6 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/users/profile/rentals?returnedCard=false": {
-      "get": {
-        "description": "",
-        "tags": ["users"],
         "parameters": [],
         "responses": {}
       }
@@ -625,6 +813,57 @@
           }
 
         }
+      },
+      "Car":{
+        "type": "object",
+        "properties": {
+          "id":{
+            "type": "string"
+          },
+          "name":{
+            "type": "string"
+          },
+          "model":{
+            "type": "string"
+          },
+          "brand":{
+            "type": "string"
+          },
+          "year":{
+            "type": "string"
+          },
+          "color":{
+            "type": "string"
+          },
+          "doors":{
+            "type": "string"
+          },
+          "fuelType":{
+            "type": "string"
+          },
+          "plate":{
+            "type": "string"
+          },
+          "gear":{
+            "type": "string"
+          },
+          "chassis":{
+            "type": "string"
+          },
+          "currentMileage":{
+            "type": "string"
+          },
+          "rentalPricePerDay":{
+            "type": "string"
+          },
+          "availableToRent":{
+            "type": "string"
+          },
+          "isActive":{
+            "type": "string"
+          }
+
+        }
       }
     },
     "examples": {
@@ -681,7 +920,7 @@
           "address": {
             "id": "e6471557-49ac-4f1d-a9e4-60b759c17ca8",
             "address": "Rua vinte e dois de outubro",
-            "city": "São GOnçalo",
+            "city": "São Gonçalo",
             "state": "RJ",
             "country": "Brasil"
           }
@@ -696,7 +935,7 @@
     },
     "responses": {
       "Unauthorized Error": {
-        "description": "UNAUTHORIZED",
+        "description": "Unauthorized",
         "content": {
           "application/json": {
             "example": {
