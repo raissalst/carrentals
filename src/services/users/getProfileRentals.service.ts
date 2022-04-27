@@ -1,6 +1,6 @@
 import { User } from '../../entities/User';
 import { RentalRepository } from '../../repositories';
-import { ErrorHandler } from '../../utils';
+import { changeDateFormat, ErrorHandler } from '../../utils';
 import { carObjectKeyFilter } from '../../utils';
 
 const getProfileRentalsService = async (user: User, closedRental: any) => {
@@ -16,6 +16,8 @@ const getProfileRentalsService = async (user: User, closedRental: any) => {
   );
   
   carObjectKeyFilter(user.userType, rentals);
+
+  changeDateFormat(rentals)
 
   return rentals;
 };
