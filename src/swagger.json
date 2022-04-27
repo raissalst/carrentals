@@ -553,8 +553,45 @@
             "bearerAuth": []
           }
         ],
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema":{
+                "$ref": "#/components/schemas/Car"
+              },
+              "examples": {
+                "Car Register": {
+                  "$ref": "#/components/examples/CarRegister"
+                }
+              }
+            }
+          }
+        },
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "201": {
+            "description": "CREATED",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/cars?available=false&&active=false": {
@@ -930,6 +967,27 @@
         "value": {
           "email": "roberto235@gmail.com",
           "password": "123456"
+        }
+      },
+      "CarRegister": {
+        "value": { 
+          "cars": [
+            {
+              "name": "maverick",
+              "model": "monster",
+              "brand": "Ford",
+              "year": "1978",
+              "color": "azul",
+              "doors": 2,
+              "fuelType": "gasolina",
+              "plate": "LPY7666",
+              "gear": "manual",
+              "chassis": "3C8FY77B82T297664",
+              "currentMileage": 3856,
+              "rentalPricePerDay": 195.00
+            }
+          ]           
+                   
         }
       }
     },
