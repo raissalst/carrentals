@@ -3,6 +3,7 @@ import {
   loginUserController,
   updateIsActiveUserController,
   createUserController,
+  deleteUserProfile,
   getUserController,
   updateUserProfileController,
   getUserProfileController,
@@ -49,6 +50,11 @@ userRoute.patch(
   updateIsActiveUserController
 );
 
+userRoute.delete(
+  '/profile',
+  validateAuth,
+  deleteUserProfile
+);
 
 userRoute.get(
   '/profile',
