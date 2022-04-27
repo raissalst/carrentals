@@ -29,7 +29,7 @@
           "content": {
             "application/json": {
               "schema":{
-                "$ref": "#/components/schemas/CustomerRegister"
+                "$ref": "#/components/schemas/UserRegister"
               },
               "examples": {
                 "Customer Register":{
@@ -98,7 +98,7 @@
             "content": {
               "application/json":{
                 "schema":{
-                  "$ref": "#/components/schemas/AllUsers"
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -165,7 +165,7 @@
               "default": "cliente"
             },
             "required": false,
-            "description": "User type to be listed (cliente, empresa ou admin"
+            "description": "User type to be listed (cliente, empresa or admin)"
           }
         ],
         "responses": {
@@ -594,7 +594,7 @@
         }
       }
     },
-    "/cars?available=false&&active=false": {
+    "/cars?available=param&&active=param": {
       "get": {
         "description": "Visualize all public data of unavaillable/inactive registered cars.",
         "tags": ["cars"],
@@ -603,8 +603,31 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "query",
+            "name": "availableToRent",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "required": false,
+            "description": "Retrieves cars available to rent or not"            
+          },
+          {
+            "in": "query",
+            "name": "isActive",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            },
+            "required": false,
+            "description": "Retrieves active or inactive cars"
+          }
+        ],
+        "responses": {
+          
+        }
       }
     },
     "/cars/:id": {
@@ -786,25 +809,21 @@
           }
         }
       },
-      "CustomerRegister":{
+      "UserRegister":{
         "type": "object",
         "required": [
           "name",
           "email",
           "password",
-          "phone",
-          "cpf",
+          "phone",          
           "userType",
           "address",
           "city",
           "state",
           "ountry"
-        ]
-      },
-      "AllUsers":{        
-        "type": "object",
+        ],
         "properties": {
-          "id": {
+          "id":{
             "type": "string"
           },
           "name": {
@@ -846,11 +865,10 @@
               "country": {
                 "type": "string"                
               }
-            }
+            }  
           }
-
         }
-      },
+      },      
       "Car":{
         "type": "object",
         "properties": {
