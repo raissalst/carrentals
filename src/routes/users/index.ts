@@ -3,6 +3,7 @@ import {
   loginUserController,
   updateIsActiveUserController,
   createUserController,
+  getUserController,
   updateUserProfileController,
   getUserProfileController,
   getUserProfileCarsController,
@@ -37,12 +38,27 @@ userRoute.patch(
   updateUserProfileController
 );
 
+
 userRoute.patch(
   '/:id',
   validateAuth,
   validateAdmin,
   getUserFromQueryId,
   updateIsActiveUserController
+);
+
+
+userRoute.get(
+  '/profile',
+  validateAuth,
+  getUserProfileController
+);
+
+userRoute.get(
+  '/',
+  validateAuth,
+  validateAdmin,
+  getUserController,
 );
 
 userRoute.get('/profile', validateAuth, getUserProfileController);
