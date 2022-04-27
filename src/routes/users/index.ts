@@ -3,7 +3,12 @@ import {
   loginUserController,
   updateIsActiveUserController,
   createUserController,
-  deleteUserProfile
+  deleteUserProfile,
+  getUserController,
+  updateUserProfileController,
+  getUserProfileController,
+  getUserProfileCarsController,
+  getUserByIdController,
 } from '../../controllers';
 
 import {
@@ -12,9 +17,10 @@ import {
   validateAdmin,
   validateAuth,
   verifyUserType,
+  validateCompany,
 } from '../../middlewares';
 
-import { createUserShape, loginUserShape } from '../../shapes';
+import { createUserShape, loginUserShape, updateUserShape } from '../../shapes';
 
 const userRoute = Router();
 
@@ -25,6 +31,14 @@ userRoute.post(
   verifyUserType,
   createUserController
 );
+
+userRoute.patch(
+  '/profile',
+  validateAuth,
+  validateShape(updateUserShape),
+  updateUserProfileController
+);
+
 
 userRoute.patch(
   '/:id',
@@ -42,5 +56,28 @@ userRoute.delete(
   deleteUserProfile
 );
 
-export default userRoute;
+userRoute.get(
+  '/profile',
+  validateAuth,
+  getUserProfileController
+);
 
+userRoute.get(
+  '/',
+  validateAuth,
+  // validateAdmin,
+  getUserController,
+);
+
+userRoute.get('/profile', validateAuth, getUserProfileController);
+
+userRoute.get('/:id', validateAuth, getUserByIdController);
+
+userRoute.get(
+  '/profile/cars',
+  validateAuth,
+  validateCompany,
+  getUserProfileCarsController
+)
+
+export default userRoute;
