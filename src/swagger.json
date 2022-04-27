@@ -56,6 +56,30 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json":{
+                "example":{
+                  "status": "error",
+                  "statusCode": 409,
+                  "message": "User email, cpf or cnpj already registered"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
           }
         }
       },
@@ -68,7 +92,30 @@
           }
         ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/AllUsers"
+                }
+              }
+            }
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/login": {
@@ -100,7 +147,7 @@
         }
       }
     },
-    "/users?userType=cliente": {
+    "/users?userType=param": {
       "get": {
         "description": "Visualize private users information by user type. Only admin authorization.",
         "tags": ["users"],
@@ -121,35 +168,45 @@
             "description": "User type to be listed (cliente, empresa ou admin"
           }
         ],
-        "responses": {}
-      }
-    },
-    "/users?userType=empresa": {
-      "get": {
-        "description": "",
-        "tags": ["users"],
-        "security": [
-          {
-            "bearerAuth": []
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Bad Request",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 400,
+                  "message": "query"
+                }
+              }
+            }
           }
-        ],
-        "parameters": [],
-        "responses": {}
+        }
       }
     },
-    "/users?userType=admin": {
-      "get": {
-        "description": "",
-        "tags": ["users"],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [],
-        "responses": {}
-      }
-    },
+    
     "/users/{id}": {
       "get": {
         "description": "Visualize specific public profile data. Companies can retrieve customer or company profiles, customer can retrieve companies profile, and an admin can retrieve public and private companies data.",
@@ -518,6 +575,56 @@
           "state",
           "ountry"
         ]
+      },
+      "AllUsers":{        
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "address":{
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "address":{
+                "type": "string"
+              },
+              "state":{
+                "type": "string"
+              },
+              "city":{
+                "type": "string"
+              },
+              "country": {
+                "type": "string"                
+              }
+            }
+          }
+
+        }
       }
     },
     "examples": {
@@ -578,6 +685,12 @@
             "state": "RJ",
             "country": "Brasil"
           }
+        }
+      },
+      "UserLogin": {
+        "value": {
+          "email": "roberto235@gmail.com",
+          "password": "123456"
         }
       }
     },
