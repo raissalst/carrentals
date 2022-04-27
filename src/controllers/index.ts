@@ -12,6 +12,7 @@ import getCarByIdController from './cars/getCarById.controller';
 import getRentalByIdController from './rentals/getRentalById';
 
 import getAllRentalsController from './rentals/getAllRentals.controller';
+import returnCarController from './rentals/returnCar.controller';
 
 export {
   createUserController,
@@ -27,4 +28,5 @@ export {
   updateIsActiveCarController,
   getCarByIdController,
   getRentalByIdController,
+  returnCarController,
 };
