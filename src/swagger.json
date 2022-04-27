@@ -329,7 +329,7 @@
           "content": {
             "application/json": {
               "schema":{
-                "$ref": "#/components/schemas/CustomerRegister"
+                "$ref": "#/components/schemas/UserRegister"
               },
               "examples": {
                 "Customer Name Update": {
@@ -414,7 +414,23 @@
           }
         ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "204":{
+            "description": "No Content"
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/profile/cars": {
@@ -517,7 +533,18 @@
           }
         ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/Rentals"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/profile/rentals?returnedCar=param": {
@@ -529,8 +556,42 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "query",
+            "name": "returnedCar",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "required": false,
+            "description": "Use false for active rentals and true for inactive rentals"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "$ref": "#/components/schemas/Rentals"
+                }
+              }
+            }
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/cars": {
@@ -626,7 +687,7 @@
           }
         ],
         "responses": {
-          
+
         }
       }
     },
@@ -918,6 +979,77 @@
             "type": "string"
           }
 
+        }
+      },
+      "Rentals":{
+        "type":"object",
+        "properties": {
+          "id": {
+          "type": "string"
+          },
+          "rentalStartDate": {
+                "type": "string" 
+                },
+          "rentalReturnDate": {
+                "type": "string" 
+                },
+          "returnedCarDate": {
+                "type": "string" 
+                },
+          "returnedCar": {
+                "type": "boolean"
+                },
+          "rentalPricePerDay": {
+                "type": "number"
+                },
+          "rentalPricePreview": {
+                "type": "number"
+                },
+          "rentalPriceTotal": {
+                "type": "number"
+                },
+          "mileageRan": {
+                "type": "number"
+                },
+          "car": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+                },
+            "name": {
+                "type": "string"
+                },
+            "model": {
+                "type": "string"
+                },
+            "brand": {
+                "type": "string"
+                },
+            "year": {
+                "type": "string"
+                },
+            "color": {
+                "type": "string"
+                },
+            "doors": {
+                "type": "number"
+                },
+            "fuelType": {
+                "type": "string"
+                },
+            "plate": {
+                "type": "string"
+                },
+            "gear": {
+                "type": "string"
+                },
+            "chassis": {
+                "type": "string"
+                }
+            }
+          }
+              
         }
       }
     },
