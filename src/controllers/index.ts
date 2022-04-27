@@ -11,6 +11,8 @@ import updateIsActiveCarController from './cars/updateIsActiveCar.controller';
 import getUserRentalsController from './users/getUserRentals.controller';
 import getCarByIdController from './cars/getCarById.controller';
 
+import getAllRentalsController from './rentals/getAllRentals.controller';
+
 export {
   createUserController,
   loginUserController,
@@ -21,6 +23,7 @@ export {
   getUserProfileCarsController,
   getUserByIdController,
   createCarController,
+  getAllRentalsController,
   updateIsActiveCarController,
   getUserRentalsController,
   getCarByIdController,
