@@ -1,5 +1,5 @@
 import { CarRepository, RentalRepository } from '../../repositories';
-import { ErrorHandler, handleError } from '../../utils';
+import { ErrorHandler } from '../../utils';
 import { v4 } from 'uuid';
 import { User } from '../../entities/User';
 
