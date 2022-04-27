@@ -65,7 +65,7 @@ userRoute.get(
 userRoute.get(
   '/',
   validateAuth,
-  // validateAdmin,
+  validateAdmin,
   getUserController,
 );
 

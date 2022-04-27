@@ -15,7 +15,6 @@ interface IUserRepo {
   findUserProfile: (id: string) => Promise<User[]>;
   findRentalsInUsers: (query?: boolean) => Promise<User[]>;
   findUserCars: (id: string) => Promise<User[]>;
-  deleteUser: (id: string) => Promise<DeleteResult>;
 }
 
 class UserRepository implements IUserRepo {
@@ -82,8 +81,6 @@ class UserRepository implements IUserRepo {
       .where({ id: id })
       .getMany();
 
-  deleteUser = async (id: string) =>
-    await this.ormRepository.delete({ id });
 }
 
 export { UserRepository, IUserRepo, IUserFilters };
