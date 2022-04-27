@@ -77,7 +77,7 @@ This API contains 3 routes and 19 endpoints. For more detailed information about
 - <a name="typeorm" href="https://typeorm.io/" target="_blank">TypeORM</a>
 - <a name="postgreSQL" href="https://www.postgresql.org/docs/" target="_blank">PostgreSQL</a>
 - <a name="jestL" href="https://jestjs.io/" target="_blank">Jest</a>
-- <a name="swagger" href="https://swagger.io/" target="_blank">Jest</a>
+- <a name="swagger" href="https://swagger.io/" target="_blank">Swagger API Specification</a>
 
 <a name="requisites"></a>
 
