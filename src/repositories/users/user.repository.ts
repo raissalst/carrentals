@@ -1,4 +1,4 @@
-import { Repository, getRepository, QueryBuilder } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { User } from '../../entities/User';
 
 interface IUserFilters {
@@ -10,11 +10,10 @@ interface IUserRepo {
   findByEmail: (email: string) => Promise<User>;
   findUsersByData: (data: User) => Promise<User[]>;
   findAll: (query: Array<IUserFilters> | IUserFilters) => Promise<User[]>;
-  findUsers: (data) => Promise<User[]>;
   findById: (id: string) => Promise<User>;
   updateUser: (userData: any, id: string) => Promise<Object>;
   findUserProfile: (id: string) => Promise<User[]>;
-  findRentalsInUsers: (query?: boolean) => Promise<User[]> | any;
+  findRentalsInUsers: (query?: boolean) => Promise<User[]>;
   findUserCars: (id: string) => Promise<User[]>;
 }
 
@@ -47,10 +46,6 @@ class UserRepository implements IUserRepo {
     }
   };
 
-  findUsers = async (data) =>
-    await this.ormRepository.find({
-      where: [{ cpf: data.cpf }, { cnpj: data.cnpj }, { email: data.email }],
-    });
   findById = async (id: string) => await this.ormRepository.findOne({ id });
 
   updateUser = async (userData: any, id: string) =>
@@ -76,7 +71,9 @@ class UserRepository implements IUserRepo {
       .leftJoinAndSelect('user.rentals', 'rentals')
       .where(query !== undefined ? 'rentals.returnedCar =:returnedCar' : '', {
         returnedCar: query,
-      });
+      })
+      .getMany();
+
   findUserCars = async (id: string) =>
     await this.ormRepository
       .createQueryBuilder('user')

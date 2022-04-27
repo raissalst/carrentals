@@ -3,9 +3,7 @@ import { IRentalFilters, UserRepository } from '../../repositories';
 const getAllRentalsService = async (query: IRentalFilters) => {
   try {
     const { returnedCar } = query;
-    const rentals: any = await new UserRepository().findRentalsInUsers(
-      returnedCar
-    );
+    const rentals = await new UserRepository().findRentalsInUsers(returnedCar);
     rentals.forEach((element) => {
       delete element.password;
       if (element.cpf) {
