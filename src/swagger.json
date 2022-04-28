@@ -28,17 +28,17 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema":{
+              "schema": {
                 "$ref": "#/components/schemas/UserRegister"
               },
               "examples": {
-                "Customer Register":{
+                "Customer Register": {
                   "$ref": "#/components/examples/CustomerRegister"
                 },
-                "Company Register":{
+                "Company Register": {
                   "$ref": "#/components/examples/CompanyRegister"
                 },
-                "Admin Register":{
+                "Admin Register": {
                   "$ref": "#/components/examples/AdminRegister"
                 }
               }
@@ -50,8 +50,8 @@
           "201": {
             "description": "CREATED",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/User"
                 }
               }
@@ -60,8 +60,8 @@
           "409": {
             "description": "Conflict",
             "content": {
-              "application/json":{
-                "example":{
+              "application/json": {
+                "example": {
                   "status": "error",
                   "statusCode": 409,
                   "message": "User email, cpf or cnpj already registered"
@@ -72,7 +72,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -84,7 +84,7 @@
         }
       },
       "get": {
-        "description": "Get private information of all registered users (clientes, empresas e admins)",
+        "description": "Get private information of all registered users (clientes, empresas and admins). Only admin authorization.",
         "tags": ["users"],
         "security": [
           {
@@ -93,20 +93,20 @@
         ],
         "parameters": [],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/User"
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -122,11 +122,11 @@
       "post": {
         "description": "User login",
         "tags": ["users"],
-        "requestBody":{
+        "requestBody": {
           "description": "Use email and password of created users examples",
           "content": {
-            "application/json":{
-              "schema":{
+            "application/json": {
+              "schema": {
                 "$ref": "#/components/schemas/UserLogin"
               }
             }
@@ -137,8 +137,8 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Token"
                 }
               }
@@ -169,20 +169,20 @@
           }
         ],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/User"
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -191,10 +191,10 @@
               }
             }
           },
-          "400":{
+          "400": {
             "description": "Bad Request",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 400,
@@ -206,12 +206,12 @@
         }
       }
     },
-    
+
     "/users/{id}": {
       "get": {
         "description": "Visualize specific public profile data. Companies can retrieve customer or company profiles, customer can retrieve companies profile, and an admin can retrieve public and private companies data.",
-         "tags": ["users"],
-         "security": [
+        "tags": ["users"],
+        "security": [
           {
             "bearerAuth": []
           }
@@ -220,29 +220,29 @@
           {
             "in": "path",
             "name": "id",
-            "schema":{
+            "schema": {
               "type": "string",
               "default": "c40423ac-9871-4e71-a75a-c2f42233ce25"
             },
-            
+
             "description": "Use an id from a created user"
           }
         ],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/User"
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -251,10 +251,10 @@
               }
             }
           },
-          "400":{
+          "400": {
             "description": "Bad Request",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 400,
@@ -266,7 +266,7 @@
         }
       },
       "patch": {
-        "description": "Activate or deactivate a company or a customer profile.",
+        "description": "Activate or deactivate a company or a customer profile. Only admin authorization.",
         "tags": ["users"],
         "security": [
           {
@@ -286,13 +286,13 @@
           }
         ],
         "responses": {
-          "204":{
-            "description": "No Content"            
+          "204": {
+            "description": "No Content"
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -301,10 +301,10 @@
               }
             }
           },
-          "400":{
+          "400": {
             "description": "Bad Request",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 400,
@@ -312,7 +312,7 @@
                 }
               }
             }
-          }          
+          }
         }
       }
     },
@@ -328,7 +328,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema":{
+              "schema": {
                 "$ref": "#/components/schemas/UserRegister"
               },
               "examples": {
@@ -348,11 +348,11 @@
         },
         "parameters": [],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/User"
                 }
               }
@@ -370,11 +370,11 @@
         ],
         "parameters": [],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/User"
                 }
               }
@@ -383,18 +383,18 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
-                  "statusCode": 400                  
+                  "statusCode": 400
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -415,13 +415,13 @@
         ],
         "parameters": [],
         "responses": {
-          "204":{
+          "204": {
             "description": "No Content"
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -435,7 +435,7 @@
     },
     "/users/profile/cars": {
       "get": {
-        "description": "Visualize all cars information of a logged in company.",
+        "description": "Visualize all cars information of a logged in company. Only company authorization.",
         "tags": ["users"],
         "security": [
           {
@@ -444,27 +444,27 @@
         ],
         "parameters": [],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Car"
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "Unauthroized User error":{
+              "Unauthroized User error": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
                   "message": "Unauthorized"
                 }
               },
-              "Unauthorized Missing token error":{
+              "Unauthorized Missing token error": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -478,7 +478,7 @@
     },
     "/users/profile/cars?availableToRent=param": {
       "get": {
-        "description": "Visualize all available/unavailable cars of a logged in company.",
+        "description": "Visualize all available/unavailable cars of a logged in company. Only company authorization.",
         "tags": ["users"],
         "security": [
           {
@@ -489,7 +489,7 @@
           {
             "in": "query",
             "name": "availableToRent",
-            "schema":{
+            "schema": {
               "type": "boolean",
               "default": true
             },
@@ -498,20 +498,20 @@
           }
         ],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Car"
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -525,7 +525,7 @@
     },
     "/users/profile/rentals": {
       "get": {
-        "description": "Visualize rental history of a logged in user (company or customer).",
+        "description": "Visualize rental history of a logged in user (company or customer authorization).",
         "tags": ["users"],
         "security": [
           {
@@ -534,11 +534,11 @@
         ],
         "parameters": [],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Rentals"
                 }
               }
@@ -549,7 +549,7 @@
     },
     "/users/profile/rentals?returnedCar=param": {
       "get": {
-        "description": "Visualize history of active/inative rentals of a logged in user. (company or customer)",
+        "description": "Visualize history of active/inative rentals of a logged in user. (company or customer authorization)",
         "tags": ["users"],
         "security": [
           {
@@ -569,20 +569,20 @@
           }
         ],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Rentals"
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -614,10 +614,10 @@
             "bearerAuth": []
           }
         ],
-        "requestBody":{
+        "requestBody": {
           "content": {
-            "application/json":{
-              "schema":{
+            "application/json": {
+              "schema": {
                 "$ref": "#/components/schemas/Car"
               },
               "examples": {
@@ -633,8 +633,8 @@
           "201": {
             "description": "CREATED",
             "content": {
-              "application/json":{
-                "schema":{
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Car"
                 }
               }
@@ -643,7 +643,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "application/json":{
+              "application/json": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
@@ -655,9 +655,9 @@
         }
       }
     },
-    "/cars?available=param&&active=param": {
+    "/cars?availableToRent=param&&isActive=param": {
       "get": {
-        "description": "Visualize all public data of unavaillable/inactive registered cars.",
+        "description": "Visualize all public data of unavaillable/inactive registered cars. Only admin authorization.",
         "tags": ["cars"],
         "security": [
           {
@@ -673,7 +673,7 @@
               "default": true
             },
             "required": false,
-            "description": "Retrieves cars available to rent or not"            
+            "description": "Retrieves cars available to rent or not"
           },
           {
             "in": "query",
@@ -686,12 +686,106 @@
             "description": "Retrieves active or inactive cars"
           }
         ],
-        "responses": {
-
-        }
+        "responses": {}
       }
     },
-    "/cars/:id": {
+    "/cars?params filter": {
+      "get": {
+        "description": "Visualize available and active cars with filters. Only customer authorization.",
+        "tags": ["cars"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search for caar name"
+          },
+          {
+            "in": "query",
+            "name": "model",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search for car model"
+          },
+          {
+            "in": "query",
+            "name": "brand",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search for car brand"
+          },
+          {
+            "in": "query",
+            "name": "year",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search for car fabrication year"
+          },
+          {
+            "in": "query",
+            "name": "color",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search for car color"
+          },
+          {
+            "in": "query",
+            "name": "doors",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search for car number of doors (2, 3 or 4)"
+          },
+          {
+            "in": "query",
+            "name": "fuelType",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search for car fuel type (flex, híbrido, eletrico, gasolina, diesel ou alcool)"
+          },
+          {
+            "in": "query",
+            "name": "gear",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "description": "Search car for gear type automatico or manual"
+          },
+          {
+            "in": "query",
+            "name": "rentalPricePerDay",
+            "schema": {
+              "type": "number"              
+            },
+            "required": false,
+            "description": "Search car for daily rental price"
+          }
+        ],
+        "responses": {}
+
+      }
+    },
+    "/cars/{id}": {
       "get": {
         "description": "Visualize all public data of a specific car.",
         "tags": ["cars"],
@@ -700,22 +794,138 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "default": "59c15d72-4e27-4c81-8ba0-d1fcb3d8ebb3"
+            },
+            "description": "Use an id from a created car"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 400,
+                  "message": "Id can be UUID"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 400,
+                  "message": "Car not found."
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
-        "description": "Rent a car.",
+        "description": "Rent a car. Only customer authorization.",
         "tags": ["cars"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Rent Car"
+              },
+              "examples": {
+                "Rent a car": {
+                  "$ref": "#/components/examples/Car Rent"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "default": "59c15d72-4e27-4c81-8ba0-d1fcb3d8ebb3"
+            },
+            "description": "Pass an id from a created car"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rental"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "This car is not available to rent."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       },
       "patch": {
-        "description": "Update car information.",
+        "description": "Update car information. Only company authorization.",
         "tags": ["cars"],
         "security": [
           {
@@ -726,20 +936,46 @@
         "responses": {}
       },
       "delete": {
-        "description": "Deactivates a car.",
+        "description": "Deactivates a car. Only company authorization.",
         "tags": ["cars"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "default": "59c15d72-4e27-4c81-8ba0-d1fcb3d8ebb3"
+            },
+            "description": "Deactivates a car from company fleet."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/rentals": {
       "get": {
-        "description": "Visualize rentals history of all customers.",
+        "description": "Visualize rentals history of all customers. Only admin authorization.",
         "tags": ["rentals"],
         "security": [
           {
@@ -747,12 +983,35 @@
           }
         ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerRentals"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/rentals?returnedCar=true": {
       "get": {
-        "description": "Visualize active/inactive rentals history of all customers.",
+        "description": "Visualize active/inactive rentals history of all customers. Only admin authorization.",
         "tags": ["rentals"],
         "security": [
           {
@@ -763,28 +1022,53 @@
         "responses": {}
       }
     },
-    "/rentals?returnedCar=false": {
+    "/rentals/{id}": {
       "get": {
-        "description": "",
-        "tags": ["rentals"],
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/rentals/:id": {
-      "get": {
-        "description": "Visualize all details of a specific rent.",
+        "description": "Visualize all details of a specific rent. Only admin authorization.",
         "tags": ["rentals"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "default": "b8c9a38c-a259-4cca-8711-83fa0bae728c"
+            },
+            "description": "Use an id from a created car rent."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rental"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "error",
+                  "statusCode": 401,
+                  "message": "missing authorization token"
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
-        "description": "Close a specific rent.",
+        "description": "Close a specific rent. Only company authorization.",
         "tags": ["rentals"],
         "security": [
           {
@@ -808,25 +1092,25 @@
       "User": {
         "type": "object",
         "properties": {
-          "id":{
+          "id": {
             "type": "string"
           },
-          "name":{
+          "name": {
             "type": "string"
           },
-          "email":{
+          "email": {
             "type": "string"
           },
-          "cpf":{
+          "cpf": {
             "type": "string"
           },
-          "cnpj":{
+          "cnpj": {
             "type": "string"
           },
-          "phone":{
+          "phone": {
             "type": "string"
           },
-          "userType":{
+          "userType": {
             "type": "string"
           },
           "address": {
@@ -851,32 +1135,32 @@
           }
         }
       },
-      "UserLogin":{
+      "UserLogin": {
         "type": "object",
         "properties": {
           "email": {
             "type": "string"
           },
-          "password":{
+          "password": {
             "type": "string"
           }
         }
       },
-      "Token":{
+      "Token": {
         "type": "object",
         "properties": {
-          "token":{
+          "token": {
             "type": "string"
           }
         }
       },
-      "UserRegister":{
+      "UserRegister": {
         "type": "object",
         "required": [
           "name",
           "email",
           "password",
-          "phone",          
+          "phone",
           "userType",
           "address",
           "city",
@@ -884,7 +1168,7 @@
           "ountry"
         ],
         "properties": {
-          "id":{
+          "id": {
             "type": "string"
           },
           "name": {
@@ -908,195 +1192,320 @@
           "isActive": {
             "type": "boolean"
           },
-          "address":{
+          "address": {
             "type": "object",
             "properties": {
               "id": {
                 "type": "string"
               },
-              "address":{
+              "address": {
                 "type": "string"
               },
-              "state":{
+              "state": {
                 "type": "string"
               },
-              "city":{
+              "city": {
                 "type": "string"
               },
               "country": {
-                "type": "string"                
+                "type": "string"
               }
-            }  
+            }
           }
-        }
-      },      
-      "Car":{
-        "type": "object",
-        "properties": {
-          "id":{
-            "type": "string"
-          },
-          "name":{
-            "type": "string"
-          },
-          "model":{
-            "type": "string"
-          },
-          "brand":{
-            "type": "string"
-          },
-          "year":{
-            "type": "string"
-          },
-          "color":{
-            "type": "string"
-          },
-          "doors":{
-            "type": "string"
-          },
-          "fuelType":{
-            "type": "string"
-          },
-          "plate":{
-            "type": "string"
-          },
-          "gear":{
-            "type": "string"
-          },
-          "chassis":{
-            "type": "string"
-          },
-          "currentMileage":{
-            "type": "string"
-          },
-          "rentalPricePerDay":{
-            "type": "string"
-          },
-          "availableToRent":{
-            "type": "string"
-          },
-          "isActive":{
-            "type": "string"
-          }
-
         }
       },
-      "Rentals":{
-        "type":"object",
+      "Car": {
+        "type": "object",
         "properties": {
           "id": {
-          "type": "string"
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "year": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "doors": {
+            "type": "string"
+          },
+          "fuelType": {
+            "type": "string"
+          },
+          "plate": {
+            "type": "string"
+          },
+          "gear": {
+            "type": "string"
+          },
+          "chassis": {
+            "type": "string"
+          },
+          "currentMileage": {
+            "type": "string"
+          },
+          "rentalPricePerDay": {
+            "type": "string"
+          },
+          "availableToRent": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "string"
+          }
+        }
+      },
+      "Rental": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
           "rentalStartDate": {
-                "type": "string" 
-                },
+            "type": "string"
+          },
           "rentalReturnDate": {
-                "type": "string" 
-                },
+            "type": "string"
+          },
           "returnedCarDate": {
-                "type": "string" 
-                },
+            "type": "string"
+          },
           "returnedCar": {
-                "type": "boolean"
-                },
+            "type": "boolean"
+          },
           "rentalPricePerDay": {
-                "type": "number"
-                },
+            "type": "number"
+          },
           "rentalPricePreview": {
-                "type": "number"
-                },
+            "type": "number"
+          },
           "rentalPriceTotal": {
-                "type": "number"
-                },
+            "type": "number"
+          },
           "mileageRan": {
-                "type": "number"
-                },
+            "type": "number"
+          }
+        }
+      },
+      "Rentals": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "rentalStartDate": {
+            "type": "string"
+          },
+          "rentalReturnDate": {
+            "type": "string"
+          },
+          "returnedCarDate": {
+            "type": "string"
+          },
+          "returnedCar": {
+            "type": "boolean"
+          },
+          "rentalPricePerDay": {
+            "type": "number"
+          },
+          "rentalPricePreview": {
+            "type": "number"
+          },
+          "rentalPriceTotal": {
+            "type": "number"
+          },
+          "mileageRan": {
+            "type": "number"
+          },
           "car": {
             "type": "object",
             "properties": {
               "id": {
                 "type": "string"
-                },
-            "name": {
+              },
+              "name": {
                 "type": "string"
-                },
-            "model": {
+              },
+              "model": {
                 "type": "string"
-                },
-            "brand": {
+              },
+              "brand": {
                 "type": "string"
-                },
-            "year": {
+              },
+              "year": {
                 "type": "string"
-                },
-            "color": {
+              },
+              "color": {
                 "type": "string"
-                },
-            "doors": {
+              },
+              "doors": {
                 "type": "number"
-                },
-            "fuelType": {
+              },
+              "fuelType": {
                 "type": "string"
-                },
-            "plate": {
+              },
+              "plate": {
                 "type": "string"
-                },
-            "gear": {
+              },
+              "gear": {
                 "type": "string"
-                },
-            "chassis": {
+              },
+              "chassis": {
                 "type": "string"
-                }
+              }
             }
           }
-              
+        }
+      },
+      "CustomerRentals": {
+        "type": "object",
+        "properties": {
+          "clientes": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              },
+              "cnpj": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "userType": {
+                "type": "string"
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "rentals": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "rentalStartDate": {
+                        "type": "string"
+                      },
+                      "rentalReturnDate": {
+                        "type": "string"
+                      },
+                      "returnedCarDate": {
+                        "type": "string"
+                      },
+                      "returnedCar": {
+                        "type": "boolean"
+                      },
+                      "rentalPricePerDay": {
+                        "type": "number"
+                      },
+                      "rentalPricePreview": {
+                        "type": "number"
+                      },
+                      "rentalPriceTotal": {
+                        "type": "number"
+                      },
+                      "mileageRan": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Rent Car": {
+        "type": "object",
+        "required": ["rentalStartDate", "rentalReturnDate"],
+        "properties": {
+          "rentalStartDate": {
+            "type": "string"
+          },
+          "rentalReturnDate": {
+            "type": "string"
+          }
         }
       }
     },
     "examples": {
-      "CustomerRegister":{
+      "CustomerRegister": {
         "value": {
           "name": "Roberto",
-	        "email": "roberto235@gmail.com",
-	        "password": "123456",
-	        "phone": "21997771234",
-	        "userType": "cliente",
-	        "cpf": "902.950.180-46",
-	        "address": "Rua vinte e dois de outubro",
-	        "city": "São Gonçalo",
-	        "state": "RJ",
-	        "country": "Brasil"
+          "email": "roberto235@gmail.com",
+          "password": "123456",
+          "phone": "21997771234",
+          "userType": "cliente",
+          "cpf": "902.950.180-46",
+          "address": "Rua vinte e dois de outubro",
+          "city": "São Gonçalo",
+          "state": "RJ",
+          "country": "Brasil"
         }
       },
-      "CompanyRegister":{
+      "CompanyRegister": {
         "value": {
           "name": "Rode Bem S/A",
           "email": "rode_bem@gmail.com",
-	        "password": "123456",
-	        "phone": "21998271255",
-	        "userType": "empresa",
-	        "cnpj": "51.363.333/0001-31",
-	        "address": "Rua das Calotas, 199 - Galpão",
-	        "city": "Magé",
-	        "state": "RJ",
-	        "country": "Brasil"
+          "password": "123456",
+          "phone": "21998271255",
+          "userType": "empresa",
+          "cnpj": "51.363.333/0001-31",
+          "address": "Rua das Calotas, 199 - Galpão",
+          "city": "Magé",
+          "state": "RJ",
+          "country": "Brasil"
         }
       },
       "AdminRegister": {
         "value": {
           "name": "Ricardo",
-	        "email": "ricardo@gmail.com",
-	        "password": "123456",
-	        "phone": "21997873434",
-	        "userType": "admin",
-	        "cpf": "945.458.750-17",
-	        "address": "Rua São Clemente, 98/201",
-	        "city": "Botafogo",
-	        "state": "RJ",
-	        "country": "Brasil"
+          "email": "ricardo@gmail.com",
+          "password": "123456",
+          "phone": "21997873434",
+          "userType": "admin",
+          "cpf": "945.458.750-17",
+          "address": "Rua São Clemente, 98/201",
+          "city": "Botafogo",
+          "state": "RJ",
+          "country": "Brasil"
         }
       },
-      "Customer":{
+      "Customer": {
         "value": {
           "id": "122171a3-20d1-4079-b7c5-f3eff02680c1",
           "name": "Roberto",
@@ -1120,7 +1529,7 @@
         }
       },
       "CarRegister": {
-        "value": { 
+        "value": {
           "cars": [
             {
               "name": "maverick",
@@ -1134,10 +1543,15 @@
               "gear": "manual",
               "chassis": "3C8FY77B82T297664",
               "currentMileage": 3856,
-              "rentalPricePerDay": 195.00
+              "rentalPricePerDay": 195.0
             }
-          ]           
-                   
+          ]
+        }
+      },
+      "Car Rent": {
+        "value": {
+          "rentalStartDate": "10/05/2023",
+          "rentalReturnDate": "15/05/2023"
         }
       }
     },
