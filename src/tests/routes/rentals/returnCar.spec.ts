@@ -52,6 +52,39 @@ describe('return car tests', () => {
     rental = mock.rental;
   });
 
+  it('401, try return car when not owner', async () => {
+    const companyMock = {
+      id: v4(),
+      name: 'Company',
+      email: 'company@gmail.com',
+      password: '1234',
+      phone: '21997771234',
+      userType: 'empresa',
+      cnpj: '12.788.702/0001-22',
+      cpf: null,
+      isActive: true,
+      addressId: v4(),
+    };
+
+    const otherCompany = await new UserRepository().saveUser(
+      companyMock as any
+    );
+
+    const token = jwt.sign({ user: otherCompany }, jwtConfig.secretKey, {
+      expiresIn: jwtConfig.expiresIn,
+    });
+
+    const response = await request(app)
+      .post(`/api/rentals/${rental.id}`)
+      .send({ mileageRan: 50 })
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(response.statusCode).toBe(401);
+    expect(response.body).toStrictEqual({
+      error: "Unauthorized. Company doesn't own this car.",
+    });
+  });
+
   it('200, return car success', async () => {
     const response = await request(app)
       .post(`/api/rentals/${rental.id}`)
