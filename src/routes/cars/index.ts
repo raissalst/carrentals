@@ -1,9 +1,11 @@
 import { Router } from 'express';
+
 import {
   createCarController,
   rentACarController,
   getCarByIdController,
   updateIsActiveCarController,
+  updateCarController,
   getCarsController,
 } from '../../controllers';
 
@@ -15,10 +17,22 @@ import {
   validateCustomer,
   validateShape,
 } from '../../middlewares';
-import { createCarRentShape, createCarShape } from '../../shapes';
+
+import {
+  createCarShape,
+  updateCarShape,
+  createCarRentShape,
+} from '../../shapes';
 
 const carRoute = Router();
 
+carRoute.patch(
+  '/:id',
+  validateShape(updateCarShape),
+  validateAuth,
+  validateCompany,
+  updateCarController
+);
 carRoute.post(
   '/',
   validateShape(createCarShape),
@@ -34,11 +48,7 @@ carRoute.delete(
   updateIsActiveCarController
 );
 
-carRoute.get(
-  '/',
-  validateAuth,
-  getCarsController
-)
+carRoute.get('/', validateAuth, getCarsController);
 
 carRoute.post(
   '/:id',
