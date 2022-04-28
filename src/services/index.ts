@@ -10,6 +10,7 @@ import createRentalService from './rentals/createRental.service';
 
 import getAllRentalsService from './rentals/getAllRentals.service';
 import updateCompanyIsActive from './users/updateCompanyIsActive.service';
+import returnCarService from './rentals/returnCar.service';
 
 import getCarsService from "./cars/getCars.service";
 
@@ -26,5 +27,6 @@ export {
   getProfileRentalsService,
   getAllRentalsService,
   updateCompanyIsActive,
+  returnCarService,
 };
 

@@ -1,3 +1,4 @@
+import { Rental } from '../entities/Rental';
 import { User } from '../entities/User';
 
 //importar interfaces ou entities
@@ -9,6 +10,7 @@ declare global {
       token: string;
       userAuth: any;
       userFromQuery: User;
+      rental: Rental;
     }
   }
 }
