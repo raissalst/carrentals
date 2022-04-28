@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { User } from '../entities/User';
 import { UserRepository } from '../repositories';
 import { ErrorHandler, handleError } from '../utils';
 
@@ -10,11 +9,8 @@ const validateCustomer = async (
 ) => {
   try {
     const user = await new UserRepository().findByEmail(
-      (req.userAuth as User).email
+      req.userAuth.user.email
     );
-    if (!user) {
-      throw new ErrorHandler(404, 'Customer not found');
-    }
 
     if (user.userType === 'cliente') {
       return next();
