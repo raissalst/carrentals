@@ -3,11 +3,13 @@ import {
   loginUserController,
   updateIsActiveUserController,
   createUserController,
+  deleteUserProfile,
   getUserController,
   updateUserProfileController,
   getUserProfileController,
   getUserProfileCarsController,
   getUserByIdController,
+  getUserRentalsController,
 } from '../../controllers';
 
 import {
@@ -17,6 +19,7 @@ import {
   validateAuth,
   verifyUserType,
   validateCompany,
+  validateCustomerOrCompany,
 } from '../../middlewares';
 
 import { createUserShape, loginUserShape, updateUserShape } from '../../shapes';
@@ -47,6 +50,11 @@ userRoute.patch(
   updateIsActiveUserController
 );
 
+userRoute.delete(
+  '/profile',
+  validateAuth,
+  deleteUserProfile
+);
 
 userRoute.get(
   '/profile',
@@ -70,6 +78,13 @@ userRoute.get(
   validateAuth,
   validateCompany,
   getUserProfileCarsController
-)
+);
+
+userRoute.get(
+  '/profile/rentals',
+  validateAuth,
+  validateCustomerOrCompany,
+  getUserRentalsController,
+);
 
 export default userRoute;
