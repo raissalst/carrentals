@@ -9,7 +9,7 @@ interface IRentalUpdateData {
   returnedCarDate: Date;
   returnedCar: boolean;
   rentalPriceTotal: number;
-  mileageRun: number;
+  mileageRan: number;
 }
 
 interface IRentalRepo {
@@ -22,6 +22,7 @@ interface IRentalRepo {
     id: string,
     updateData: IRentalUpdateData
   ) => Promise<UpdateResult>;
+  findRentalCar: (id: string) => Promise<Rental>;
 }
 
 class RentalRepository implements IRentalRepo {
@@ -41,6 +42,13 @@ class RentalRepository implements IRentalRepo {
 
   updateRental = async (id: string, updateData: IRentalUpdateData) =>
     await this.ormRepo.update({ id }, updateData);
+
+  findRentalCar = async (id: string) =>
+    await this.ormRepo
+      .createQueryBuilder('rental')
+      .leftJoinAndSelect('rental.car', 'car')
+      .where({ id })
+      .getOne();
 }
 
 export { RentalRepository, IRentalRepo, IRentalFilters, IRentalUpdateData };
