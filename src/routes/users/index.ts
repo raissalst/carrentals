@@ -41,7 +41,6 @@ userRoute.patch(
   updateUserProfileController
 );
 
-
 userRoute.patch(
   '/:id',
   validateAuth,
@@ -50,24 +49,11 @@ userRoute.patch(
   updateIsActiveUserController
 );
 
-userRoute.delete(
-  '/profile',
-  validateAuth,
-  deleteUserProfile
-);
+userRoute.delete('/profile', validateAuth, deleteUserProfile);
 
-userRoute.get(
-  '/profile',
-  validateAuth,
-  getUserProfileController
-);
+userRoute.get('/profile', validateAuth, getUserProfileController);
 
-userRoute.get(
-  '/',
-  validateAuth,
-  validateAdmin,
-  getUserController,
-);
+userRoute.get('/', validateAuth, validateAdmin, getUserController);
 
 userRoute.get('/profile', validateAuth, getUserProfileController);
 
@@ -84,7 +70,7 @@ userRoute.get(
   '/profile/rentals',
   validateAuth,
   validateCustomerOrCompany,
-  getUserRentalsController,
+  getUserRentalsController
 );
 
 export default userRoute;

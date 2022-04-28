@@ -1,4 +1,4 @@
-const newDateFormat = (stringDate: string): string => {
+const newDateFormat = (stringDate: string) => {
   //recebo 'dd/mm/yyyy' que veio do validate do yup
   const newArray = stringDate.split('/');
   //['dd', 'mm', 'yyyy']
