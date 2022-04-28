@@ -12,6 +12,13 @@ const updateCarController = async (req: Request, res: Response) => {
     if (!response) {
       throw new ErrorHandler(404, 'Car not found.');
     }
+    const { userAuth } = req;
+    if (response.company.id !== userAuth.user.id) {
+      throw new ErrorHandler(
+        401,
+        "Unauthorized. Company doesn't own this car."
+      );
+    }
 
     const { validated } = req;
     await new CarRepository().updateCar(id, validated);
