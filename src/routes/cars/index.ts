@@ -6,11 +6,14 @@ import {
   getCarByIdController,
   updateIsActiveCarController,
   updateCarController,
+  getCarsController,
 } from '../../controllers';
 
 import {
+  validateAdmin,
   validateAuth,
   validateCompany,
+  validateCustomerOrCompany,
   validateCustomer,
   validateShape,
 } from '../../middlewares';
@@ -44,6 +47,8 @@ carRoute.delete(
   validateCompany,
   updateIsActiveCarController
 );
+
+carRoute.get('/', validateAuth, getCarsController);
 
 carRoute.post(
   '/:id',

@@ -24,6 +24,10 @@ interface ICarRepo {
   getCarById: (id: string) => Promise<Car>;
   getCars: (params?: ICarData) => Promise<Car[]>;
   updateCar: (id: string, updatedData: ICarData) => Promise<UpdateResult>;
+  updateIsActive: (
+    companyId: string,
+    updateTo: boolean
+  ) => Promise<UpdateResult>;
 }
 
 class CarRepository implements ICarRepo {
@@ -49,6 +53,12 @@ class CarRepository implements ICarRepo {
 
   updateCar = async (id: string, updatedData: ICarData) =>
     await this.ormRepository.update({ id }, updatedData);
+
+  updateIsActive = async (companyId, updateTo) =>
+    await this.ormRepository.update(
+      { company: companyId },
+      { isActive: updateTo, availableToRent: updateTo }
+    );
 }
 
 export { CarRepository, ICarRepo, ICarData };
