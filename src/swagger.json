@@ -3,6 +3,9 @@
   "info": {
     "title": "Cars Rentals API",
     "description": "Documentation for the Car Rentals API. ",
+    "contact": {
+      "url": "https://github.com/raissalst/carrentals"
+    },
     "version": "1.0.0"
   },
   "servers": [
@@ -69,17 +72,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       },
@@ -103,17 +97,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       }
@@ -140,6 +125,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400":{
+            "$ref": "#/components/responses/Bad Request Error"
+          },
+          "401":{
+            "description": "Unauthorized",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "example": {
+                    "error": "Wrong email or password"
+                  }
                 }
               }
             }
@@ -179,29 +179,11 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 400,
-                  "message": "query"
-                }
-              }
-            }
+          "400":{
+            "$ref": "#/components/responses/Bad Request Error"
           }
         }
       }
@@ -239,29 +221,11 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 400,
-                  "message": "query"
-                }
-              }
-            }
+          "400":{
+            "$ref": "#/components/responses/Bad Request Error"
           }
         }
       },
@@ -289,29 +253,11 @@
           "204": {
             "description": "No Content"
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 400,
-                  "message": "query"
-                }
-              }
-            }
+          "400":{
+            "$ref": "#/components/responses/Bad Request Error"
           }
         }
       }
@@ -380,28 +326,11 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 400
-                }
-              }
-            }
+          "400":{
+            "$ref": "#/components/responses/Bad Request Error"
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       },
@@ -418,17 +347,8 @@
           "204": {
             "description": "No Content"
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       }
@@ -508,17 +428,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       }
@@ -579,17 +490,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       }
@@ -640,17 +542,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       }
@@ -816,29 +709,11 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 400,
-                  "message": "Id can be UUID"
-                }
-              }
-            }
+          "400":{
+            "$ref": "#/components/responses/Bad Request Error"
           },
           "404": {
             "description": "Not found",
@@ -898,29 +773,11 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "This car is not available to rent."
-                }
-              }
-            }
+          "400":{
+            "$ref": "#/components/responses/Bad Request Error"
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       },
@@ -958,17 +815,8 @@
           "204": {
             "description": "No Content"
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       }
@@ -994,17 +842,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       }
@@ -1018,8 +857,32 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "in": "query",
+            "name": "returnedCar",
+            "schema":{
+              "type": "boolean",
+              "default": true
+            },
+            "description": "Choose between true or false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerRentals"
+                }
+              }
+            }
+          },
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
+          }
+        }
       }
     },
     "/rentals/{id}": {
@@ -1053,17 +916,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": "error",
-                  "statusCode": 401,
-                  "message": "missing authorization token"
-                }
-              }
-            }
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
           }
         }
       },
@@ -1560,8 +1414,30 @@
         "description": "Unauthorized",
         "content": {
           "application/json": {
-            "example": {
-              "error": "Missing authorization token"
+            "schema": {
+              "example": {
+                "error": "missing authorization token"
+              }
+
+            }
+          }
+        }
+      },
+      "Bad Request Error": {
+        "description": "Bad request",
+        "content": {
+          "Bad Request Error": {
+            "schema": {              
+              "example": {
+                "error": "bad request"
+              }             
+            }
+          },
+          "Missing Key Error": {
+            "schema": {
+              "example": {
+                "error": "email must be a valid email"
+              }
             }
           }
         }
