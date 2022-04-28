@@ -4,6 +4,7 @@ import {
   validateAdmin,
   validateCompany,
   validateShape,
+  verifyCarOwner,
 } from '../../middlewares';
 import {
   getRentalByIdController,
@@ -23,6 +24,7 @@ rentalRoute.post(
   validateShape(returnCarShape),
   validateAuth,
   validateCompany,
+  verifyCarOwner,
   returnCarController
 );
 
