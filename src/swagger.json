@@ -188,7 +188,6 @@
         }
       }
     },
-
     "/users/{id}": {
       "get": {
         "description": "Visualize specific public profile data. Companies can retrieve customer or company profiles, customer can retrieve companies profile, and an admin can retrieve public and private companies data.",
@@ -506,7 +505,21 @@
           }
         ],
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
+          }
+        }
       },
       "post": {
         "description": "Register cars to rent",
@@ -548,7 +561,7 @@
         }
       }
     },
-    "/cars?availableToRent=param&&isActive=param": {
+    "/cars?availableToRent={availableToRent}&&isActive={isActive}": {
       "get": {
         "description": "Visualize all public data of unavaillable/inactive registered cars. Only admin authorization.",
         "tags": ["cars"],
@@ -582,7 +595,7 @@
         "responses": {}
       }
     },
-    "/cars?params filter": {
+    "/cars?": {
       "get": {
         "description": "Visualize available and active cars with filters. Only customer authorization.",
         "tags": ["cars"],
@@ -599,7 +612,7 @@
               "type": "string"
             },
             "required": false,
-            "description": "Search for caar name"
+            "description": "Search for car name"
           },
           {
             "in": "query",
@@ -674,7 +687,33 @@
             "description": "Search car for daily rental price"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
+          },
+          "400":{
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "error": "bad request"
+                  }
+                }
+              }
+            }
+          }
+        }
 
       }
     },
