@@ -3,10 +3,21 @@ import { connection } from '../..';
 import app from '../../../app';
 import { v4 } from 'uuid';
 import request from 'supertest';
-import { CarRepository } from '../../../repositories';
+import { CarRepository, UserRepository } from '../../../repositories';
+import jwt from 'jsonwebtoken';
+import { jwtConfig } from '../../../configs';
+
+let adminToken
 
 beforeAll(async () => {
   await connection.create();
+  const admin = await new UserRepository().findByEmail(
+    process.env.ADMIN_EMAIL
+  );
+
+  adminToken = jwt.sign({ user: admin }, jwtConfig.secretKey, {
+    expiresIn: jwtConfig.expiresIn,
+  });
 });
 
 afterAll(async () => {
@@ -19,10 +30,10 @@ describe('should retrieve all active and available cars', () => {
 
   it('200, get no cars when there are not cars availables or actives', async () => {
     const response = await request(app).get(
-      '/api/cars');
-      
-      expect(response.statusCode).toBe(200);
-      expect(response.body).toStrictEqual([]);
+      '/api/cars').set('Authorization', `Bearer ${adminToken}`)
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toStrictEqual([]);
   });
 
 
@@ -30,13 +41,13 @@ describe('should retrieve all active and available cars', () => {
     const car = await createCar();
     const { chassis, currentMileage, isActive, plate, ...outputCar } = car[0]
 
-    const response = await request(app).get('/api/cars');
+    const response = await request(app).get('/api/cars').set('Authorization', `Bearer ${adminToken}`)
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toStrictEqual([outputCar]);
   });
-  
- 
+
+
 });
 
 const createCar = async () => {
@@ -62,6 +73,3 @@ const createCar = async () => {
 
   return resp;
 };
-
-
-// - [GET] → *visualizar dados públicos (tudo menos placa, chassis, km e isActive) de todos os carros disponíveis (available=true e active=true) cadastrados na plataforma (autorização para admin, empresa e cliente)🔒*
