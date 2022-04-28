@@ -71,8 +71,6 @@ describe('test loginUser controller', () => {
       .post('/api/users/login')
       .send(requestBody);
 
-    console.log('body', response.body);
-
     expect(response.statusCode).toBe(200);
     expect(response.body.token).toBeTruthy();
   });
@@ -128,7 +126,6 @@ const createCompanyMock = async () => {
   };
 
   const company = await new UserRepository().saveUser(companyMock as any);
-  console.log(company);
 
   return company;
 };
