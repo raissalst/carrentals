@@ -54,7 +54,7 @@ describe('get car by id tests', () => {
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toStrictEqual({ error: 'Id can be UUID' });
+    expect(response.body).toStrictEqual({ error: 'Id must be UUID' });
   });
 
   it('401, get car with no token', async () => {
