@@ -592,7 +592,33 @@
             "description": "Retrieves active or inactive cars"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200":{
+            "description": "OK",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Bad Request",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "example":{
+                    "error": "Filter not available."
+                  }
+                }
+              }
+            }
+          },
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
+          }
+        }
       }
     },
     "/cars?": {
@@ -828,8 +854,46 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema":{},
+              "examples": {
+                "Update Car Name":{
+                  "value": {
+                    "name": "novo nome do carro"
+                  }
+                },
+                "Update Year and Color":{
+                  "value":{
+                    "year": "1950",
+                    "color": "verde metálico"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema":{
+              "type": "string",
+              "default": "13d7752a-44b3-453a-a2c8-1841035f932c"
+            },
+            "required": true,
+            "description": "Use an id from a created car."
+          }
+        ],
+        "responses": {
+          "204":{
+            "description": "No Content"
+          },
+           "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
+          }
+        }
       },
       "delete": {
         "description": "Deactivates a car. Only company authorization.",
