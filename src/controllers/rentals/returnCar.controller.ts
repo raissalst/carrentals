@@ -18,7 +18,7 @@ const returnCarController = async (req: Request, res: Response) => {
       throw new ErrorHandler(404, 'Rental not found.');
     }
     if (rental.returnedCar) {
-      throw new ErrorHandler(400, 'This rent already been finished');
+      throw new ErrorHandler(400, 'This rental has already been finished.');
     }
 
     await returnCarService(userAuth.user, rental, mileageRan);

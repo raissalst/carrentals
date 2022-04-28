@@ -86,7 +86,7 @@ describe('return car tests', () => {
 
     expect(response.statusCode).toBe(400);
     expect(response.body).toStrictEqual({
-      error: 'This rent already been finished',
+      error: 'This rental has already been finished.',
     });
   });
   it('400, try return car with invalid id', async () => {
