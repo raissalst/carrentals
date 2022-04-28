@@ -6,7 +6,7 @@ const updateCarController = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     if (!validate(id)) {
-      throw new ErrorHandler(400, 'Id must be UUID');
+      throw new ErrorHandler(400, 'Id must be UUID.');
     }
     const response = await new CarRepository().getCarById(id);
     if (!response) {
