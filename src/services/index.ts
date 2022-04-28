@@ -10,15 +10,19 @@ import createRentalService from './rentals/createRental.service';
 
 import getAllRentalsService from './rentals/getAllRentals.service';
 
+import getCarsService from "./cars/getCars.service";
+
 export {
   createUserService,
   createAddressService,
   updateProfileService,
   updateAddressProfileService,
   getUserProfileService,
-  createRentalService,
-  getAllUsersService,
+  getCarsService,
   getProfileCarsService,
+  getAllUsersService,
+  createRentalService,
   getProfileRentalsService,
   getAllRentalsService,
-};
+}
+
