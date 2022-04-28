@@ -203,10 +203,10 @@
             "name": "id",
             "schema": {
               "type": "string",
-              "default": "c40423ac-9871-4e71-a75a-c2f42233ce25"
+              "default": "8a5813d5-1307-486f-b35b-f7d7f2c8b13a"
             },
 
-            "description": "Use an id from a created user"
+            "description": "Use an id from a created user (customer or company)"
           }
         ],
         "responses": {
@@ -1032,8 +1032,47 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
-        "responses": {}
+        "requestBody":{
+          "content": {
+            "application/json":{
+              "schema":{},
+              "examples": {
+                "Mileage Ran Value":{
+                  "value":{
+                    "mileageRan": 145
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema":{
+              "type": "string",
+              "default": "82067e94-625f-488e-a6a1-b511b8244ee6"
+            },
+            "required": true,
+            "description": "Use an id from a valid rent created."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rental"
+                }
+              }
+            }
+          },
+          "401":{
+            "$ref": "#/components/responses/Unauthorized Error"
+          }
+        }
       }
     }
   },
