@@ -12,17 +12,21 @@ import getAllRentalsService from './rentals/getAllRentals.service';
 import updateCompanyIsActive from './users/updateCompanyIsActive.service';
 import returnCarService from './rentals/returnCar.service';
 
+import getCarsService from "./cars/getCars.service";
+
 export {
   createUserService,
   createAddressService,
   updateProfileService,
   updateAddressProfileService,
   getUserProfileService,
-  createRentalService,
-  getAllUsersService,
+  getCarsService,
   getProfileCarsService,
+  getAllUsersService,
+  createRentalService,
   getProfileRentalsService,
   getAllRentalsService,
   updateCompanyIsActive,
   returnCarService,
 };
+
