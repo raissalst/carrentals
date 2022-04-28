@@ -1,0 +1,50 @@
+{
+  "name": "Capstone-CarRental",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "repository": "git@github.com:raissalst/carrentals.git",
+  "author": "Raissa Toledo <raissalst@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@jest/globals": "^27.5.1",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.4.0",
+    "reflect-metadata": "^0.1.13",
+    "swagger-ui-express": "^4.3.0",
+    "typeorm": "0.2.45",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/node": "^16.11.10",
+    "@types/supertest": "^2.0.12",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@types/uuid": "^8.3.4",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.4",
+    "ts-node": "10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "4.5.2"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --rs --files src/server.ts --clear ",
+    "build": "tsc",
+    "test": "jest -w ,",
+    "start": "node dist/src/server.js",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js -f src/database/ormconfig.ts"
+  }
+}
