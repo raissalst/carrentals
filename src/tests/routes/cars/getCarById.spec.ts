@@ -27,7 +27,7 @@ describe('get car by id tests', () => {
       expiresIn: jwtConfig.expiresIn,
     });
   });
-  it('200, get car success', async () => {
+  it('200, get car with success', async () => {
     const car = await createCar();
 
     const response = await request(app)
@@ -38,7 +38,7 @@ describe('get car by id tests', () => {
     expect(response.body.id).toStrictEqual(car.id);
   });
 
-  it('404, get car with no id on database', async () => {
+  it('404, try to get car with id not existing in database', async () => {
     const response = await request(app)
       .get(`/api/cars/${v4()}`)
       .set('Authorization', `Bearer ${adminToken}`);
@@ -54,15 +54,15 @@ describe('get car by id tests', () => {
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(response.statusCode).toBe(400);
-    expect(response.body).toStrictEqual({ error: 'Id must be UUID' });
+    expect(response.body).toStrictEqual({ error: 'Id must be UUID.' });
   });
 
-  it('401, get car with no token', async () => {
+  it('401, trying to get car without token', async () => {
     const response = await request(app).get(`/api/cars/${v4()}`);
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toStrictEqual({
-      error: 'Missing authorization token',
+      error: 'Missing authorization token.',
     });
   });
 });

@@ -57,7 +57,7 @@ describe('get one rental information by id', () => {
 
     expect(responseOfGetRentalById.statusCode).toBe(401);
     expect(responseOfGetRentalById.body.error).toEqual(
-      'Missing authorization token'
+      'Missing authorization token.'
     );
   });
 });

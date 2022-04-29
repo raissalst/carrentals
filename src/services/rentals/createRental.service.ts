@@ -38,7 +38,7 @@ const createRentalService = async (
     const car = await new CarRepository().getCarById(carId);
 
     if (!car) {
-      throw new ErrorHandler(404, 'Car not found');
+      throw new ErrorHandler(404, 'Car not found.');
     }
 
     if (!car.availableToRent || !car.isActive) {

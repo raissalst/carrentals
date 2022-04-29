@@ -73,12 +73,12 @@ describe('get user cars', () => {
     expect(Object.keys(userCars.body[0])).toContain('name');
   });
 
-  it('should not retrieve the cars list without bearer token', async () => {
+  it('should not retrieve the cars list without token', async () => {
     const userCars = await request(app).get('/api/users/profile/cars');
 
     expect(userCars.statusCode).toBe(401);
     expect(userCars.body).toMatchObject({
-      error: 'Missing authorization token',
+      error: 'Missing authorization token.',
     });
   });
 
@@ -99,7 +99,7 @@ describe('get user cars', () => {
       .get('/api/users/profile/cars')
       .set('Authorization', `Bearer ${mockToken}`);
     expect(userCars.statusCode).toBe(401);
-    expect(userCars.body).toMatchObject({ error: 'Unauthorized' });
+    expect(userCars.body).toMatchObject({ error: 'Unauthorized.' });
   });
 
   it('should filter cars in the list by true availability', async () => {

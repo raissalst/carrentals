@@ -53,7 +53,7 @@ describe('update User profile tests', () => {
     expect(res.body.name).toEqual('Novo Nome S/a');
   });
 
-  it('should not update userType key from empresa to admin', async () => {
+  it('should not update the userType key from empresa to admin', async () => {
     const res = await request(app)
       .patch('/api/users/profile')
       .set('Authorization', `Bearer ${responseBody.token}`)
@@ -71,13 +71,13 @@ describe('update User profile tests', () => {
     expect(res.body.address.address).toStrictEqual('Rua Caravelas, 2022');
   });
 
-  it('should not update without bearer token', async () => {
+  it('should not update without token', async () => {
     const res = await request(app)
       .patch('/api/users/profile')
       .set('Authorization', `Bearer`)
       .send({ address: 'Rua Caravelas, 2022' });
 
     expect(res.statusCode).toBe(401);
-    expect(res.body.error).toEqual('Missing authorization token');
+    expect(res.body.error).toEqual('Missing authorization token.');
   });
 });

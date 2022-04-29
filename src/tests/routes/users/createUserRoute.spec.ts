@@ -57,6 +57,6 @@ describe('Create User test', () => {
 
     const responseBody = response.body;
     expect(response.statusCode).toBe(401);
-    expect(responseBody.error).toContain('missing authorization token');
+    expect(responseBody.error).toContain('Missing authorization token.');
   });
 });

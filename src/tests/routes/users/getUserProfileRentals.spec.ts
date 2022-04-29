@@ -16,7 +16,7 @@ import { Rental } from '../../../entities/Rental';
 let companyToken: string;
 let customerToken: string;
 let rentalsOpen: Rental;
-let rentalsClose: Rental
+let rentalsClose: Rental;
 let userCustomer: User;
 let rentals2: Rental;
 let userCompany: User;
@@ -100,8 +100,8 @@ describe('get users rentals', () => {
     const car = await new CarRepository().saveCar(mockCar as any);
     rentalsOpen = await new RentalRepository().saveRental(mockRental as any);
 
-    mockRental.returnedCar = true
-    mockRental.id = v4()
+    mockRental.returnedCar = true;
+    mockRental.id = v4();
     rentalsClose = await new RentalRepository().saveRental(mockRental as any);
     rentals2 = await new RentalRepository().saveRental(
       mockRentalCompany as any
@@ -141,7 +141,7 @@ describe('get users rentals', () => {
       .set('Authorization', `Bearer`);
     expect(response.statusCode).toBe(401);
     expect(response.body).toMatchObject({
-      error: 'Missing authorization token',
+      error: 'Missing authorization token.',
     });
   });
 
@@ -155,7 +155,7 @@ describe('get users rentals', () => {
       .get('/api/users/profile/rentals')
       .set('Authorization', `Bearer ${customerToken}`)
       .query('returnedCar=false');
-    
+
     expect(response.statusCode).toBe(200);
     expect(response.body[0].returnedCar).toStrictEqual(false);
   });

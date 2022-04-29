@@ -70,26 +70,26 @@ describe('create car tests', () => {
     expect(car).toBeTruthy();
   });
 
-  it('401 UNAUTORIZED, try create car with no header', async () => {
+  it('401 UNAUTHORIZED, trying to create a car without token', async () => {
     const response = await request(app).post('/api/cars').send(reqMock);
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toStrictEqual({
-      error: 'Missing authorization token',
+      error: 'Missing authorization token.',
     });
   });
 
-  it('401, when try create car with a admin token', async () => {
+  it('401, when trying to create a car with an admin token', async () => {
     const response = await request(app)
       .post('/api/cars')
       .send(reqMock)
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(response.statusCode).toBe(401);
-    expect(response.body).toStrictEqual({ error: 'Unauthorized' });
+    expect(response.body).toStrictEqual({ error: 'Unauthorized.' });
   });
 
-  it('400, when try create car with request not contains a array', async () => {
+  it('400, when trying to create a car with a request without an array', async () => {
     const otherMock = {
       cars: reqMock.cars[0],
     };

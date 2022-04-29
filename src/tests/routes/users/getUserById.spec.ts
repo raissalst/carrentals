@@ -109,6 +109,6 @@ describe('get user information by id', () => {
       .set('Authorization', `Bearer ${responseLoginCustomerBody.token}`);
 
     expect(res.statusCode).toBe(401);
-    expect(res.body.error).toEqual('Unauthorized');
+    expect(res.body.error).toEqual('Unauthorized.');
   });
 });

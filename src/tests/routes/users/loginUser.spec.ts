@@ -18,7 +18,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('test loginUser controller', () => {
+describe('test login user controller', () => {
   it('test sucess login', async () => {
     const requestBody = {
       email: process.env.ADMIN_EMAIL,
@@ -33,7 +33,7 @@ describe('test loginUser controller', () => {
     expect(typeof responseBody).toBe('object');
     expect(responseBody.token).toBeTruthy();
   });
-  it('test fail, with wrong password', async () => {
+  it('test fail with wrong password', async () => {
     const requestWrongBody = {
       email: process.env.ADMIN_EMAIL,
       password: '4321',
@@ -46,7 +46,7 @@ describe('test loginUser controller', () => {
     expect(typeof responseBody).toBe('object');
   });
 
-  it('401, try login with desactivated user', async () => {
+  it('401, try to login with deactivated user', async () => {
     const user = await createUserMock();
     const requestBody = {
       email: user.email,
@@ -61,7 +61,7 @@ describe('test loginUser controller', () => {
       error: 'Your profile is deactivated.',
     });
   });
-  it('200, try login with desactivated company', async () => {
+  it('200, try to login with deactivated company', async () => {
     const user = await createCompanyMock();
     const requestBody = {
       email: user.email,
@@ -75,7 +75,7 @@ describe('test loginUser controller', () => {
     expect(response.body.token).toBeTruthy();
   });
 
-  it('401, try login with desactivated admin', async () => {
+  it('401, try to login with deactivated admin', async () => {
     const admin = await new UserRepository().findByEmail(
       process.env.ADMIN_EMAIL
     );

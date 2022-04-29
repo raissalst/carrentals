@@ -11,7 +11,7 @@ afterAll(async () => {
   await connection.dropTables();
   await connection.close();
 });
-describe('rental reposiotory tests', () => {
+describe('rental repository tests', () => {
   const rentalMock = {
     id: v4(),
     rentalStartDate: new Date(),

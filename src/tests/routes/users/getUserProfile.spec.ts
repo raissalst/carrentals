@@ -26,7 +26,7 @@ describe('get user profile', () => {
     country: 'Brasil',
   };
 
-  it('should retrieves a customer profile', async () => {
+  it('should retrieve a customer profile', async () => {
     const requestBody = {
       email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD,
@@ -56,7 +56,7 @@ describe('get user profile', () => {
     expect(res.body.error.name).toEqual('JsonWebTokenError');
   });
 
-  it('should retrieves a company profile', async () => {
+  it('should retrieve a company profile', async () => {
     const createRequestBody = companyMock;
     const createResponse = await request(app)
       .post('/api/users')
@@ -80,12 +80,12 @@ describe('get user profile', () => {
     expect(Object.keys(res.body)).toContain('cnpj');
   });
 
-  it('should not retrieve a user profile without a token', async () => {
+  it('should not retrieve an user profile without a token', async () => {
     const res = await request(app)
       .get('/api/users/profile')
       .set('Authorization', `Bearer`);
 
     expect(res.statusCode).toBe(401);
-    expect(res.body.error).toEqual('Missing authorization token');
+    expect(res.body.error).toEqual('Missing authorization token.');
   });
 });

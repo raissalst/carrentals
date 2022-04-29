@@ -48,7 +48,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('Testing the /delete/UserProfile route', () => {
+describe('Testing the delete user profile route', () => {
   it('should set isActive false', async () => {
     const response = await request(app)
       .delete(`/api/users/profile`)
@@ -68,7 +68,7 @@ describe('Testing the /delete/UserProfile route', () => {
     expect(response.statusCode).toBe(401);
   });
 
-  it('204, try delete admin profile', async () => {
+  it('204, try to delete an admin profile', async () => {
     const response = await request(app)
       .delete(`/api/users/profile`)
       .set('Authorization', `Bearer ${admin.adminToken}`);
@@ -83,7 +83,7 @@ describe('Testing the /delete/UserProfile route', () => {
     expect(user.isActive).toBe(false);
   });
 
-  it('204, try delete company profile', async () => {
+  it('204, trying to delete company profile', async () => {
     const company = await createCompanyMock();
     const companyToken = jwt.sign({ user: company }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,

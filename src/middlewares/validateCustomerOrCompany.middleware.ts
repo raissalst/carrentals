@@ -12,13 +12,13 @@ const validateCustomerOrCompany = async (
     const user = await new UserRepository().findByEmail(userAuth.user.email);
 
     if (!user) {
-      throw new ErrorHandler(404, 'User not found');
+      throw new ErrorHandler(404, 'User not found.');
     }
 
     if (user.userType === 'empresa' || user.userType === 'cliente') {
       return next();
     } else {
-      throw new ErrorHandler(401, 'Unauthorized');
+      throw new ErrorHandler(401, 'Unauthorized.');
     }
   } catch (err: any) {
     return handleError(err, res);

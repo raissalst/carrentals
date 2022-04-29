@@ -33,13 +33,13 @@ describe('rent a car tests', () => {
     });
   });
 
-  it('400, try rent a car with wrong keys on body', async () => {
+  it('400, try to rent a car with wrong keys on request body', async () => {
     const response = await request(app).post(`/api/cars/${car.id}`).send({});
 
     expect(response.statusCode).toBe(400);
   });
 
-  it('401, try rent a car with no token', async () => {
+  it('401, try to rent a car without token', async () => {
     const response = await request(app).post(`/api/cars/${car.id}`).send({
       rentalStartDate: '10/05/2023',
       rentalReturnDate: '15/05/2023',
@@ -47,7 +47,7 @@ describe('rent a car tests', () => {
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toStrictEqual({
-      error: 'Missing authorization token',
+      error: 'Missing authorization token.',
     });
   });
 
@@ -61,7 +61,7 @@ describe('rent a car tests', () => {
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(response.statusCode).toBe(401);
-    expect(response.body).toStrictEqual({ error: 'Unauthorized' });
+    expect(response.body).toStrictEqual({ error: 'Unauthorized.' });
   });
 
   it('200, rent success', async () => {
@@ -115,7 +115,7 @@ describe('rent a car tests', () => {
 
     expect(response.statusCode).toBe(404);
     expect(response.body).toStrictEqual({
-      error: 'Car not found',
+      error: 'Car not found.',
     });
   });
 });

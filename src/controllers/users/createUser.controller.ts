@@ -12,7 +12,10 @@ const createUserController = async (req: Request, res: Response) => {
     );
 
     if (checkUser.length > 0) {
-      throw new ErrorHandler(409, 'User email, cpf or cnpj already registered');
+      throw new ErrorHandler(
+        409,
+        'User e-mail, CPF or CNPJ already registered.'
+      );
     }
 
     const {
