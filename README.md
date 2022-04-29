@@ -32,7 +32,7 @@ This API contains 3 routes and 19 endpoints. For more detailed information about
 
 ## 2. Application's links 🔗
 
-- <a name="API documentation" href="https://swagger.io/" target="_blank">API Documentation (Swagger)</a>
+- <a name="API documentation" href="https://carrental-capstone.herokuapp.com/api/docs/" target="_blank">API Documentation (Swagger)</a>
 - <a name="API deploy in Heroku" href="https://carrental-capstone.herokuapp.com/" target="_blank">API Deploy in Heroku</a>
 
 ## 3. General Functionalities ⚙️
