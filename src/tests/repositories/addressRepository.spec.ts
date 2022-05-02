@@ -18,20 +18,20 @@ describe('Address repository tests', () => {
     city: 'Socorro',
     country: 'Brasil',
   };
-  it('create address', async () => {
+  it('should create an address', async () => {
     const address = await new AddressRepository().saveAddress(addressMock);
 
     expect(address).toBeTruthy();
     expect(address).toStrictEqual(addressMock);
   });
 
-  it('get all addreses', async () => {
+  it('should get all addresses', async () => {
     const address = await new AddressRepository().getAllAddreses();
 
     expect(address.length).toBe(1);
   });
 
-  it('get address by id', async () => {
+  it('should get an address by id', async () => {
     const address = await new AddressRepository().getAddressById(
       addressMock.id
     );
@@ -39,7 +39,7 @@ describe('Address repository tests', () => {
     expect(Object.keys(address)).toStrictEqual(Object.keys(addressMock));
   });
 
-  it('update address', async () => {
+  it('should update an address', async () => {
     const response = await new AddressRepository().updateAddress(
       addressMock.id,
       { address: 'Rua João Pedro' }

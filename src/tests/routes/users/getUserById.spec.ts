@@ -12,7 +12,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get user by id route tests', () => {
+describe('Get user by id route tests', () => {
   const companyMock = {
     name: 'Company One',
     email: 'companyone@gmail.com',
@@ -52,7 +52,7 @@ describe('get user by id route tests', () => {
     country: 'Brasil',
   };
 
-  it('should retrieve a complete company profile with an admin logged', async () => {
+  it('should retrieve a complete company profile with an admin logged and return http status 200', async () => {
     const createRequestBody = companyMock;
     const createResponse = await request(app)
       .post('/api/users')
@@ -79,7 +79,7 @@ describe('get user by id route tests', () => {
     expect(Object.keys(res.body)).toContain('phone');
   });
 
-  it('should not retrieve a customer profile with a customer logged', async () => {
+  it('should not retrieve a customer profile with a customer logged and return http status 401', async () => {
     const createRequestBodyCustomerOne = customerMockOne;
     const createResponseCustomerOne = await request(app)
       .post('/api/users')

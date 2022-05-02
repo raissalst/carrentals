@@ -14,7 +14,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('update user profile route tests', () => {
+describe('Update user profile route tests', () => {
   const companyMock = {
     name: 'Company SA',
     email: 'companysa@gmail.com',
@@ -28,7 +28,7 @@ describe('update user profile route tests', () => {
     country: 'Brasil',
   };
 
-  it('should update a company profile', async () => {
+  it('should update a company profile and return http status 200', async () => {
     const createRequestBody = companyMock;
     const createResponse = await request(app)
       .post('/api/users')
@@ -53,7 +53,7 @@ describe('update user profile route tests', () => {
     expect(res.body.name).toEqual('Novo Nome S/a');
   });
 
-  it('should not update the userType key from empresa to admin', async () => {
+  it('should not update the userType key from type empresa to type admin', async () => {
     const res = await request(app)
       .patch('/api/users/profile')
       .set('Authorization', `Bearer ${responseBody.token}`)
@@ -62,7 +62,7 @@ describe('update user profile route tests', () => {
     expect(res.body.userType).toStrictEqual('empresa');
   });
 
-  it('should update an address and return it with user data', async () => {
+  it('should update an address and return it with user data and return http status 200', async () => {
     const res = await request(app)
       .patch('/api/users/profile')
       .set('Authorization', `Bearer ${responseBody.token}`)
@@ -71,7 +71,7 @@ describe('update user profile route tests', () => {
     expect(res.body.address.address).toStrictEqual('Rua Caravelas, 2022');
   });
 
-  it('should not update without token', async () => {
+  it('should not update an user profile without a token and return http status 401', async () => {
     const res = await request(app)
       .patch('/api/users/profile')
       .set('Authorization', `Bearer`)

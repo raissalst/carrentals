@@ -26,7 +26,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get users rentals route tests', () => {
+describe('Get users rentals route tests', () => {
   const userMock = {
     id: v4(),
     name: 'Jhon Doe',
@@ -108,7 +108,7 @@ describe('get users rentals route tests', () => {
     );
   });
 
-  it('should retrieve customer rentals', async () => {
+  it('should retrieve a customer rentals and return http status 200', async () => {
     user = userCustomer;
     customerToken = jwt.sign({ user }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,
@@ -122,7 +122,7 @@ describe('get users rentals route tests', () => {
     expect(response.body[0].id).toEqual(rentalsOpen.id);
   });
 
-  it('should retrieve company rentals', async () => {
+  it('should retrieve a company rentals and return http status 200', async () => {
     user = userCompany;
     companyToken = jwt.sign({ user }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,
@@ -135,7 +135,7 @@ describe('get users rentals route tests', () => {
     expect(response.body[0].id).toEqual(rentals2.id);
   });
 
-  it('should not retrieve rentals without bearer token', async () => {
+  it('should not retrieve rentals without a token and return http status 401', async () => {
     const response = await request(app)
       .get('/api/users/profile/rentals')
       .set('Authorization', `Bearer`);
@@ -145,7 +145,7 @@ describe('get users rentals route tests', () => {
     });
   });
 
-  it('should list opened rentals by returnedCar query equals to false', async () => {
+  it('should list opened rentals by returnedCar query passed as false and return http status 200', async () => {
     user = userCustomer;
     customerToken = jwt.sign({ user }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,

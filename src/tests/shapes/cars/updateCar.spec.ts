@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import updateCarShape from '../../../shapes/cars/updateCar.shape';
 
-describe('car update shape tests', () => {
+describe('Car update shape tests', () => {
   const schemaRight = {
     name: 'Gol',
     model: 'bolinha',

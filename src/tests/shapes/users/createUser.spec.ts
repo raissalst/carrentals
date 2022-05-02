@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { createUserShape } from '../../../shapes';
 
-describe('create user shape tests', () => {
+describe('Create user shape tests', () => {
   const schemaRight = {
     name: 'seu nome',
     email: 'mail@mail.com',
@@ -23,7 +23,7 @@ describe('create user shape tests', () => {
     const result = await createUserShape.isValid(schemaRight);
     expect(result).toEqual(true);
   });
-  it('should not be a valid schema with cpf in wrong format', async () => {
+  it('should not be a valid schema with CPF being sent with a wrong format', async () => {
     const result = await createUserShape.isValid(schemaWrong);
     expect(result).toEqual(false);
   });

@@ -16,7 +16,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('rent a car route tests', () => {
+describe('Rent a car route tests', () => {
   let car;
   let user;
   let adminToken;
@@ -33,13 +33,13 @@ describe('rent a car route tests', () => {
     });
   });
 
-  it('400, should not rent a car with wrong keys passed on the request body', async () => {
+  it('should not rent a car with the wrong keys passed on the request body and return http status 400', async () => {
     const response = await request(app).post(`/api/cars/${car.id}`).send({});
 
     expect(response.statusCode).toBe(400);
   });
 
-  it('401, should not rent a car without token', async () => {
+  it('should not rent a car without a token and return http status 401', async () => {
     const response = await request(app).post(`/api/cars/${car.id}`).send({
       rentalStartDate: '10/05/2023',
       rentalReturnDate: '15/05/2023',
@@ -51,7 +51,7 @@ describe('rent a car route tests', () => {
     });
   });
 
-  it('401, should not rent a car without customer token', async () => {
+  it('should not rent a car without a customer token and return http status 401', async () => {
     const response = await request(app)
       .post(`/api/cars/${car.id}`)
       .send({
@@ -64,7 +64,7 @@ describe('rent a car route tests', () => {
     expect(response.body).toStrictEqual({ error: 'Unauthorized.' });
   });
 
-  it('200, should rent a car with success', async () => {
+  it('should rent a car and return http status 200', async () => {
     const response = await request(app)
       .post(`/api/cars/${car.id}`)
       .send({
@@ -89,7 +89,7 @@ describe('rent a car route tests', () => {
     expect(response.statusCode).toBe(200);
     expect(responseKeys.sort()).toStrictEqual(mockKeys.sort());
   });
-  it('400, should not rent an unavailable car', async () => {
+  it('should not rent an unavailable car and return http status 400', async () => {
     const response = await request(app)
       .post(`/api/cars/${car.id}`)
       .send({
@@ -104,7 +104,7 @@ describe('rent a car route tests', () => {
     });
   });
 
-  it('400, should not rent a car with invalid id', async () => {
+  it('should not rent a car with an invalid id and return http status 404', async () => {
     const response = await request(app)
       .post(`/api/cars/${v4()}`)
       .send({

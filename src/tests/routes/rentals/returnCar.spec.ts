@@ -23,7 +23,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('return car route tests', () => {
+describe('Return car route tests', () => {
   let adminToken: string;
   let companyToken: string;
   let user: User;
@@ -52,7 +52,7 @@ describe('return car route tests', () => {
     rental = mock.rental;
   });
 
-  it('401, should not return a car when company is not the owner of the car', async () => {
+  it('should not return a car when company is not the owner of the car and return http status 401', async () => {
     const companyMock = {
       id: v4(),
       name: 'Company',
@@ -85,7 +85,7 @@ describe('return car route tests', () => {
     });
   });
 
-  it('200, should return a car with success', async () => {
+  it('should return a car and return http status 200', async () => {
     const response = await request(app)
       .post(`/api/rentals/${rental.id}`)
       .send({ mileageRan: 50 })
@@ -101,7 +101,7 @@ describe('return car route tests', () => {
 
     expect(updatedCar.availableToRent).toBe(true);
   });
-  it('404, should not return a car without a car id existing on database', async () => {
+  it('should not return a car without a car id existing on the database and return http status 404', async () => {
     const response = await request(app)
       .post(`/api/rentals/${v4()}`)
       .send({ mileageRan: 50 })
@@ -111,7 +111,7 @@ describe('return car route tests', () => {
     expect(response.body).toStrictEqual({ error: 'Rental not found.' });
   });
 
-  it('400, should not return a car whose rental has already been finished', async () => {
+  it('should not return a car whose rental has already been finished and return http status 400', async () => {
     const response = await request(app)
       .post(`/api/rentals/${rental.id}`)
       .send({ mileageRan: 50 })
@@ -122,7 +122,7 @@ describe('return car route tests', () => {
       error: 'This rental has already been finished.',
     });
   });
-  it('400, should not return a car with an invalid id', async () => {
+  it('should not return a car with an invalid id and return http status 400', async () => {
     const response = await request(app)
       .post(`/api/rentals/asdf456`)
       .send({ mileageRan: 50 })
@@ -134,7 +134,7 @@ describe('return car route tests', () => {
     });
   });
 
-  it('401, should not return a car without token', async () => {
+  it('should not return a car without a token and return http status 401', async () => {
     const response = await request(app)
       .post(`/api/rentals/${rental.id}`)
       .send({ mileageRan: 50 });
@@ -142,7 +142,7 @@ describe('return car route tests', () => {
     expect(response.statusCode).toBe(401);
   });
 
-  it('401, should not return a car with an admin token', async () => {
+  it('should not return a car with an admin token and return http status 401', async () => {
     const response = await request(app)
       .post(`/api/rentals/${rental.id}`)
       .send({ mileageRan: 50 })
@@ -151,7 +151,7 @@ describe('return car route tests', () => {
     expect(response.statusCode).toBe(401);
   });
 
-  it('200, should not return car with deactivated company logged', async () => {
+  it('should not return a car with a deactivated company logged and return http status 200', async () => {
     const mock = await desactiveCompanyMock(company, car, user);
     const response = await request(app)
       .post(`/api/rentals/${mock.rental.id}`)

@@ -11,7 +11,7 @@ afterAll(async () => {
   await connection.dropTables();
   await connection.close();
 });
-describe('rental repository tests', () => {
+describe('Rental repository tests', () => {
   const rentalMock = {
     id: v4(),
     rentalStartDate: new Date(),
@@ -40,21 +40,21 @@ describe('rental repository tests', () => {
     carId: v4(),
   };
 
-  it('create rental', async () => {
+  it('should create a rental', async () => {
     const rental = await new RentalRepository().saveRental(rentalMock as any);
 
     expect(rental).toBeTruthy();
     expect(rental).toStrictEqual(rentalMock);
   });
 
-  it('get all rentals', async () => {
+  it('should get all rentals', async () => {
     const rental = await new RentalRepository().getAllRental();
 
     expect(rental).toBeTruthy();
     expect(rental.length).toBe(1);
   });
 
-  it('get rentals with filter', async () => {
+  it('should get rentals with filter', async () => {
     const newRental = await new RentalRepository().saveRental(
       rentalMock2 as any
     );
@@ -68,14 +68,14 @@ describe('rental repository tests', () => {
     expect(rental[0].returnedCar).toStrictEqual(true);
   });
 
-  it('get rentals by id', async () => {
+  it('should get rentals by id', async () => {
     const rental = await new RentalRepository().getRentalById(rentalMock.id);
 
     expect(rental).toBeTruthy();
     expect(rental.id).toStrictEqual(rentalMock.id);
   });
 
-  it('update rental', async () => {
+  it('should update a rental', async () => {
     const updateData = await new RentalRepository().updateRental(
       rentalMock.id,
       {

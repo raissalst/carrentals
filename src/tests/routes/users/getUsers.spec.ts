@@ -15,8 +15,8 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get users route tests', () => {
-  it('should retrieve all profiles with an admin logged', async () => {
+describe('Get users route tests', () => {
+  it('should retrieve all profiles with an admin logged and return http status 200', async () => {
     const requestLoginBody = {
       email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD,
@@ -34,7 +34,7 @@ describe('get users route tests', () => {
     expect(res.statusCode).toBe(200);
   });
 
-  it('should not get users without an admin token', async () => {
+  it('should not get users without an admin token and return http status 401', async () => {
     const response = await request(app).get('/api/users');
 
     expect(response.statusCode).toBe(401);

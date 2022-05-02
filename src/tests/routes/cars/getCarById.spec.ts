@@ -16,7 +16,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get car by id route tests', () => {
+describe('Get car by id route tests', () => {
   let adminToken;
   beforeAll(async () => {
     const admin = await new UserRepository().findByEmail(
@@ -27,7 +27,7 @@ describe('get car by id route tests', () => {
       expiresIn: jwtConfig.expiresIn,
     });
   });
-  it('200, should get a car with success', async () => {
+  it('should get a car and return http status 200', async () => {
     const car = await createCar();
 
     const response = await request(app)
@@ -38,7 +38,7 @@ describe('get car by id route tests', () => {
     expect(response.body.id).toStrictEqual(car.id);
   });
 
-  it('404, should not get a car passing an id that does not exist in database', async () => {
+  it('should not get a car passing an id that does not exist in the database and return http status 404', async () => {
     const response = await request(app)
       .get(`/api/cars/${v4()}`)
       .set('Authorization', `Bearer ${adminToken}`);
@@ -48,7 +48,7 @@ describe('get car by id route tests', () => {
     expect(response.body.isActive).toBeFalsy();
   });
 
-  it('400, should not get a car with an invalid id', async () => {
+  it('should not get a car with an invalid id and return http status 400', async () => {
     const response = await request(app)
       .get(`/api/cars/9bb89e15-0244-48c2-a770-5c7b457eb9d`)
       .set('Authorization', `Bearer ${adminToken}`);
@@ -57,7 +57,7 @@ describe('get car by id route tests', () => {
     expect(response.body).toStrictEqual({ error: 'Id must be UUID.' });
   });
 
-  it('401, should not get a car without token', async () => {
+  it('should not get a car without a token and return http status 401', async () => {
     const response = await request(app).get(`/api/cars/${v4()}`);
 
     expect(response.statusCode).toBe(401);
