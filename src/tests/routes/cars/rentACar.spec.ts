@@ -16,7 +16,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('rent a car tests', () => {
+describe('rent a car route tests', () => {
   let car;
   let user;
   let adminToken;
@@ -33,13 +33,13 @@ describe('rent a car tests', () => {
     });
   });
 
-  it('400, try to rent a car with wrong keys on request body', async () => {
+  it('400, should not rent a car with wrong keys passed on the request body', async () => {
     const response = await request(app).post(`/api/cars/${car.id}`).send({});
 
     expect(response.statusCode).toBe(400);
   });
 
-  it('401, try to rent a car without token', async () => {
+  it('401, should not rent a car without token', async () => {
     const response = await request(app).post(`/api/cars/${car.id}`).send({
       rentalStartDate: '10/05/2023',
       rentalReturnDate: '15/05/2023',
@@ -51,7 +51,7 @@ describe('rent a car tests', () => {
     });
   });
 
-  it('401, try rent a car with not customer token', async () => {
+  it('401, should not rent a car without customer token', async () => {
     const response = await request(app)
       .post(`/api/cars/${car.id}`)
       .send({
@@ -64,7 +64,7 @@ describe('rent a car tests', () => {
     expect(response.body).toStrictEqual({ error: 'Unauthorized.' });
   });
 
-  it('200, rent success', async () => {
+  it('200, should rent a car with success', async () => {
     const response = await request(app)
       .post(`/api/cars/${car.id}`)
       .send({
@@ -89,7 +89,7 @@ describe('rent a car tests', () => {
     expect(response.statusCode).toBe(200);
     expect(responseKeys.sort()).toStrictEqual(mockKeys.sort());
   });
-  it('400, try rent unavailable car', async () => {
+  it('400, should not rent an unavailable car', async () => {
     const response = await request(app)
       .post(`/api/cars/${car.id}`)
       .send({
@@ -104,7 +104,7 @@ describe('rent a car tests', () => {
     });
   });
 
-  it('400, try rent car with invalid id', async () => {
+  it('400, should not rent a car with invalid id', async () => {
     const response = await request(app)
       .post(`/api/cars/${v4()}`)
       .send({

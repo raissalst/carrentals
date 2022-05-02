@@ -12,7 +12,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get user profile', () => {
+describe('get user profile route tests', () => {
   const companyMock = {
     name: 'Company SA',
     email: 'companysa@gmail.com',
@@ -45,7 +45,7 @@ describe('get user profile', () => {
     expect(Object.keys(res.body)).toContain('cpf');
   });
 
-  it('should not retrieve a user profile with a badly formed token', async () => {
+  it('should not retrieve an user profile with a badly formed token', async () => {
     let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
 
     const res = await request(app)

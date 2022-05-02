@@ -23,8 +23,8 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('should retrieve all active and available cars', () => {
-  it('200, get no cars when there are not available/active cars', async () => {
+describe('get cars route tests', () => {
+  it('200, should get no cars when there are not available/active cars', async () => {
     const response = await request(app)
       .get('/api/cars')
       .set('Authorization', `Bearer ${adminToken}`);
@@ -33,7 +33,7 @@ describe('should retrieve all active and available cars', () => {
     expect(response.body).toStrictEqual([]);
   });
 
-  it('200, get all cars', async () => {
+  it('200, should get all cars', async () => {
     const car = await createCar();
     const { chassis, currentMileage, isActive, plate, ...outputCar } = car[0];
 

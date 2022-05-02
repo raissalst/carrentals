@@ -48,8 +48,8 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('Testing the delete user profile route', () => {
-  it('should set isActive false', async () => {
+describe('delete user profile route tests', () => {
+  it('should deactivate user account', async () => {
     const response = await request(app)
       .delete(`/api/users/profile`)
       .set('Authorization', `Bearer ${userToken}`);
@@ -62,13 +62,13 @@ describe('Testing the delete user profile route', () => {
     expect(user.isActive).toBe(false);
   });
 
-  it('should not delete users without token', async () => {
+  it('should not deactivate user account without token', async () => {
     const response = await request(app).delete('/api/users/profile');
 
     expect(response.statusCode).toBe(401);
   });
 
-  it('204, try to delete an admin profile', async () => {
+  it('204, should deactivate user of type admin account', async () => {
     const response = await request(app)
       .delete(`/api/users/profile`)
       .set('Authorization', `Bearer ${admin.adminToken}`);
@@ -83,7 +83,7 @@ describe('Testing the delete user profile route', () => {
     expect(user.isActive).toBe(false);
   });
 
-  it('204, trying to delete company profile', async () => {
+  it('204, should deactivate company account and all its cars', async () => {
     const company = await createCompanyMock();
     const companyToken = jwt.sign({ user: company }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,

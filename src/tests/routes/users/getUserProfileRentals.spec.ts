@@ -26,7 +26,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get users rentals', () => {
+describe('get users rentals route tests', () => {
   const userMock = {
     id: v4(),
     name: 'Jhon Doe',

@@ -15,7 +15,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('Update Car Controller test', () => {
+describe('update car route tests', () => {
   let company = {
     token: '',
     data: {},
@@ -38,13 +38,13 @@ describe('Update Car Controller test', () => {
     model: 'celta',
     brand: 'chevrolet',
   };
-  it('401, try to update car without token', async () => {
+  it('401, should not update a car without token', async () => {
     const response = await request(app)
       .patch(`/api/cars/${car.id}`)
       .send(reqCarMock);
     expect(response.statusCode).toBe(401);
   });
-  it('204, try to update car with correct token', async () => {
+  it('204, should update a car with correct token', async () => {
     const response = await request(app)
       .patch(`/api/cars/${car.id}`)
       .send(reqCarMock)

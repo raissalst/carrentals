@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { updateUserShape } from '../../../shapes';
 
-describe('verify user update shape', () => {
+describe('user update shape tests', () => {
   const schemaRight = {
     name: 'novo nome',
     phone: '55976885423',

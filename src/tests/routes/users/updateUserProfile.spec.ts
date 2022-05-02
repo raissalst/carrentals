@@ -14,7 +14,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('update User profile tests', () => {
+describe('update user profile route tests', () => {
   const companyMock = {
     name: 'Company SA',
     email: 'companysa@gmail.com',
@@ -62,7 +62,7 @@ describe('update User profile tests', () => {
     expect(res.body.userType).toStrictEqual('empresa');
   });
 
-  it('should update address and return it with user data', async () => {
+  it('should update an address and return it with user data', async () => {
     const res = await request(app)
       .patch('/api/users/profile')
       .set('Authorization', `Bearer ${responseBody.token}`)

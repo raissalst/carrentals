@@ -12,7 +12,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get user cars', () => {
+describe('get user cars route tests', () => {
   const mockCar = {
     name: 'voyage',
     model: 'GTS',

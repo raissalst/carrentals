@@ -1,7 +1,7 @@
 import { describe, it } from '@jest/globals';
 import { createCarRentShape } from '../../../shapes';
 
-describe('verify create car rent shape', () => {
+describe('create car rent shape tests', () => {
   const correctSchema = {
     rentalStartDate: '20/05/2023',
     rentalReturnDate: '23/05/2023',

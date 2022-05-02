@@ -15,7 +15,7 @@ afterAll(async () => {
   await connection.dropTables();
   await connection.close();
 });
-describe('create car tests', () => {
+describe('create car route tests', () => {
   let company = {
     token: '',
     data: {},
@@ -56,7 +56,7 @@ describe('create car tests', () => {
       },
     ],
   };
-  it('201 CREATED, create car success', async () => {
+  it('201 CREATED, should create a car with success', async () => {
     const response = await request(app)
       .post('/api/cars')
       .send(reqMock)
@@ -70,7 +70,7 @@ describe('create car tests', () => {
     expect(car).toBeTruthy();
   });
 
-  it('401 UNAUTHORIZED, trying to create a car without token', async () => {
+  it('401 UNAUTHORIZED, should not create a car without token', async () => {
     const response = await request(app).post('/api/cars').send(reqMock);
 
     expect(response.statusCode).toBe(401);
@@ -79,7 +79,7 @@ describe('create car tests', () => {
     });
   });
 
-  it('401, when trying to create a car with an admin token', async () => {
+  it('401, should not create a car with an admin token', async () => {
     const response = await request(app)
       .post('/api/cars')
       .send(reqMock)
@@ -89,7 +89,7 @@ describe('create car tests', () => {
     expect(response.body).toStrictEqual({ error: 'Unauthorized.' });
   });
 
-  it('400, when trying to create a car with a request without an array', async () => {
+  it('400, should not create a car with the request body without an array', async () => {
     const otherMock = {
       cars: reqMock.cars[0],
     };

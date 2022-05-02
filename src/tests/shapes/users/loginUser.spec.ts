@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { loginUserShape } from '../../../shapes';
 
-describe('verify user login shape', () => {
+describe('login user shape tests', () => {
   const correctSchema = {
     email: 'user@mail.com',
     password: '1234',
@@ -18,7 +18,7 @@ describe('verify user login shape', () => {
     const result = await loginUserShape.isValid(correctSchema);
     expect(result).toEqual(true);
   });
-  it('should not be a valid schema, with field email not type email', async () => {
+  it('should not be a valid schema when email sent is not a valid email type', async () => {
     const result = await loginUserShape.isValid(wrongSchema);
     expect(result).toEqual(false);
   });

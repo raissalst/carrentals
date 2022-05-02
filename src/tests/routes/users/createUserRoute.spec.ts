@@ -12,7 +12,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('Create User test', () => {
+describe('create user route tests', () => {
   const userMock = {
     name: 'Roberto',
     email: 'roberto251@gmail.com',
@@ -26,7 +26,7 @@ describe('Create User test', () => {
     country: 'Brasil',
   };
 
-  it('create new user', async () => {
+  it('should create a new user', async () => {
     const requestBody = userMock;
 
     const response = await request(app).post('/api/users').send(requestBody);

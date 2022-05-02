@@ -12,7 +12,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('update isActive car - disable car for renting', () => {
+describe('update isActive car route tests', () => {
   const companyMock = {
     name: 'Company One',
     email: 'companyone@gmail.com',
@@ -45,7 +45,7 @@ describe('update isActive car - disable car for renting', () => {
     ],
   };
 
-  it('401, try to disable car rent without token', async () => {
+  it('401, should not disable a car for rental without token', async () => {
     const createResponse = await request(app)
       .post('/api/users')
       .send(companyMock);
@@ -76,7 +76,7 @@ describe('update isActive car - disable car for renting', () => {
     expect(responseOfDelete.statusCode).toBe(401);
   });
 
-  it('204, try to disable car rent with token of the company that owns the car', async () => {
+  it('204, should disable a car for rental with token of the company that owns the car', async () => {
     const requestBody = {
       email: companyMock.email,
       password: companyMock.password,

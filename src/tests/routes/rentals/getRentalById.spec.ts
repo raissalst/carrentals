@@ -28,7 +28,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get one rental information by id', () => {
+describe('get a rental by id route tests', () => {
   it('should retrieve one rental information with admin logged', async () => {
     const requestLoginBody = {
       email: process.env.ADMIN_EMAIL,
