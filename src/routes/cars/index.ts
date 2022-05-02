@@ -10,10 +10,8 @@ import {
 } from '../../controllers';
 
 import {
-  validateAdmin,
   validateAuth,
   validateCompany,
-  validateCustomerOrCompany,
   validateCustomer,
   validateShape,
 } from '../../middlewares';

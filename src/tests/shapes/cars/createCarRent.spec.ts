@@ -1,7 +1,7 @@
 import { describe, it } from '@jest/globals';
 import { createCarRentShape } from '../../../shapes';
 
-describe('verify create car rent shape', () => {
+describe('Create car rent shape tests', () => {
   const correctSchema = {
     rentalStartDate: '20/05/2023',
     rentalReturnDate: '23/05/2023',
@@ -16,7 +16,7 @@ describe('verify create car rent shape', () => {
     expect(result).toEqual(true);
   });
 
-  it('should not be a  valid schema, with dates being sent in wrong format', async () => {
+  it('should not be a valid schema, with dates being sent in wrong format', async () => {
     const result = await createCarRentShape.isValid(wrongSchema);
     expect(result).toEqual(false);
   });

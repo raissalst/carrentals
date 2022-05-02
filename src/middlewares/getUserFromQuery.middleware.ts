@@ -13,7 +13,7 @@ const getUserFromQueryId = async (
     const user = await new UserRepository().findById(id);
 
     if (!user) {
-      throw new ErrorHandler(404, 'User not found');
+      throw new ErrorHandler(404, 'User not found.');
     }
     req.userFromQuery = user;
 

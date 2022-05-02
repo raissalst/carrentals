@@ -15,10 +15,13 @@ const getProfileCarsService = async (id: string, availableData: IAvailable) => {
   if (Object.keys(availableData).length !== 0) {
     if (searchQuery.toLowerCase().trim() === 'true') {
       responseCars = responseCars.filter((car: Car) => car.availableToRent);
-    } else if  (searchQuery.toLowerCase().trim() === 'false'){
+    } else if (searchQuery.toLowerCase().trim() === 'false') {
       responseCars = responseCars.filter((car: Car) => !car.availableToRent);
     } else {
-      throw new ErrorHandler(400, 'The availableToRent param, when used, must be true or false')
+      throw new ErrorHandler(
+        400,
+        'The availableToRent param, when used, must be true or false.'
+      );
     }
   }
 

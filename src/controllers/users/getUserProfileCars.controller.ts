@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { getProfileCarsService } from '../../services';
-import { handleError, ErrorHandler } from '../../utils';
+import { handleError } from '../../utils';
 
 const getUserProfileCarsController = async (req: Request, res: Response) => {
-  try {  
+  try {
     const userCars = await getProfileCarsService(
       req.userAuth.user.id,
       req.query

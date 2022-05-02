@@ -12,7 +12,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('Create User test', () => {
+describe('Create user route tests', () => {
   const userMock = {
     name: 'Roberto',
     email: 'roberto251@gmail.com',
@@ -26,7 +26,7 @@ describe('Create User test', () => {
     country: 'Brasil',
   };
 
-  it('create new user', async () => {
+  it('should create a new user and return http status 201', async () => {
     const requestBody = userMock;
 
     const response = await request(app).post('/api/users').send(requestBody);
@@ -37,7 +37,7 @@ describe('Create User test', () => {
     expect(typeof responseBody).toBe('object');
   });
 
-  it('should not create a new user without email key', async () => {
+  it('should not create a new user without an email key and return http status 400', async () => {
     const { email, ...newMock } = userMock;
     const requestBody = newMock;
 
@@ -48,7 +48,7 @@ describe('Create User test', () => {
     expect(responseBody.error).toContain('email is a required field');
   });
 
-  it('should not create an admin user without admin token', async () => {
+  it('should not create an admin user without an admin token and return http status 401', async () => {
     const { userType, ...newMock } = userMock;
     newMock['userType'] = 'admin';
     const requestBody = newMock;
@@ -57,6 +57,6 @@ describe('Create User test', () => {
 
     const responseBody = response.body;
     expect(response.statusCode).toBe(401);
-    expect(responseBody.error).toContain('missing authorization token');
+    expect(responseBody.error).toContain('Missing authorization token.');
   });
 });

@@ -12,7 +12,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get user cars', () => {
+describe('Get user cars route tests', () => {
   const mockCar = {
     name: 'voyage',
     model: 'GTS',
@@ -41,7 +41,7 @@ describe('get user cars', () => {
     country: 'Brasil',
   };
 
-  it('should retrieve company cars', async () => {
+  it('should retrieve company cars and return http status 200', async () => {
     const reqCarBody = mockCar;
     const reqCompanyBody = companyMock;
 
@@ -73,16 +73,16 @@ describe('get user cars', () => {
     expect(Object.keys(userCars.body[0])).toContain('name');
   });
 
-  it('should not retrieve the cars list without bearer token', async () => {
+  it('should not retrieve the cars list without a token and return http status 401', async () => {
     const userCars = await request(app).get('/api/users/profile/cars');
 
     expect(userCars.statusCode).toBe(401);
     expect(userCars.body).toMatchObject({
-      error: 'Missing authorization token',
+      error: 'Missing authorization token.',
     });
   });
 
-  it('should not retrieve the cars list if not requested by a company', async () => {
+  it('should not retrieve the cars list if not requested by a company and return http status 401', async () => {
     const requestBody = {
       email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD,
@@ -99,10 +99,10 @@ describe('get user cars', () => {
       .get('/api/users/profile/cars')
       .set('Authorization', `Bearer ${mockToken}`);
     expect(userCars.statusCode).toBe(401);
-    expect(userCars.body).toMatchObject({ error: 'Unauthorized' });
+    expect(userCars.body).toMatchObject({ error: 'Unauthorized.' });
   });
 
-  it('should filter cars in the list by true availability', async () => {
+  it('should filter cars in the list by true availability and return http status 200', async () => {
     const loginRequestBody = {
       email: companyMock.email,
       password: companyMock.password,

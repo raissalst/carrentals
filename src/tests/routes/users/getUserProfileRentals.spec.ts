@@ -16,7 +16,7 @@ import { Rental } from '../../../entities/Rental';
 let companyToken: string;
 let customerToken: string;
 let rentalsOpen: Rental;
-let rentalsClose: Rental
+let rentalsClose: Rental;
 let userCustomer: User;
 let rentals2: Rental;
 let userCompany: User;
@@ -26,7 +26,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get users rentals', () => {
+describe('Get users rentals route tests', () => {
   const userMock = {
     id: v4(),
     name: 'Jhon Doe',
@@ -100,15 +100,15 @@ describe('get users rentals', () => {
     const car = await new CarRepository().saveCar(mockCar as any);
     rentalsOpen = await new RentalRepository().saveRental(mockRental as any);
 
-    mockRental.returnedCar = true
-    mockRental.id = v4()
+    mockRental.returnedCar = true;
+    mockRental.id = v4();
     rentalsClose = await new RentalRepository().saveRental(mockRental as any);
     rentals2 = await new RentalRepository().saveRental(
       mockRentalCompany as any
     );
   });
 
-  it('should retrieve customer rentals', async () => {
+  it('should retrieve a customer rentals and return http status 200', async () => {
     user = userCustomer;
     customerToken = jwt.sign({ user }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,
@@ -122,7 +122,7 @@ describe('get users rentals', () => {
     expect(response.body[0].id).toEqual(rentalsOpen.id);
   });
 
-  it('should retrieve company rentals', async () => {
+  it('should retrieve a company rentals and return http status 200', async () => {
     user = userCompany;
     companyToken = jwt.sign({ user }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,
@@ -135,17 +135,17 @@ describe('get users rentals', () => {
     expect(response.body[0].id).toEqual(rentals2.id);
   });
 
-  it('should not retrieve rentals without bearer token', async () => {
+  it('should not retrieve rentals without a token and return http status 401', async () => {
     const response = await request(app)
       .get('/api/users/profile/rentals')
       .set('Authorization', `Bearer`);
     expect(response.statusCode).toBe(401);
     expect(response.body).toMatchObject({
-      error: 'Missing authorization token',
+      error: 'Missing authorization token.',
     });
   });
 
-  it('should list opened rentals by returnedCar query equals to false', async () => {
+  it('should list opened rentals by returnedCar query passed as false and return http status 200', async () => {
     user = userCustomer;
     customerToken = jwt.sign({ user }, jwtConfig.secretKey, {
       expiresIn: jwtConfig.expiresIn,
@@ -155,7 +155,7 @@ describe('get users rentals', () => {
       .get('/api/users/profile/rentals')
       .set('Authorization', `Bearer ${customerToken}`)
       .query('returnedCar=false');
-    
+
     expect(response.statusCode).toBe(200);
     expect(response.body[0].returnedCar).toStrictEqual(false);
   });

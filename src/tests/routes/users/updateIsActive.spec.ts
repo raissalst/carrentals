@@ -16,7 +16,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('update isActive users', () => {
+describe('Update isActive users route tests', () => {
   const userMock = {
     id: v4(),
     name: 'Jhon Doe',
@@ -50,13 +50,13 @@ describe('update isActive users', () => {
     });
   });
 
-  it('401, try update user with no token', async () => {
+  it('should not update an user without a token and return http status 401', async () => {
     const response = await request(app).patch(`/api/users/${userMock.id}`);
 
     expect(response.statusCode).toBe(401);
   });
 
-  it('204, try update user with admin token', async () => {
+  it('should update an user with an admin token and return http status 204', async () => {
     const response = await request(app)
       .patch(`/api/users/${userMock.id}`)
       .set('Authorization', `Bearer ${adminToken}`);
@@ -69,7 +69,7 @@ describe('update isActive users', () => {
     expect(user.isActive).toBe(false);
   });
 
-  it('401, try update user with user token', async () => {
+  it('should not update an user with a customer token and return http status 401', async () => {
     const response = await request(app)
       .patch(`/api/users/${userMock.id}`)
       .set('Authorization', `Bearer ${userToken}`);
@@ -77,7 +77,7 @@ describe('update isActive users', () => {
     expect(response.statusCode).toBe(401);
   });
 
-  it('404, try update with wrong user id', async () => {
+  it('should not update an user with a wrong user id and return http status 404', async () => {
     const response = await request(app)
       .patch(`/api/users/${v4()}`)
       .set('Authorization', `Bearer ${adminToken}`);
@@ -85,7 +85,7 @@ describe('update isActive users', () => {
     expect(response.statusCode).toBe(404);
   });
 
-  it('204, try desactivate company with admin token', async () => {
+  it('should deactivate company with an admin token and return http status 204', async () => {
     const response = await request(app)
       .patch(`/api/users/${company.id}`)
       .set('Authorization', `Bearer ${adminToken}`);
@@ -103,7 +103,7 @@ describe('update isActive users', () => {
     });
   });
 
-  it('204, try activate company with admin token', async () => {
+  it('should activate company with an admin token and return http status 204', async () => {
     const response = await request(app)
       .patch(`/api/users/${company.id}`)
       .set('Authorization', `Bearer ${adminToken}`);

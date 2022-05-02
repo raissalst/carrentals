@@ -15,7 +15,7 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('Controller getAllRentals test', () => {
+describe('Get rentals route tests', () => {
   const userMock = {
     id: v4(),
     name: 'Jhon Doe',
@@ -58,23 +58,23 @@ describe('Controller getAllRentals test', () => {
       expiresIn: jwtConfig.expiresIn,
     });
   });
-  it('401,Authenticated User but not is Admin', async () => {
+  it('should not get rentals with an authenticated user that is not an admin and return http status 401', async () => {
     const response = await request(app)
       .get('/api/rentals')
       .set('Authorization', `Bearer ${userToken}`);
     expect(response.statusCode).toBe(401);
   });
-  it('200,Authenticated User and is Admin', async () => {
+  it('should get rentals with an authenticated user that is an admin and return http status 200', async () => {
     const response = await request(app)
       .get('/api/rentals')
       .set('Authorization', `Bearer ${adminToken}`);
     expect(response.statusCode).toBe(200);
   });
-  it('401,Unauthenticated user', async () => {
+  it('should not get rentals with an unauthenticated user and return http status 401', async () => {
     const response = await request(app).get('/api/rentals');
     expect(response.statusCode).toBe(401);
   });
-  it('200, get rentals with query', async () => {
+  it('should get rentals filtered by query params and return http status 200', async () => {
     const response = await request(app)
       .get('/api/rentals?returnedCar=true')
       .set('Authorization', `Bearer ${adminToken}`);

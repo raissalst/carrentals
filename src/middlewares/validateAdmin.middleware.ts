@@ -13,13 +13,13 @@ const validateAdmin = async (
       req.userAuth.user.email
     );
     if (!user) {
-      throw new ErrorHandler(404, 'Admin not found');
+      throw new ErrorHandler(404, 'Admin not found.');
     }
 
     if (user.userType === 'admin') {
       return next();
     } else {
-      throw new ErrorHandler(401, 'Unauthorized');
+      throw new ErrorHandler(401, 'Unauthorized.');
     }
   } catch (err: any) {
     return handleError(err, res);

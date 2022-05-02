@@ -18,7 +18,7 @@ const getUserByIdController = async (
       userProfileSearched.userType === 'admin' &&
       userLoggedType !== 'admin'
     ) {
-      throw new ErrorHandler(401, 'Unauthorized');
+      throw new ErrorHandler(401, 'Unauthorized.');
     }
 
     if (userLoggedType === 'admin') {
@@ -41,7 +41,7 @@ const getUserByIdController = async (
       userLoggedType === 'cliente' &&
       userProfileSearched.userType === 'cliente'
     ) {
-      throw new ErrorHandler(401, 'Unauthorized');
+      throw new ErrorHandler(401, 'Unauthorized.');
     }
 
     return res.status(200).json(publicProfileReturn);

@@ -71,14 +71,14 @@ describe('Car repository tests', () => {
     },
   ];
 
-  it('create car', async () => {
+  it('should create a car', async () => {
     const car = await new CarRepository().saveCar(carMock as any);
 
     expect(car).toBeTruthy();
     expect(car).toStrictEqual(carMock);
   });
 
-  it('create multiple cars', async () => {
+  it('should create multiple cars', async () => {
     const cars = await new CarRepository().saveMultipleCars(
       carMultipleCarsMock as any
     );
@@ -87,13 +87,13 @@ describe('Car repository tests', () => {
     expect(cars).toHaveLength(2);
   });
 
-  it('get all cars', async () => {
+  it('should get all cars', async () => {
     const cars = await new CarRepository().getCars();
 
     expect(cars.length).toBe(3);
   });
 
-  it('get car by id', async () => {
+  it('should get a car by id', async () => {
     const car = await new CarRepository().getCarById(carMock.id);
     const { companyId, ...carWithoutCompanyId } = carMock;
     const carKeys = Object.keys(car);
@@ -105,7 +105,7 @@ describe('Car repository tests', () => {
     expect(carKeys.sort()).toEqual(carKeysMock.sort());
   });
 
-  it('update car', async () => {
+  it('should update a car', async () => {
     const response = await new CarRepository().updateCar(carMock.id as any, {
       color: 'vermelho',
     });
