@@ -28,8 +28,8 @@ afterAll(async () => {
   await connection.close();
 });
 
-describe('get one rental information by id', () => {
-  it('should retrieve one rental information with admin logged', async () => {
+describe('Get a rental by id route tests', () => {
+  it('should retrieve one rental information with an admin logged and return http status 200', async () => {
     const requestLoginBody = {
       email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD,
@@ -50,14 +50,14 @@ describe('get one rental information by id', () => {
     expect(Object.keys(responseOfGetRentalById.body)).toContain('mileageRan');
   });
 
-  it('should not retrieve one rental information without admin logged', async () => {
+  it('should not retrieve one rental information without an admin logged and return http status 401', async () => {
     const responseOfGetRentalById = await request(app).get(
       `/api/rentals/${rentalMock.id}`
     );
 
     expect(responseOfGetRentalById.statusCode).toBe(401);
     expect(responseOfGetRentalById.body.error).toEqual(
-      'Missing authorization token'
+      'Missing authorization token.'
     );
   });
 });

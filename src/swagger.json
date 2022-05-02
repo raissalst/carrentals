@@ -67,12 +67,12 @@
                 "example": {
                   "status": "error",
                   "statusCode": 409,
-                  "message": "User email, cpf or cnpj already registered"
+                  "message": "User e-mail, CPF or CNPJ already registered."
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -97,7 +97,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -129,16 +129,16 @@
               }
             }
           },
-          "400":{
+          "400": {
             "$ref": "#/components/responses/Bad Request Error"
           },
-          "401":{
-            "description": "Unauthorized",
+          "401": {
+            "description": "Unauthorized.",
             "content": {
-              "application/json":{
+              "application/json": {
                 "schema": {
                   "example": {
-                    "error": "Wrong email or password"
+                    "error": "Wrong e-mail or password."
                   }
                 }
               }
@@ -179,10 +179,10 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400":{
+          "400": {
             "$ref": "#/components/responses/Bad Request Error"
           }
         }
@@ -220,10 +220,10 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400":{
+          "400": {
             "$ref": "#/components/responses/Bad Request Error"
           }
         }
@@ -252,10 +252,10 @@
           "204": {
             "description": "No Content"
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400":{
+          "400": {
             "$ref": "#/components/responses/Bad Request Error"
           }
         }
@@ -325,10 +325,10 @@
               }
             }
           },
-          "400":{
+          "400": {
             "$ref": "#/components/responses/Bad Request Error"
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -346,7 +346,7 @@
           "204": {
             "description": "No Content"
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -374,20 +374,20 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized.",
             "content": {
               "Unauthroized User error": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
-                  "message": "Unauthorized"
+                  "message": "Unauthorized."
                 }
               },
               "Unauthorized Missing token error": {
                 "example": {
                   "status": "error",
                   "statusCode": 401,
-                  "message": "missing authorization token"
+                  "message": "Missing authorization token."
                 }
               }
             }
@@ -427,7 +427,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -489,7 +489,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -506,17 +506,17 @@
         ],
         "parameters": [],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Car"
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -555,7 +555,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -593,29 +593,29 @@
           }
         ],
         "responses": {
-          "200":{
+          "200": {
             "description": "OK",
             "content": {
-              "application/json":{
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Car"
                 }
               }
             }
           },
-          "400":{
+          "400": {
             "description": "Bad Request",
             "content": {
-              "application/json":{
-                "schema":{
-                  "example":{
+              "application/json": {
+                "schema": {
+                  "example": {
                     "error": "Filter not available."
                   }
                 }
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -707,7 +707,7 @@
             "in": "query",
             "name": "rentalPricePerDay",
             "schema": {
-              "type": "number"              
+              "type": "number"
             },
             "required": false,
             "description": "Search car for daily rental price"
@@ -724,10 +724,10 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400":{
+          "400": {
             "description": "Bad Request",
             "content": {
               "application/json": {
@@ -740,7 +740,6 @@
             }
           }
         }
-
       }
     },
     "/cars/{id}": {
@@ -774,10 +773,10 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           },
-          "400":{
+          "400": {
             "$ref": "#/components/responses/Bad Request Error"
           },
           "404": {
@@ -838,10 +837,10 @@
               }
             }
           },
-          "400":{
+          "400": {
             "$ref": "#/components/responses/Bad Request Error"
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -854,18 +853,18 @@
             "bearerAuth": []
           }
         ],
-        "requestBody":{
+        "requestBody": {
           "content": {
-            "application/json":{
-              "schema":{},
+            "application/json": {
+              "schema": {},
               "examples": {
-                "Update Car Name":{
+                "Update Car Name": {
                   "value": {
                     "name": "novo nome do carro"
                   }
                 },
-                "Update Year and Color":{
-                  "value":{
+                "Update Year and Color": {
+                  "value": {
                     "year": "1950",
                     "color": "verde metálico"
                   }
@@ -878,7 +877,7 @@
           {
             "in": "path",
             "name": "id",
-            "schema":{
+            "schema": {
               "type": "string",
               "default": "13d7752a-44b3-453a-a2c8-1841035f932c"
             },
@@ -887,10 +886,10 @@
           }
         ],
         "responses": {
-          "204":{
+          "204": {
             "description": "No Content"
           },
-           "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -918,7 +917,7 @@
           "204": {
             "description": "No Content"
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -945,7 +944,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -964,7 +963,7 @@
           {
             "in": "query",
             "name": "returnedCar",
-            "schema":{
+            "schema": {
               "type": "boolean",
               "default": true
             },
@@ -982,7 +981,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -1019,7 +1018,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -1032,13 +1031,13 @@
             "bearerAuth": []
           }
         ],
-        "requestBody":{
+        "requestBody": {
           "content": {
-            "application/json":{
-              "schema":{},
+            "application/json": {
+              "schema": {},
               "examples": {
-                "Mileage Ran Value":{
-                  "value":{
+                "Mileage Ran Value": {
+                  "value": {
                     "mileageRan": 145
                   }
                 }
@@ -1050,7 +1049,7 @@
           {
             "in": "path",
             "name": "id",
-            "schema":{
+            "schema": {
               "type": "string",
               "default": "82067e94-625f-488e-a6a1-b511b8244ee6"
             },
@@ -1069,7 +1068,7 @@
               }
             }
           },
-          "401":{
+          "401": {
             "$ref": "#/components/responses/Unauthorized Error"
           }
         }
@@ -1553,14 +1552,13 @@
     },
     "responses": {
       "Unauthorized Error": {
-        "description": "Unauthorized",
+        "description": "Unauthorized.",
         "content": {
           "application/json": {
             "schema": {
               "example": {
-                "error": "missing authorization token"
+                "error": "Missing authorization token."
               }
-
             }
           }
         }
@@ -1569,10 +1567,10 @@
         "description": "Bad request",
         "content": {
           "Bad Request Error": {
-            "schema": {              
+            "schema": {
               "example": {
                 "error": "bad request"
-              }             
+              }
             }
           },
           "Missing Key Error": {

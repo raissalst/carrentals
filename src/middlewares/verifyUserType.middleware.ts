@@ -21,7 +21,7 @@ const verifyUserType = (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
-      throw new ErrorHandler(401, 'missing authorization token');
+      throw new ErrorHandler(401, 'Missing authorization token.');
     }
 
     verify(token, jwtConfig.secretKey, (err, decoded) => {
@@ -30,7 +30,7 @@ const verifyUserType = (req: Request, res: Response, next: NextFunction) => {
       }
 
       if ((decoded as IDecoded).user.userType !== 'admin') {
-        throw new ErrorHandler(401, 'Unauthorized');
+        throw new ErrorHandler(401, 'Unauthorized.');
       }
 
       return next();

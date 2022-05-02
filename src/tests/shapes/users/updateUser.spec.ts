@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { updateUserShape } from '../../../shapes';
 
-describe('verify user update shape', () => {
+describe('User update shape tests', () => {
   const schemaRight = {
     name: 'novo nome',
     phone: '55976885423',
@@ -16,7 +16,7 @@ describe('verify user update shape', () => {
     const result = await updateUserShape.isValid(schemaRight);
     expect(result).toEqual(true);
   });
-  it('should not be a valid schema with cpf in wrong format', async () => {
+  it('should not be a valid schema with the CPF being sent with a wrong format', async () => {
     const result = await updateUserShape.isValid(schemaWrong);
     expect(result).toEqual(false);
   });

@@ -15,7 +15,7 @@ const validateCustomer = async (
     if (user.userType === 'cliente') {
       return next();
     } else {
-      throw new ErrorHandler(401, 'Unauthorized');
+      throw new ErrorHandler(401, 'Unauthorized.');
     }
   } catch (err: any) {
     return handleError(err, res);

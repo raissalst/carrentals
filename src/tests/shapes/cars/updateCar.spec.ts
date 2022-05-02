@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import updateCarShape from '../../../shapes/cars/updateCar.shape';
 
-describe('verify car update shape', () => {
+describe('Car update shape tests', () => {
   const schemaRight = {
     name: 'Gol',
     model: 'bolinha',
@@ -16,7 +16,7 @@ describe('verify car update shape', () => {
     currentMileage: 1000,
     rentalPricePerDay: 89.0,
     availableToRent: true,
-    isActive: true
+    isActive: true,
   };
 
   const schemaWrong = {

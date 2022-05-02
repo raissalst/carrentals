@@ -7,13 +7,11 @@ import { CarRepository, UserRepository } from '../../../repositories';
 import jwt from 'jsonwebtoken';
 import { jwtConfig } from '../../../configs';
 
-let adminToken
+let adminToken;
 
 beforeAll(async () => {
   await connection.create();
-  const admin = await new UserRepository().findByEmail(
-    process.env.ADMIN_EMAIL
-  );
+  const admin = await new UserRepository().findByEmail(process.env.ADMIN_EMAIL);
 
   adminToken = jwt.sign({ user: admin }, jwtConfig.secretKey, {
     expiresIn: jwtConfig.expiresIn,
@@ -25,29 +23,27 @@ afterAll(async () => {
   await connection.close();
 });
 
-
-describe('should retrieve all active and available cars', () => {
-
-  it('200, get no cars when there are not cars availables or actives', async () => {
-    const response = await request(app).get(
-      '/api/cars').set('Authorization', `Bearer ${adminToken}`)
+describe('Get cars route tests', () => {
+  it('should not get unavailable/inactive cars and return http status 200', async () => {
+    const response = await request(app)
+      .get('/api/cars')
+      .set('Authorization', `Bearer ${adminToken}`);
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toStrictEqual([]);
   });
 
-
-  it('200, get all cars', async () => {
+  it('should get all available/active cars and return http status 200', async () => {
     const car = await createCar();
-    const { chassis, currentMileage, isActive, plate, ...outputCar } = car[0]
+    const { chassis, currentMileage, isActive, plate, ...outputCar } = car[0];
 
-    const response = await request(app).get('/api/cars').set('Authorization', `Bearer ${adminToken}`)
+    const response = await request(app)
+      .get('/api/cars')
+      .set('Authorization', `Bearer ${adminToken}`);
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toStrictEqual([outputCar]);
   });
-
-
 });
 
 const createCar = async () => {

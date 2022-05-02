@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { ErrorHandler, handleError } from '../utils';
+import { ErrorHandler } from '../utils';
 import { validate } from 'uuid';
 import { CarRepository, RentalRepository } from '../repositories';
 
@@ -13,7 +13,7 @@ const verifyCarOwner = async (
     const { id } = req.params;
 
     if (!validate(id)) {
-      throw new ErrorHandler(400, 'Id must be UUID');
+      throw new ErrorHandler(400, 'Id must be UUID.');
     }
     const rental = await new RentalRepository().findRentalCar(id);
 
